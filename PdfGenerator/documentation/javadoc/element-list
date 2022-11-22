@@ -1,0 +1,12 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+
+com.rifluxyss.pdfgenerator
+com.rifluxyss.pdfgenerator.constants
+com.rifluxyss.pdfgenerator.customView
+com.rifluxyss.pdfgenerator.image
+com.rifluxyss.pdfgenerator.mainView
+com.rifluxyss.pdfgenerator.model
+com.rifluxyss.pdfgenerator.structure
+com.rifluxyss.pdfgenerator.typefaceFont
+
