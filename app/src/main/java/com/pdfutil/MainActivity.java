@@ -1,5 +1,6 @@
 package com.pdfutil;
 
+import android.pdf.customtext.CustomTypefaceSpan;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,25 +9,23 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
+import android.pdf.customtext.TextBuilder;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.TypefaceSpan;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
-import com.android.CustomTypefaceSpan;
+import com.pdfutil.databinding.ActivityMainBinding;
 
 import android.pdf.custom.Utils;
 import android.pdf.io.Image;
 import android.pdf.io.Line;
 import android.pdf.io.Paragraph;
 import android.pdf.io.Text;
-import android.pdf.kernel.DocType;
 import android.pdf.kernel.FontStyle;
-import android.pdf.merger.DocumentMerger;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +33,13 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     Document document;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
         document = new Document().init(this);
 
@@ -63,26 +64,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void create() {
 
-        Typeface helveticaLight = Utils.createGetFont(this, FontStyle.HELVETICA_LIGHT);
-        TypefaceSpan helveticaLightSpan = new CustomTypefaceSpan("", helveticaLight);
+        TextBuilder textBuilder = new TextBuilder(this);
 
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        String txt1="Customer certifies it  ";
-        SpannableString txtSpannableNew = new SpannableString(txt1);
-        txtSpannableNew.setSpan(helveticaLightSpan, 0, txtSpannableNew.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.append(txtSpannableNew);
+        textBuilder.append("HELVETICA\n",FontStyle.HELVETICA);
+        textBuilder.append("HELVETICA_BOLD\n",FontStyle.HELVETICA_BOLD);
+        textBuilder.append("HELVETICA_LIGHT\n",FontStyle.HELVETICA_LIGHT);
+        textBuilder.append("HELVETICA_OBLIQUE\n",FontStyle.HELVETICA_OBLIQUE);
 
-        Typeface helveticaBold = Utils.createGetFont(this,FontStyle.HELVETICA_BOLD);
-        TypefaceSpan helveticaBoldSpan = new CustomTypefaceSpan("", helveticaBold);
+        String firstWord = "HELVETICA ";
+        String secondWord = "HELVETICA_BOLD";
 
-        SpannableString txtSpannable= new SpannableString("customerCertified");
-        txtSpannable.setSpan(helveticaBoldSpan, 0, txtSpannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.append(txtSpannable);
+        Typeface HELVETICA = Utils.createGetFont(this,FontStyle.HELVETICA);
+        Typeface HELVETICA_BOLD = Utils.createGetFont(this,FontStyle.HELVETICA_BOLD);
 
-        String txt2="  a federal, state or local government branch or agency";
-        SpannableString txtSpannableLast = new SpannableString(txt2);
-        txtSpannableNew.setSpan(helveticaLightSpan, 0, txtSpannableNew.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.append(txtSpannableLast);
+        Spannable spannable = new SpannableString(firstWord+secondWord);
+
+        spannable.setSpan( new CustomTypefaceSpan(firstWord,HELVETICA), 0, firstWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan( new CustomTypefaceSpan(secondWord,HELVETICA_BOLD), firstWord.length(), firstWord.length() + secondWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        binding.sampleText.setText(textBuilder.get());
+        binding.sampleText.setTextColor(Color.BLACK);
 
     }
 
