@@ -101,7 +101,7 @@ public class CreateRepeatedView {
 
             } else if (cell.getDraw() == Draw.text || cell.getDraw() == Draw.empty_space) {
 
-                View view = Utils.createGridTextView(context, cellWidth, cell);
+                View view = new Utils(colWeight).createGridTextView(context, cellWidth, cell);
                 gridLayout.addView(view);
 
             }

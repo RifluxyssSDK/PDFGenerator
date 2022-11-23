@@ -39,6 +39,8 @@ public class CreateView {
     ImageData imageData;
     PageCounterModel pageCounterModel;
 
+    private int colSpan;
+
     final PdfDocument pdfDocument = new PdfDocument();
 
     public CreateView(Context context) {
@@ -106,7 +108,17 @@ public class CreateView {
 
             } else if (cell.getDraw() == Draw.text || cell.getDraw() == Draw.empty_space) {
 
-                View view = Utils.createGridTextView(context, cellWidth, cell);
+                View view = new Utils(colWeight).createGridTextView(context, cellWidth, cell);
+
+                if (colWeight != 0) {
+                    colSpan = colSpan + cell.getColSpan();
+                    if (colWeight == colSpan) {
+                        Utils.startLine = false;
+                        Utils.topLine = true;
+                        colSpan = 0;
+                    }
+                }
+
                 gridLayout.addView(view);
 
             } else if (cell.getDraw() == Draw.break_page) {

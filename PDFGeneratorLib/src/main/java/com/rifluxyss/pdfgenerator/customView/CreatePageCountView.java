@@ -17,6 +17,8 @@ public class CreatePageCountView {
     int pageWidth,currentPageCount;
     PageCounterModel pageCounterModel;
 
+    private boolean startLine;
+
     public CreatePageCountView(Context context) {
         this.context = context;
     }
@@ -47,7 +49,7 @@ public class CreatePageCountView {
         textView.setPadding(pageCounterModel.getPaddingLeft(), pageCounterModel.getPaddingTop(), pageCounterModel.getPaddingRight(), pageCounterModel.getPaddingBottom());
 
         if (pageCounterModel.isBorder()) {
-            textView.setBackground(Utils.createBorder(pageCounterModel.getBackgroundColor(), pageCounterModel.getBorderColor(), pageCounterModel.getBorderWidth()));
+            textView.setBackground(Utils.createBorder(pageCounterModel.getBackgroundColor(), pageCounterModel.getBorderColor(), pageCounterModel.getBorderWidth(),0));
         } else {
             textView.setBackgroundColor(pageCounterModel.getBackgroundColor());
         }

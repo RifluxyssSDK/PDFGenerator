@@ -7,7 +7,7 @@ android {
     dataBinding { enabled true }
     defaultConfig {
         applicationId "com.pdfutil"
-        minSdk 21
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"

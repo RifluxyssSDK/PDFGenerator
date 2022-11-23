@@ -19,6 +19,10 @@ public class CreateParagraphView {
     int pageWidth;
     int colWeight;
 
+    private boolean startLine = false;
+
+    private int colSpan = 0;
+
     public CreateParagraphView(Context context) {
         this.context = context;
     }
@@ -57,6 +61,14 @@ public class CreateParagraphView {
 
                 CreateParagraphView createParagraphView = new CreateParagraphView(context);
                 createParagraphView.setData(cell, cellWidth, colWeight);
+                if (colWeight != 0) {
+                    colSpan = colSpan + cell.getColSpan();
+                    if (colWeight == colSpan) {
+                        Utils.startLine = false;
+                        Utils.topLine = true;
+                        colSpan = 0;
+                    }
+                }
                 gridLayout.addView(createParagraphView.create());
 
             } else if (cell.getDraw() == Draw.image) {
@@ -67,7 +79,15 @@ public class CreateParagraphView {
 
             } else if (cell.getDraw() == Draw.text || cell.getDraw() == Draw.empty_space) {
 
-                View view = Utils.createGridTextView(context, cellWidth, cell);
+                View view = new Utils(colWeight).createGridTextView(context, cellWidth, cell);
+                if (colWeight != 0) {
+                    colSpan = colSpan + cell.getColSpan();
+                    if (colWeight == colSpan) {
+                        Utils.startLine = false;
+                        Utils.topLine = true;
+                        colSpan = 0;
+                    }
+                }
                 gridLayout.addView(view);
             }
         }
@@ -98,7 +118,16 @@ public class CreateParagraphView {
         gridLayout.setLayoutParams(layoutParams);
 
         if (cell.isBorder()) {
-            gridLayout.setBackground(Utils.createBorder(cell.getBackgroundColor(), cell.getBorderColor(), cell.getBorderWidth()));
+
+            int hideLineStart;
+            if (startLine) {
+                hideLineStart = -100;
+            } else {
+                hideLineStart = cell.getBorderWidth();
+                startLine = true;
+            }
+
+            gridLayout.setBackground(Utils.createBorder(cell.getBackgroundColor(), cell.getBorderColor(), cell.getBorderWidth(),hideLineStart));
         }
 
         return gridLayout;

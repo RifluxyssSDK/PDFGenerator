@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -19,14 +20,36 @@ import com.rifluxyss.pdfgenerator.structure.Cell;
 @SuppressWarnings("unused")
 public class Utils {
 
-    public static Drawable createBorder(int backgroundColor, int borderColor, int width) {
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setStroke(width, borderColor);
-        gradientDrawable.setColor(backgroundColor);
-        return new LayerDrawable(new Drawable[]{gradientDrawable});
+    public static boolean startLine = false;
+    public static boolean topLine = false;
+
+    public int colWeight = 0;
+
+    private int colSpan;
+
+    public static int topHideLine = 0;
+
+    public Utils(int colWeight) {
+        this.colWeight = colWeight;
     }
 
-    public static TextView createGridTextView(Context context, int minMaxWidth, Cell cell) {
+    public Utils() {
+    }
+
+    public static Drawable createBorder(int backgroundColor, int borderColor, int width, int hideLineStart) {
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setStroke(width, borderColor);
+        gradientDrawable.setColor(backgroundColor);
+        gradientDrawable.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+        LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{gradientDrawable});
+        layerDrawable.setLayerInset(0, hideLineStart, topHideLine, 0, 0);
+
+        return layerDrawable;
+
+    }
+
+    public TextView createGridTextView(Context context, int minMaxWidth, Cell cell) {
 
         TextView textView = new TextView(context);
         if (cell.getDraw() == Draw.empty_space || cell.getMessage() != null) {
@@ -48,7 +71,20 @@ public class Utils {
         }
 
         if (cell.isBorder()) {
-            textView.setBackground(createBorder(cell.getBackgroundColor(), cell.getBorderColor(), cell.getBorderWidth()));
+
+            int hideLineStart;
+            if (startLine) {
+                hideLineStart = -1;
+            } else {
+                hideLineStart = cell.getBorderWidth() != 0 ? cell.getBorderWidth() : 0;
+                startLine = true;
+            }
+
+            topHideLine = topLine ? -1 : cell.getBorderWidth() != 0 ? cell.getBorderWidth() : 0;
+
+            textView.setBackground(createBorder(cell.getBackgroundColor(), cell.getBorderColor(), cell.getBorderWidth(), hideLineStart));
+
+
         } else {
             textView.setBackgroundColor(cell.getBackgroundColor());
 
