@@ -76,7 +76,7 @@ public class CreateContainer {
 
             if (Utils.getViewHeight(mHeight) > pageSize.pageHeight) {
 
-                View view = overlapping(gridLayout);
+                View view = overlapping((Paragraph) cell, gridLayout);
 
                 createPageBreakView(gridLayout);
 
@@ -101,10 +101,17 @@ public class CreateContainer {
         return this;
     }
 
-    private View overlapping(GridLayout gridLayout) {
+    private View overlapping(Paragraph paragraph, GridLayout gridLayout) {
 
         View view = gridLayout.getChildAt(gridLayout.getChildCount() - 1);
         gridLayout.removeViewAt(gridLayout.getChildCount() - 1);
+
+        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, paragraph.getRowSpan(), paragraph.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, paragraph.getColSpan(), paragraph.getColSpan()));
+
+        layoutParams.setMargins(paragraph.getMarginLeft(), (paragraph.getMarginTop() + paragraph.getBorderWidth()), paragraph.getMarginRight(), paragraph.getMarginBottom());
+
+        view.setLayoutParams(layoutParams);
+
         return view;
 
     }

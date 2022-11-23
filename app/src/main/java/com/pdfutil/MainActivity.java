@@ -1,7 +1,9 @@
 package com.pdfutil;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import com.android.core.Document;
 import com.android.io.AreaBreak;
 import com.android.io.Paragraph;
 import com.android.io.Text;
+import com.android.kernel.DocType;
 import com.android.kernel.FontStyle;
 
 import java.io.File;
@@ -27,11 +30,34 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20);
 
-        document.add(new Paragraph().add(new Text(1,10,"Hello World").setFontStyle(FontStyle.HELVETICA)));
+        document.add(DocType.HEADER,new Paragraph()
+                .add(new Text(1,10,"HEADER").setGravity(Gravity.CENTER)
+                        .setMarginBottom(10)
+                        .setFontStyle(FontStyle.HELVETICA).setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE))
+        );
 
-        document.add(new AreaBreak());
+        document.add(DocType.FOOTER,new Paragraph()
+                .add(new Text(1,10,"FOOTER").setGravity(Gravity.CENTER).setFontStyle(FontStyle.HELVETICA)
+                        .setMarginTop(10)
+                        .setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE))
+        );
 
-        document.add(new Paragraph().add(new Text(1,10,"This is page 2").setFontStyle(FontStyle.HELVETICA_BOLD)));
+        document.add(new Paragraph()
+                .add(new Text(1,3,"Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER))
+                .add(new Text(1,3,"Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER).setMarginLeft(-1))
+                .add(new Text(1,4,"Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER).setMarginLeft(-1))
+        );
+
+        for (int i = 1; i <= 50 ; i++) {
+
+            document.add(new Paragraph()
+                    .add(new Text(1,3,i+". Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER))
+                    .add(new Text(1,3,i+". Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER).setMarginLeft(-1))
+                    .add(new Text(1,4,i+". Hello World").setFontStyle(FontStyle.HELVETICA).setBorder(true).setGravity(Gravity.CENTER).setMarginLeft(-1))
+                    .setMarginTop(-1)
+            );
+
+        }
 
         document.close();
 

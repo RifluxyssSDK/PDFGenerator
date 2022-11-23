@@ -1,5 +1,7 @@
 package com.android.io;
 
+import android.graphics.Color;
+
 import com.android.kernel.ElementType;
 
 import java.util.ArrayList;
@@ -26,6 +28,11 @@ public class Paragraph extends Cell {
     int backgroundColor;
 
     final ArrayList<Element> elements = new ArrayList<>();
+
+    public Paragraph() {
+        setBorderWidth(1);
+        setBorderColor(Color.BLACK);
+    }
 
     @Override
     public byte getCellType() {
