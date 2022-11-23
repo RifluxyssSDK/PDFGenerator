@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Environment;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.rifluxyss.pdfgenerator.constants.Draw;
 import com.rifluxyss.pdfgenerator.constants.FontStyle;
 import com.rifluxyss.pdfgenerator.constants.PageSize;
