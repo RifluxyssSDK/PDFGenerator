@@ -2,15 +2,21 @@ package com.pdfutil;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.TypefaceSpan;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.core.Document;
+import com.android.custom.Utils;
 import com.android.io.Image;
 import com.android.io.Line;
 import com.android.io.Paragraph;
@@ -53,7 +59,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void create() {
 
-        
+        Typeface helveticaLight = Utils.createGetFont(this, FontStyle.HELVETICA_LIGHT);
+        TypefaceSpan helveticaLightSpan = new CustomTypefaceSpan("", helveticaLight);
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        String txt1="Customer certifies it  ";
+        SpannableString txtSpannableNew = new SpannableString(txt1);
+        txtSpannableNew.setSpan(helveticaLightSpan, 0, txtSpannableNew.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(txtSpannableNew);
+
+        Typeface helveticaBold = Utils.createGetFont(this,FontStyle.HELVETICA_BOLD);
+        TypefaceSpan helveticaBoldSpan = new CustomTypefaceSpan("", helveticaBold);
+
+        SpannableString txtSpannable= new SpannableString("customerCertified");
+        txtSpannable.setSpan(helveticaBoldSpan, 0, txtSpannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(txtSpannable);
+
+        String txt2="  a federal, state or local government branch or agency";
+        SpannableString txtSpannableLast = new SpannableString(txt2);
+        txtSpannableNew.setSpan(helveticaLightSpan, 0, txtSpannableNew.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(txtSpannableLast);
 
     }
 
