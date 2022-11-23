@@ -2,6 +2,7 @@ package com.android.io;
 
 import android.graphics.Color;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class PageCount {
 
     int marginLeft;

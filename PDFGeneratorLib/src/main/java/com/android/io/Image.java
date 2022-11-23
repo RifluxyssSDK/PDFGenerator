@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.android.kernel.ElementType;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Image extends Element {
 
     int rowSpan;

@@ -27,15 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20);
 
-        document.add(new Paragraph()
-                .add(new Text(1,10,"Hello World").setFontStyle(FontStyle.HELVETICA))
-        );
+        document.add(new Paragraph().add(new Text(1,10,"Hello World").setFontStyle(FontStyle.HELVETICA)));
 
         document.add(new AreaBreak());
 
-        document.add(new Paragraph()
-                .add(new Text(1,10,"Hello World").setFontStyle(FontStyle.HELVETICA))
-        );
+        document.add(new Paragraph().add(new Text(1,10,"This is page 2").setFontStyle(FontStyle.HELVETICA_BOLD)));
 
         document.close();
 

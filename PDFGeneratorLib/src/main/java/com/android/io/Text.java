@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import com.android.kernel.ElementType;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Text extends Element {
 
     int rowSpan;

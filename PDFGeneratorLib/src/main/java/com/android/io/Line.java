@@ -2,6 +2,7 @@ package com.android.io;
 
 import com.android.kernel.ElementType;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Line extends Element {
 
     int rowSpan;

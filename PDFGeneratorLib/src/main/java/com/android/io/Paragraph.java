@@ -4,6 +4,7 @@ import com.android.kernel.ElementType;
 
 import java.util.ArrayList;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Paragraph extends Cell {
 
     int rowSpan;

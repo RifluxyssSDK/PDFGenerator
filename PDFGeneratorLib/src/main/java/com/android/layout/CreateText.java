@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.android.custom.Utils;
 import com.android.io.Text;
-import com.android.kernel.FontStyle;
 
 public class CreateText {
 
@@ -25,10 +24,6 @@ public class CreateText {
         textView.setTextSize(text.getTextSize());
         textView.setTypeface(Utils.createGetFont(context, text.getFontStyle()));
         textView.setPadding(text.getPaddingLeft(), text.getPaddingTop(), text.getPaddingRight(), text.getPaddingBottom());
-
-        if (text.getFontStyle() == FontStyle.HELVETICA_BOLD) {
-            textView.setLetterSpacing(0.05f);
-        }
 
         if (text.isBorder()) {
             textView.setBackground(Utils.createBorder(text.getBackgroundColor(), text.getBorderColor(), text.getBorderWidth()));
