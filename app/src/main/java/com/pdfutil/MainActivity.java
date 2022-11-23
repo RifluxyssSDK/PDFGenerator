@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.pdf.core.Document;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -17,14 +18,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.CustomTypefaceSpan;
-import com.android.core.Document;
-import com.android.custom.Utils;
-import com.android.io.Image;
-import com.android.io.Line;
-import com.android.io.Paragraph;
-import com.android.io.Text;
-import com.android.kernel.DocType;
-import com.android.kernel.FontStyle;
+
+import android.pdf.custom.Utils;
+import android.pdf.io.Image;
+import android.pdf.io.Line;
+import android.pdf.io.Paragraph;
+import android.pdf.io.Text;
+import android.pdf.kernel.DocType;
+import android.pdf.kernel.FontStyle;
+import android.pdf.merger.DocumentMerger;
 
 import java.io.File;
 import java.io.IOException;
