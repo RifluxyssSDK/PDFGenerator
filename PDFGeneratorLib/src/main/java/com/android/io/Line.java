@@ -1,5 +1,7 @@
 package com.android.io;
 
+import android.graphics.Color;
+
 import com.android.kernel.ElementType;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
@@ -20,6 +22,13 @@ public class Line extends Element {
 
     int lineColor;
     int lineStrokeWidth;
+
+    public Line(int rowSpan, int colSpan) {
+        setRowSpan(rowSpan);
+        setColSpan(colSpan);
+        setLineStrokeWidth(1);
+        setLineColor(Color.BLACK);
+    }
 
     @Override
     public byte getElementType() {

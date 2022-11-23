@@ -117,6 +117,14 @@ public class Paragraph extends Cell {
         return this;
     }
 
+    public Paragraph setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
+        setPaddingLeft(paddingLeft);
+        setPaddingTop(paddingTop);
+        setPaddingRight(paddingRight);
+        setPaddingBottom(paddingBottom);
+        return this;
+    }
+
     public Paragraph setMargin(int margin) {
         setMarginLeft(margin);
         setMarginTop(margin);

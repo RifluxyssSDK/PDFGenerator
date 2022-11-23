@@ -160,6 +160,14 @@ public class Text extends Element {
         return this;
     }
 
+    public Text setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
+        setPaddingLeft(paddingLeft);
+        setPaddingTop(paddingTop);
+        setPaddingRight(paddingRight);
+        setPaddingBottom(paddingBottom);
+        return this;
+    }
+
     public Text setMargin(int margin) {
         setMarginLeft(margin);
         setMarginTop(margin);
