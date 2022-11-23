@@ -15,6 +15,8 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.CustomTypefaceSpan;
 import com.android.core.Document;
 import com.android.custom.Utils;
 import com.android.io.Image;
