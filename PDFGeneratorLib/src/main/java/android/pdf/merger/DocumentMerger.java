@@ -17,15 +17,18 @@ import java.util.List;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class DocumentMerger {
 
+    /**
+     * Initialize the empty File of the variable {@code destination}
+     */
     private File destination;
 
     /**
-     * The Files.
+     * Initialize the multiple empty File of the variable {@code Files}.
      */
     final List<File> files = new ArrayList<>();
 
     /**
-     * The Pdf document.
+     * Initialize the Object of the PdfDocument {@code pdfDocument}.
      */
     final PdfDocument pdfDocument = new PdfDocument();
 
