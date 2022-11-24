@@ -11,23 +11,47 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class used to merge pdf files.
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class DocumentMerger {
 
     private File destination;
 
+    /**
+     * The Files.
+     */
     final List<File> files = new ArrayList<>();
 
+    /**
+     * The Pdf document.
+     */
     final PdfDocument pdfDocument = new PdfDocument();
 
+    /**
+     * Sets destination file.
+     *
+     * @param destination the destination
+     */
     public void setDestinationFile(File destination) {
         this.destination = destination;
     }
 
+    /**
+     * Add source.
+     *
+     * @param filePath the file path
+     */
     public void addSource(File filePath) {
         files.add(filePath);
     }
 
+    /**
+     * Merge document.
+     *
+     * @throws IOException the io exception
+     */
     public void mergeDocument() throws IOException {
 
         if (destination != null && files.size() > 0) {

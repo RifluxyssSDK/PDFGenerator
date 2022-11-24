@@ -9,8 +9,24 @@ import android.pdf.custom.Utils;
 
 import java.util.ArrayList;
 
+/**
+ * The type Create area break.
+ */
 public class CreateAreaBreak {
 
+    /**
+     * Create view.
+     *
+     * @param context         the context
+     * @param rowSpan         the row span
+     * @param colSpan         the col span
+     * @param header          the header
+     * @param footer          the footer
+     * @param gridLayout      the grid layout
+     * @param pageCounterView the page counter view
+     * @param pageHeight      the page height
+     * @return the view
+     */
     public View create(Context context, int rowSpan, int colSpan, View header, View footer, GridLayout gridLayout, View pageCounterView, int pageHeight) {
 
         ArrayList<View> views= new ArrayList<>();
@@ -34,5 +50,4 @@ public class CreateAreaBreak {
         return additionalView;
 
     }
-
 }

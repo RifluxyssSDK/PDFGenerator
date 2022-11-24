@@ -7,6 +7,9 @@ import android.text.SpannableString;
 
 import java.util.ArrayList;
 
+/**
+ * The type Text builder.
+ */
 public class TextBuilder {
 
     private final Context context;
@@ -14,15 +17,31 @@ public class TextBuilder {
     private String message = "";
     private final ArrayList<TextBuilderModel> textBuilderList = new ArrayList<>();
 
+    /**
+     * Instantiates a new Text builder.
+     *
+     * @param context the context
+     */
     public TextBuilder(Context context) {
         this.context = context;
     }
 
+    /**
+     * Append.
+     *
+     * @param text      the text
+     * @param FontStyle the font style
+     */
     public void append(String text, byte FontStyle) {
         message += text;
         textBuilderList.add(new TextBuilderModel(text,text.length(),FontStyle));
     }
 
+    /**
+     * Get spannable.
+     *
+     * @return the spannable
+     */
     public Spannable get() {
 
         StringBuilder stringBuilder = new StringBuilder();

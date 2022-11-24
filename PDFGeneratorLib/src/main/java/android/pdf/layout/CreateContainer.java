@@ -20,6 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Create container.
+ */
 public class CreateContainer {
 
     private final View header;
@@ -31,12 +34,24 @@ public class CreateContainer {
     private PageSize pageSize;
     private View pageCounterView;
 
+    /**
+     * Instantiates a new Create container.
+     *
+     * @param document the document
+     * @param header   the header
+     * @param footer   the footer
+     */
     public CreateContainer(Document document, View header, View footer) {
         this.header = header;
         this.footer = footer;
         this.document = document;
     }
 
+    /**
+     * Create create container.
+     *
+     * @return the create container
+     */
     public CreateContainer create() {
 
         pageSize = document.getPageSize();
@@ -77,7 +92,7 @@ public class CreateContainer {
 
             if (Utils.getViewHeight(mHeight) > pageSize.pageHeight) {
 
-                View view = overlapping((Paragraph) cell, gridLayout);
+                View view = overlapping(gridLayout);
 
                 createPageBreakView(gridLayout);
 
@@ -89,7 +104,7 @@ public class CreateContainer {
 
                 container.removeViews(1, (container.getChildCount() - 3));
 
-                addGridAttribute(gridLayout, singleColWeight , view);
+                addGridAttribute(gridLayout, singleColWeight , view );
             }
         }
 
@@ -102,14 +117,23 @@ public class CreateContainer {
         return this;
     }
 
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     * @param singleColWeight It used basic Alignment.
+     * @param view This is the overlap View.
+     */
     private void addGridAttribute(GridLayout gridLayout, float singleColWeight, View view) {
 
-        gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(3)));
+        gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(1)));
 
         gridLayout.addView(view);
     }
 
-    private View overlapping(Paragraph paragraph, GridLayout gridLayout) {
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     * @return overlap View.
+     */
+    private View overlapping(GridLayout gridLayout) {
 
         View view = gridLayout.getChildAt(gridLayout.getChildCount() - 1);
         gridLayout.removeViewAt(gridLayout.getChildCount() - 1);
@@ -117,10 +141,16 @@ public class CreateContainer {
 
     }
 
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     */
     private void createPageBreakView(GridLayout gridLayout) {
         gridLayout.addView(new CreateAreaBreak().create(document.getContext(), 1, document.getColumnWeight(), header, footer, gridLayout, pageCounterView, pageSize.pageHeight));
     }
 
+    /**
+     * @param view This method called when page Completed & Create document.
+     */
     private void createNewPage(LinearLayout view) {
 
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageSize.documentWidth, pageSize.documentHeight, (pdfDocument.getPages().size() + 1)).create();
@@ -144,6 +174,10 @@ public class CreateContainer {
         pdfDocument.finishPage(page);
     }
 
+    /**
+     * @param currentPageCount {@link CreatePageCount} Used to create Page No
+     * @return View
+     */
     private View createPageCounterView(int currentPageCount) {
 
         if (document.getPageCount() == null) {
@@ -157,11 +191,22 @@ public class CreateContainer {
         }
     }
 
+    /**
+     * Finish.
+     *
+     * @param servicePdfFile the service pdf file
+     * @throws IOException the io exception
+     */
     public void finish(File servicePdfFile) throws IOException {
         pdfDocument.writeTo(new FileOutputStream(servicePdfFile));
         pdfDocument.close();
     }
 
+    /**
+     * Gets page count.
+     *
+     * @return the page count
+     */
     public int getPageCount() {
         return pdfDocument.getPages().size();
     }

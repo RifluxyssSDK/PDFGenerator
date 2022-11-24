@@ -8,8 +8,19 @@ import android.widget.TextView;
 import android.pdf.custom.Utils;
 import android.pdf.io.Text;
 
+/**
+ * The type Create text.
+ */
 public class CreateText {
 
+    /**
+     * Create view.
+     *
+     * @param context         the context
+     * @param singleColWeight the single col weight
+     * @param text            the text
+     * @return the view
+     */
     public View create(Context context, float singleColWeight, Text text) {
 
         double minMaxWidth = singleColWeight * text.getColSpan();

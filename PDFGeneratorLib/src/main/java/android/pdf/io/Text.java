@@ -11,30 +11,87 @@ import android.pdf.kernel.ElementType;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Text extends Element {
 
+    /**
+     * It represents the number of rows to span.
+     */
     int rowSpan;
+    /**
+     * It represents the number of columns to span.
+     */
     int colSpan;
-
+    /**
+     * It specifies extra space on the LEFT side of the view.
+     */
     int marginLeft;
+    /**
+     * It specifies extra space on the TOP side of the view.
+     */
     int marginTop;
+    /**
+     * It specifies extra space on the RIGHT side of the view.
+     */
     int marginRight;
+    /**
+     * It specifies extra space on the BOTTOM side of the view.
+     */
     int marginBottom;
-
+    /**
+     * It used to specify extra space on the LEFT side inside the view.
+     */
     int paddingLeft;
+    /**
+     * It used to specify extra space on the TOP side inside the view.
+     */
     int paddingTop;
+    /**
+     * It used to specify extra space on the RIGHT side inside the view.
+     */
     int paddingRight;
+    /**
+     * It used to specify extra space on the BOTTOM side inside the view.
+     */
     int paddingBottom;
-
+    /**
+     * It used to set the gravity of text. ( EX : "Gravity.CENTER", "Gravity.CENTER | Gravity.CENTER_VERTICAL" )
+     */
     int gravity;
+    /**
+     * It used to set the color of text.
+     */
     int textColor;
+    /**
+     * It used to set the size of text.
+     */
     int textSize;
+    /**
+     * It used to set the fontStyle of text.
+     */
     byte fontStyle;
+    /**
+     * It used to set the background of text.
+     */
     int backgroundColor;
 
+    /**
+     * It used to set the border of text.
+     */
     boolean border;
+    /**
+     * It used to set the strokeWidth of text border.
+     */
     int borderWidth;
+    /**
+     * It used to set the color of text border.
+     */
     int borderColor;
 
+    /**
+     * It used to create text for pdf document.
+     */
     String message;
+    /**
+     * It used to create text for pdf document.
+     */
     TextBuilder textBuilder;
 
     /**
@@ -89,7 +146,7 @@ public class Text extends Element {
     }
 
     /**
-     * @param colSpan It represents the number of rows to span.
+     * @param colSpan It represents the number of columns to span.
      * @return Text
      */
     public Text setColSpan(int colSpan) {
@@ -304,82 +361,142 @@ public class Text extends Element {
         return this;
     }
 
+    /**
+     * @return rowSpan
+     */
     public int getRowSpan() {
         return rowSpan;
     }
 
+    /**
+     * @return colSpan
+     */
     public int getColSpan() {
         return colSpan;
     }
 
+    /**
+     * @return marginLeft
+     */
     public int getMarginLeft() {
         return marginLeft;
     }
 
+    /**
+     * @return marginTop
+     */
     public int getMarginTop() {
         return marginTop;
     }
 
+    /**
+     * @return marginRight
+     */
     public int getMarginRight() {
         return marginRight;
     }
 
+    /**
+     * @return marginBottom
+     */
     public int getMarginBottom() {
         return marginBottom;
     }
 
+    /**
+     * @return paddingLeft
+     */
     public int getPaddingLeft() {
         return paddingLeft;
     }
 
+    /**
+     * @return paddingTop
+     */
     public int getPaddingTop() {
         return paddingTop;
     }
 
+    /**
+     * @return paddingRight
+     */
     public int getPaddingRight() {
         return paddingRight;
     }
 
+    /**
+     * @return paddingBottom
+     */
     public int getPaddingBottom() {
         return paddingBottom;
     }
 
+    /**
+     * @return gravity
+     */
     public int getGravity() {
         return gravity;
     }
 
+    /**
+     * @return textColor
+     */
     public int getTextColor() {
         return textColor;
     }
 
+    /**
+     * @return textSize
+     */
     public int getTextSize() {
         return textSize;
     }
 
+    /**
+     * @return fontStyle
+     */
     public byte getFontStyle() {
         return fontStyle;
     }
 
+    /**
+     * @return backgroundColor
+     */
     public int getBackgroundColor() {
         return backgroundColor;
     }
 
+    /**
+     * @return border
+     */
     public boolean isBorder() {
         return border;
     }
 
+    /**
+     * @return borderWidth
+     */
     public int getBorderWidth() {
         return borderWidth;
     }
 
+    /**
+     * @return borderColor
+     */
     public int getBorderColor() {
         return borderColor;
     }
 
+    /**
+     * @return message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * @return textBuilder
+     */
     public TextBuilder getTextBuilder() {
         return textBuilder;
     }

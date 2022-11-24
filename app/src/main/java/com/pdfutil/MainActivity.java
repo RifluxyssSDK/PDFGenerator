@@ -1,20 +1,13 @@
 package com.pdfutil;
 
-import android.pdf.bgImage.BgImage;
-import android.pdf.customtext.CustomTypefaceSpan;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
-import android.pdf.io.PageCount;
-import android.pdf.kernel.PageSize;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -23,7 +16,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.pdfutil.databinding.ActivityMainBinding;
 
-import android.pdf.custom.Utils;
 import android.pdf.io.Image;
 import android.pdf.io.Line;
 import android.pdf.io.Paragraph;
@@ -52,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        createDocument();
 
-//        create();
-
-        createTemp();
+        create();
 
         document.close();
 
@@ -64,20 +54,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
-
-    }
-
-    private void createTemp() {
-
-        Document document = new Document(PageSize.A4).init(getBaseContext());
-
-        document.open(10);
-
-        document.setPageCount(new PageCount("",""));
-
-        document.close();
-
-//        document.finish(null);
 
     }
 
@@ -92,8 +68,15 @@ public class MainActivity extends AppCompatActivity {
         textBuilder.append("HELVETICA_COMPRESSED\n", FontStyle.HELVETICA_COMPRESSED);
 
         document.add(new Paragraph()
-                .add(new Text(1, 10, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
+                .add(new Text(1, 20, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
         );
+
+        for (int i = 0; i < 30; i++) {
+            document.add(new Paragraph()
+                    .add(new Text(1, 20, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
+                    .setMarginTop(-1)
+            );
+        }
 
     }
 
@@ -141,7 +124,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void addCustomerInfo() {
 
-        document.add(new Paragraph().add(new Text(1, 10, "Customer Name").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 10, "DBA Name").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 10, "A Jazz Trio Ned Kentar Prdctns").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 10, "A Jazz Trio Ned Kentar Prdctns").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 10, "Delivery Address :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 10, "Delivery Address 2 :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 10, "3430 Saint Paul Ave12-test").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 10, "3430 Saint Paul Ave12-test").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 5, "City :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 5, "State / Province :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 5, "Zip / Postal Code :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 5, "Phone :").setFontStyle(FontStyle.HELVETICA).setTextSize(5)).add(new Text(1, 5, "MINNEAPOLIS").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 5, "MN").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 5, "55438").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).add(new Text(1, 5, "6129265655").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5)).setPadding(10, 5, 10, 5).setBorder(true).setBorderColor(Color.GRAY).setMarginTop(15));
+        document.add(new Paragraph()
+                .add(new Text(1, 10, "Customer Name").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 10, "DBA Name").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 10, "A Jazz Trio Ned Kentar Prdctns").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 10, "A Jazz Trio Ned Kentar Prdctns").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 10, "Delivery Address :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 10, "Delivery Address 2 :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 10, "3430 Saint Paul Ave12-test").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 10, "3430 Saint Paul Ave12-test").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 5, "City :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 5, "State / Province :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 5, "Zip / Postal Code :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 5, "Phone :").setFontStyle(FontStyle.HELVETICA).setTextSize(5))
+                .add(new Text(1, 5, "MINNEAPOLIS").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 5, "MN").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 5, "55438").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .add(new Text(1, 5, "6129265655").setFontStyle(FontStyle.HELVETICA_BOLD).setTextSize(5))
+                .setPadding(10, 5, 10, 5).setBorder(true).setBorderColor(Color.GRAY).setMarginTop(15)
+        );
 
         addSmallText("*This agreement is effective as of the date of execution for a term of 80 months from the date of installation.");
 

@@ -9,8 +9,19 @@ import android.widget.LinearLayout;
 
 import android.pdf.io.Image;
 
+/**
+ * The type Create image.
+ */
 public class CreateImage {
 
+    /**
+     * Create view.
+     *
+     * @param context         the context
+     * @param singleColWeight the single col weight
+     * @param image           the image
+     * @return the view
+     */
     public View create(Context context, float singleColWeight, Image image) {
 
         double minMaxWidth = singleColWeight * image.getColSpan();

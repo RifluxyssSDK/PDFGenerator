@@ -7,10 +7,25 @@ import android.graphics.Color;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class BgImage {
 
+    /**
+     * This bitmap used to set background image for each page of document.
+     */
     private final Bitmap image;
+    /**
+     * It used to creating a white space on image LEFT side.
+     */
     private int marginLeft;
+    /**
+     * It used to creating a white space on image TOP side.
+     */
     private int marginTop;
+    /**
+     * It used to creating a white space on image RIGHT side.
+     */
     private int marginRight;
+    /**
+     * It used to creating a white space on image BOTTOM side.
+     */
     private int marginBottom;
 
     /**
@@ -21,7 +36,7 @@ public class BgImage {
     }
 
     /**
-     * @param margin This parameter used to creating a white space around the given bitmap.
+     * @param margin This parameter used to creating a white space around the given image.
      */
     public void setMargin(int margin) {
         this.marginLeft = margin;
@@ -31,10 +46,10 @@ public class BgImage {
     }
 
     /**
-     * @param marginLeft This parameter used to creating a white space on Left side on given image.
-     * @param marginTop This parameter used to creating a white space on Top side on given image.
-     * @param marginRight This parameter used to creating a white space on Right side on given image.
-     * @param marginBottom This parameter used to creating a white space on Bottom side on given image.
+     * @param marginLeft This parameter used to creating a white space on image LEFT side.
+     * @param marginTop This parameter used to creating a white space on image TOP side.
+     * @param marginRight This parameter used to creating a white space on image RIGHT side.
+     * @param marginBottom This parameter used to creating a white space on image BOTTOM side.
      */
     public void setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
         this.marginLeft = marginLeft;
@@ -43,18 +58,30 @@ public class BgImage {
         this.marginBottom = marginBottom;
     }
 
+    /**
+     * @return marginLeft
+     */
     public int getMarginLeft() {
         return marginLeft;
     }
 
+    /**
+     * @return marginTop
+     */
     public int getMarginTop() {
         return marginTop;
     }
 
+    /**
+     * @return marginRight
+     */
     public int getMarginRight() {
         return marginRight;
     }
 
+    /**
+     * @return marginBottom
+     */
     public int getMarginBottom() {
         return marginBottom;
     }

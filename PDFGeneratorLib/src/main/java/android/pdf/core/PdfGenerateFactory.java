@@ -11,6 +11,9 @@ import android.pdf.layout.CreateStatic;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The type Pdf generate factory.
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class PdfGenerateFactory {
 
@@ -18,6 +21,11 @@ public class PdfGenerateFactory {
     private CreateStatic staticFooter;
     private CreateContainer container;
 
+    /**
+     * Init.
+     *
+     * @param document the document
+     */
     public void init(Document document) {
 
         initDimension(document.context);
@@ -40,6 +48,9 @@ public class PdfGenerateFactory {
 
     }
 
+    /**
+     * @param document Calculate no of pages
+     */
     private void initPageCount(Document document) {
 
         PageCount pageCount = document.getPageCount();
@@ -53,6 +64,9 @@ public class PdfGenerateFactory {
         }
     }
 
+    /**
+     * @param document Create repeated View ( HEADER & FOOTER ).
+     */
     private void initStaticLayout(Document document) {
 
         staticHeader = new CreateStatic(document.getContext(), document.getHeaderCells(), document.getPageSize(), document.getColumnWeight());
@@ -61,6 +75,9 @@ public class PdfGenerateFactory {
 
     }
 
+    /**
+     * initDimension {@link Dimension}
+     */
     private void initDimension(Context context) {
 
         if (context == null) {
@@ -75,6 +92,9 @@ public class PdfGenerateFactory {
 
     }
 
+    /**
+     * @param document Calculate actual document size.
+     */
     private void initPageSize(Document document) {
 
         int paddingWidth = document.paddingLeft + document.paddingRight;
@@ -85,6 +105,12 @@ public class PdfGenerateFactory {
 
     }
 
+    /**
+     * Finish.
+     *
+     * @param file the file
+     * @throws IOException the io exception
+     */
     public void finish(File file) throws IOException {
 
         container.finish(file);

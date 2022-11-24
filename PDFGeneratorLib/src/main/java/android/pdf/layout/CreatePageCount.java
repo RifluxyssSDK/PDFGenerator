@@ -10,8 +10,20 @@ import android.pdf.custom.Utils;
 import android.pdf.io.PageCount;
 
 
+/**
+ * The type Create page count.
+ */
 public class CreatePageCount {
 
+    /**
+     * Create view.
+     *
+     * @param context          the context
+     * @param pageWidth        the page width
+     * @param currentPageCount the current page count
+     * @param pageCount        the page count
+     * @return the view
+     */
     @SuppressLint("SetTextI18n")
     public View create(Context context, int pageWidth, int currentPageCount, PageCount pageCount) {
 

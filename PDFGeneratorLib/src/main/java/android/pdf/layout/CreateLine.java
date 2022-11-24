@@ -7,8 +7,19 @@ import android.widget.LinearLayout;
 
 import android.pdf.io.Line;
 
+/**
+ * The type Create line.
+ */
 public class CreateLine {
 
+    /**
+     * Create view.
+     *
+     * @param context         the context
+     * @param singleColWeight the single col weight
+     * @param line            the line
+     * @return the view
+     */
     public View create(Context context, float singleColWeight, Line line) {
 
         double minMaxWidth =  singleColWeight * line.getColSpan();
@@ -33,5 +44,4 @@ public class CreateLine {
         return lineOuter;
 
     }
-
 }
