@@ -29,8 +29,6 @@ public class Utils {
 
         switch (typeFace) {
             default:
-                return ResourcesCompat.getFont(context, R.font.times_roman);
-            case FontStyle.HELVETICA:
                 return ResourcesCompat.getFont(context, R.font.helvetica);
             case FontStyle.HELVETICA_BOLD:
                 return ResourcesCompat.getFont(context, R.font.helvetica_bold);

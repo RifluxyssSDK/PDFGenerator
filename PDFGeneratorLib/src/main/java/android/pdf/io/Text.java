@@ -2,6 +2,7 @@ package android.pdf.io;
 
 import android.graphics.Color;
 
+import android.pdf.customtext.TextBuilder;
 import android.pdf.kernel.ElementType;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
@@ -31,6 +32,7 @@ public class Text extends Element {
     int borderColor;
 
     String message;
+    TextBuilder textBuilder;
 
     public Text(String message) {
         setRowSpan(1);
@@ -45,9 +47,20 @@ public class Text extends Element {
     public Text(int rowSpan, int colSpan, String message) {
         setRowSpan(rowSpan);
         setColSpan(colSpan);
+        setMessage(message);
+        init();
+    }
+
+    public Text(int rowSpan, int colSpan, TextBuilder TextBuilder) {
+        setRowSpan(rowSpan);
+        setColSpan(colSpan);
+        setTextBuilder(TextBuilder);
+        init();
+    }
+
+    private void init(){
         setTextSize(7);
         setBorderWidth(1);
-        setMessage(message);
         setTextColor(Color.BLACK);
         setBorderColor(Color.BLACK);
     }
@@ -176,6 +189,14 @@ public class Text extends Element {
         return this;
     }
 
+    public Text setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
+        setMarginLeft(marginLeft);
+        setMarginTop(marginTop);
+        setMarginRight(marginRight);
+        setMarginBottom(marginBottom);
+        return this;
+    }
+
     public int getRowSpan() {
         return rowSpan;
     }
@@ -250,5 +271,13 @@ public class Text extends Element {
 
     public String getMessage() {
         return message;
+    }
+
+    public TextBuilder getTextBuilder() {
+        return textBuilder;
+    }
+
+    public void setTextBuilder(TextBuilder textBuilder) {
+        this.textBuilder = textBuilder;
     }
 }

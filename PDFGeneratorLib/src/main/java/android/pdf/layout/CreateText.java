@@ -12,11 +12,11 @@ public class CreateText {
 
     public View create(Context context, float singleColWeight, Text text) {
 
-        double minMaxWidth =  singleColWeight * text.getColSpan();
+        double minMaxWidth = singleColWeight * text.getColSpan();
         int elementWidth = (int) (minMaxWidth - (text.getMarginRight() + text.getMarginLeft()));
 
         TextView textView = new TextView(context);
-        textView.setText(text.getMessage());
+        textView.setText(text.getMessage() != null ? text.getMessage() : text.getTextBuilder().get());
         textView.setMinWidth(elementWidth);
         textView.setMaxWidth(elementWidth);
         textView.setTextColor(text.getTextColor());
@@ -31,9 +31,7 @@ public class CreateText {
             textView.setBackgroundColor(text.getBackgroundColor());
         }
 
-        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
-                GridLayout.spec(GridLayout.UNDEFINED, text.getRowSpan(), text.getRowSpan()),
-                GridLayout.spec(GridLayout.UNDEFINED, text.getColSpan(), text.getColSpan()));
+        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, text.getRowSpan(), text.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, text.getColSpan(), text.getColSpan()));
         layoutParams.setMargins(text.getMarginLeft(), text.getMarginTop(), text.getMarginRight(), text.getMarginBottom());
 
         textView.setLayoutParams(layoutParams);
