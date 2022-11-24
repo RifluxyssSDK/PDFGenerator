@@ -254,6 +254,14 @@ public class Document {
      */
     public void close() {
 
+        if (context == null) {
+            throw new Error("You been must call 'init' method to initialize library.");
+        }
+
+        if (columnWeight == 0) {
+            throw new Error("You been must open the Document");
+        }
+
         pdfGenerateFactory.init((this));
 
     }

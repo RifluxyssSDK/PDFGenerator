@@ -104,7 +104,7 @@ public class CreateContainer {
 
                 container.removeViews(1, (container.getChildCount() - 3));
 
-                addGridAttribute(gridLayout, singleColWeight , view);
+                addGridAttribute(gridLayout, singleColWeight , view );
             }
         }
 
@@ -117,13 +117,22 @@ public class CreateContainer {
         return this;
     }
 
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     * @param singleColWeight It used basic Alignment.
+     * @param view This is the overlap View.
+     */
     private void addGridAttribute(GridLayout gridLayout, float singleColWeight, View view) {
 
-        gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(3)));
+        gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(1)));
 
         gridLayout.addView(view);
     }
 
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     * @return overlap View.
+     */
     private View overlapping(GridLayout gridLayout) {
 
         View view = gridLayout.getChildAt(gridLayout.getChildCount() - 1);
@@ -132,10 +141,16 @@ public class CreateContainer {
 
     }
 
+    /**
+     * @param gridLayout It used to adding the overlap View.
+     */
     private void createPageBreakView(GridLayout gridLayout) {
         gridLayout.addView(new CreateAreaBreak().create(document.getContext(), 1, document.getColumnWeight(), header, footer, gridLayout, pageCounterView, pageSize.pageHeight));
     }
 
+    /**
+     * @param view This method called when page Completed & Create document.
+     */
     private void createNewPage(LinearLayout view) {
 
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageSize.documentWidth, pageSize.documentHeight, (pdfDocument.getPages().size() + 1)).create();
@@ -159,6 +174,10 @@ public class CreateContainer {
         pdfDocument.finishPage(page);
     }
 
+    /**
+     * @param currentPageCount {@link CreatePageCount} Used to create Page No
+     * @return View
+     */
     private View createPageCounterView(int currentPageCount) {
 
         if (document.getPageCount() == null) {

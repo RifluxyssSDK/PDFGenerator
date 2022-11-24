@@ -7,6 +7,9 @@ import android.pdf.kernel.ElementType;
  */
 public class AreaBreak extends Cell {
 
+    /**
+     * @return cellType
+     */
     @Override
     public byte getCellType() {
         return ElementType.AREA_BREAK;
