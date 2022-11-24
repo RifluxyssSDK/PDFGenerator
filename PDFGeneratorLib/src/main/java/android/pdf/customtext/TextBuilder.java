@@ -2,6 +2,7 @@ package android.pdf.customtext;
 
 import android.content.Context;
 import android.pdf.custom.Utils;
+import android.pdf.kernel.PageSize;
 import android.text.Spannable;
 import android.text.SpannableString;
 
@@ -12,9 +13,20 @@ import java.util.ArrayList;
  */
 public class TextBuilder {
 
+    /**
+     * It used to Context of the parent {@link Context}.
+     */
     private final Context context;
 
+
+    /**
+     * Initialize the empty string of the variable {@code message}
+     */
     private String message = "";
+
+    /**
+     * Initialize the empty Arraylist of the variable {@code textBuilderList}
+     */
     private final ArrayList<TextBuilderModel> textBuilderList = new ArrayList<>();
 
     /**
