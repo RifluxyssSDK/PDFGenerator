@@ -70,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
         textBuilder.append("HELVETICA_BOLD\n", FontStyle.HELVETICA_BOLD);
         textBuilder.append("HELVETICA_LIGHT\n", FontStyle.HELVETICA_LIGHT);
         textBuilder.append("HELVETICA_OBLIQUE\n", FontStyle.HELVETICA_OBLIQUE);
+        textBuilder.append("HELVETICA_COMPRESSED\n", FontStyle.HELVETICA_COMPRESSED);
 
         document.add(new Paragraph()
-                .add(new Text(1, 20, textBuilder))
+                .add(new Text(1, 10, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
         );
 
     }

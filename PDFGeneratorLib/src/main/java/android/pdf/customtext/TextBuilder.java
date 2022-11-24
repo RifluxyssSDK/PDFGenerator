@@ -2,7 +2,6 @@ package android.pdf.customtext;
 
 import android.content.Context;
 import android.pdf.custom.Utils;
-import android.pdf.kernel.FontStyle;
 import android.text.Spannable;
 import android.text.SpannableString;
 
@@ -13,11 +12,7 @@ public class TextBuilder {
     private final Context context;
 
     private String message = "";
-    private final ArrayList<Integer> length = new ArrayList<>();
-    private final ArrayList<String> strings = new ArrayList<>();
-    private final ArrayList<Byte> fontStyles = new ArrayList<>();
-
-
+    private final ArrayList<TextBuilderModel> textBuilderList = new ArrayList<>();
 
     public TextBuilder(Context context) {
         this.context = context;
@@ -25,23 +20,23 @@ public class TextBuilder {
 
     public void append(String text, byte FontStyle) {
         message += text;
-        strings.add(text);
-        length.add(text.length());
-        fontStyles.add(FontStyle);
+        textBuilderList.add(new TextBuilderModel(text,text.length(),FontStyle));
     }
 
     public Spannable get() {
 
-        StringBuilder temp = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
         Spannable spannable = new SpannableString(message);
 
-        for (int i = 0; i < fontStyles.size(); i++) {
+        for (int i = 0; i < textBuilderList.size(); i++) {
 
-            spannable.setSpan( new CustomTypefaceSpan(strings.get(i), Utils.createGetFont(context, fontStyles.get(i))),
-                    temp.length(), temp.length() + strings.get(i).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            TextBuilderModel textBuilderModel = textBuilderList.get(i);
 
-            temp.append(strings.get(i));
+            spannable.setSpan( new CustomTypefaceSpan(textBuilderModel.getText(), Utils.createGetFont(context, textBuilderModel.getFontStyle())),
+                    stringBuilder.length(), (stringBuilder.length() + textBuilderModel.getLength()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            stringBuilder.append(textBuilderModel.getText());
 
         }
 
