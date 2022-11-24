@@ -13,10 +13,16 @@ public class BgImage {
     private int marginRight;
     private int marginBottom;
 
+    /**
+     * @param image This bitmap used to set background image for each page of document.
+     */
     public BgImage(Bitmap image) {
         this.image = image;
     }
 
+    /**
+     * @param margin This parameter used to creating a white space around the given bitmap.
+     */
     public void setMargin(int margin) {
         this.marginLeft = margin;
         this.marginTop = margin;
@@ -24,6 +30,12 @@ public class BgImage {
         this.marginBottom = margin;
     }
 
+    /**
+     * @param marginLeft This parameter used to creating a white space on Left side on given image.
+     * @param marginTop This parameter used to creating a white space on Top side on given image.
+     * @param marginRight This parameter used to creating a white space on Right side on given image.
+     * @param marginBottom This parameter used to creating a white space on Bottom side on given image.
+     */
     public void setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
         this.marginLeft = marginLeft;
         this.marginTop = marginTop;
@@ -47,10 +59,20 @@ public class BgImage {
         return marginBottom;
     }
 
+    /**
+     * @param width This parameter used to createScaledBitmap for actual document size.
+     * @param height This parameter used to createScaledBitmap for actual document size.
+     * @return backgroundImage
+     */
     public Bitmap getImage(int width, int height) {
         return initBackground(width, height);
     }
 
+    /**
+     * @param width This parameter used to createScaledBitmap for actual document size.
+     * @param height This parameter used to createScaledBitmap for actual document size.
+     * @return backgroundImage
+     */
     private Bitmap initBackground(int width, int height) {
         Bitmap bitmap = Bitmap.createBitmap((image.getWidth() + getMarginLeft() + getMarginRight()), (image.getHeight() + getMarginTop() + getMarginBottom()), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);

@@ -1,5 +1,6 @@
 package com.pdfutil;
 
+import android.pdf.bgImage.BgImage;
 import android.pdf.customtext.CustomTypefaceSpan;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
+import android.pdf.io.PageCount;
+import android.pdf.kernel.PageSize;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Gravity;
@@ -49,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        createDocument();
 
-        create();
+//        create();
+
+        createTemp();
 
         document.close();
 
@@ -59,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void createTemp() {
+
+        Document document = new Document(PageSize.A4).init(getBaseContext());
+
+        document.open(10);
+
+        document.setPageCount(new PageCount("",""));
+
+        document.close();
+
+//        document.finish(null);
 
     }
 

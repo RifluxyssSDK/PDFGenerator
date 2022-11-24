@@ -1,1 +1,1 @@
-var moduleSearchIndex = [{"l":"PDFGenerator","url":"index.html"}]
+var moduleSearchIndex = [{"l":"PDFGeneratorLib","url":"index.html"}]
