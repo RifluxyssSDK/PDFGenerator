@@ -20,6 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Create container.
+ */
 public class CreateContainer {
 
     private final View header;
@@ -31,12 +34,24 @@ public class CreateContainer {
     private PageSize pageSize;
     private View pageCounterView;
 
+    /**
+     * Instantiates a new Create container.
+     *
+     * @param document the document
+     * @param header   the header
+     * @param footer   the footer
+     */
     public CreateContainer(Document document, View header, View footer) {
         this.header = header;
         this.footer = footer;
         this.document = document;
     }
 
+    /**
+     * Create create container.
+     *
+     * @return the create container
+     */
     public CreateContainer create() {
 
         pageSize = document.getPageSize();
@@ -77,7 +92,7 @@ public class CreateContainer {
 
             if (Utils.getViewHeight(mHeight) > pageSize.pageHeight) {
 
-                View view = overlapping((Paragraph) cell, gridLayout);
+                View view = overlapping(gridLayout);
 
                 createPageBreakView(gridLayout);
 
@@ -109,7 +124,7 @@ public class CreateContainer {
         gridLayout.addView(view);
     }
 
-    private View overlapping(Paragraph paragraph, GridLayout gridLayout) {
+    private View overlapping(GridLayout gridLayout) {
 
         View view = gridLayout.getChildAt(gridLayout.getChildCount() - 1);
         gridLayout.removeViewAt(gridLayout.getChildCount() - 1);
@@ -157,11 +172,22 @@ public class CreateContainer {
         }
     }
 
+    /**
+     * Finish.
+     *
+     * @param servicePdfFile the service pdf file
+     * @throws IOException the io exception
+     */
     public void finish(File servicePdfFile) throws IOException {
         pdfDocument.writeTo(new FileOutputStream(servicePdfFile));
         pdfDocument.close();
     }
 
+    /**
+     * Gets page count.
+     *
+     * @return the page count
+     */
     public int getPageCount() {
         return pdfDocument.getPages().size();
     }

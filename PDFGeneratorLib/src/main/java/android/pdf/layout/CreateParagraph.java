@@ -12,8 +12,20 @@ import android.pdf.io.Paragraph;
 import android.pdf.io.Text;
 import android.pdf.kernel.ElementType;
 
+/**
+ * The type Create paragraph.
+ */
 public class CreateParagraph {
 
+    /**
+     * Create view.
+     *
+     * @param context         the context
+     * @param singleColWeight the single col weight
+     * @param paragraph       the paragraph
+     * @param columnWeight    the column weight
+     * @return the view
+     */
     public View create(Context context, float singleColWeight, Paragraph paragraph, int columnWeight) {
 
         singleColWeight = initCalc(singleColWeight, paragraph, columnWeight);

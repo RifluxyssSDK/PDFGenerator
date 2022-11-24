@@ -52,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        createDocument();
 
-//        create();
-
-        createTemp();
+        create();
 
         document.close();
 
@@ -64,20 +62,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
-
-    }
-
-    private void createTemp() {
-
-        Document document = new Document(PageSize.A4).init(getBaseContext());
-
-        document.open(10);
-
-        document.setPageCount(new PageCount("",""));
-
-        document.close();
-
-//        document.finish(null);
 
     }
 
@@ -92,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         textBuilder.append("HELVETICA_COMPRESSED\n", FontStyle.HELVETICA_COMPRESSED);
 
         document.add(new Paragraph()
+                .add(new Text(1, 10, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
                 .add(new Text(1, 10, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
         );
 

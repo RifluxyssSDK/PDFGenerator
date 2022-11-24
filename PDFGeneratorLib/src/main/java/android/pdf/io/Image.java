@@ -11,33 +11,89 @@ import android.pdf.kernel.ElementType;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Image extends Element {
 
+    /**
+     * The Row span.
+     */
     int rowSpan;
+    /**
+     * The Col span.
+     */
     int colSpan;
 
+    /**
+     * The Margin left.
+     */
     int marginLeft;
+    /**
+     * The Margin top.
+     */
     int marginTop;
+    /**
+     * The Margin right.
+     */
     int marginRight;
+    /**
+     * The Margin bottom.
+     */
     int marginBottom;
 
+    /**
+     * The Padding left.
+     */
     int paddingLeft;
+    /**
+     * The Padding top.
+     */
     int paddingTop;
+    /**
+     * The Padding right.
+     */
     int paddingRight;
+    /**
+     * The Padding bottom.
+     */
     int paddingBottom;
 
+    /**
+     * The Image width.
+     */
     int imageWidth;
+    /**
+     * The Image height.
+     */
     int imageHeight;
 
+    /**
+     * The Image.
+     */
     Bitmap image;
+    /**
+     * The Border.
+     */
     boolean border;
+    /**
+     * The Border width.
+     */
     int borderWidth;
+    /**
+     * The Border color.
+     */
     int borderColor;
+    /**
+     * The Background color.
+     */
     int backgroundColor;
+    /**
+     * The Scale type.
+     */
     ImageView.ScaleType scaleType;
 
     /**
+     * Instantiates a new Image.
+     *
      * @param rowSpan It represents the number of rows to span.
      * @param colSpan It represents the number of columns to span.
-     * @param image It used to create image for pdf document.
+     * @param image   It used to create image for pdf document.
      */
     public Image(int rowSpan, int colSpan, Bitmap image) {
         setImage(image);
@@ -57,8 +113,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets row span.
+     *
      * @param rowSpan It represents the number of rows to span.
-     * @return Image
+     * @return Image row span
      */
     public Image setRowSpan(int rowSpan) {
         this.rowSpan = rowSpan;
@@ -66,8 +124,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets col span.
+     *
      * @param colSpan It represents the number of rows to span.
-     * @return Image
+     * @return Image col span
      */
     public Image setColSpan(int colSpan) {
         this.colSpan = colSpan;
@@ -75,8 +135,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets margin left.
+     *
      * @param marginLeft It specifies extra space on the LEFT side of the view.
-     * @return Image
+     * @return Image margin left
      */
     public Image setMarginLeft(int marginLeft) {
         this.marginLeft = marginLeft;
@@ -84,8 +146,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets margin top.
+     *
      * @param marginTop It specifies extra space on the TOP side of the view.
-     * @return Image
+     * @return Image margin top
      */
     public Image setMarginTop(int marginTop) {
         this.marginTop = marginTop;
@@ -93,8 +157,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets margin right.
+     *
      * @param marginRight It specifies extra space on the Right side of the view.
-     * @return Image
+     * @return Image margin right
      */
     public Image setMarginRight(int marginRight) {
         this.marginRight = marginRight;
@@ -102,8 +168,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets margin bottom.
+     *
      * @param marginBottom It specifies extra space on the BOTTOM side of the view.
-     * @return Image
+     * @return Image margin bottom
      */
     public Image setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
@@ -111,8 +179,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets padding left.
+     *
      * @param paddingLeft It used to specify extra space on the LEFT Side inside the view.
-     * @return Image
+     * @return Image padding left
      */
     public Image setPaddingLeft(int paddingLeft) {
         this.paddingLeft = paddingLeft;
@@ -120,8 +190,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets padding top.
+     *
      * @param paddingTop It used to specify extra space on the TOP Side inside the view.
-     * @return Image
+     * @return Image padding top
      */
     public Image setPaddingTop(int paddingTop) {
         this.paddingTop = paddingTop;
@@ -129,8 +201,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets padding right.
+     *
      * @param paddingRight It used to specify extra space on the RIGHT Side inside the view.
-     * @return Image
+     * @return Image padding right
      */
     public Image setPaddingRight(int paddingRight) {
         this.paddingRight = paddingRight;
@@ -138,8 +212,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets padding bottom.
+     *
      * @param paddingBottom It used to specify extra space on the BOTTOM Side inside the view.
-     * @return Image
+     * @return Image padding bottom
      */
     public Image setPaddingBottom(int paddingBottom) {
         this.paddingBottom = paddingBottom;
@@ -147,8 +223,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets image width.
+     *
      * @param imageWidth It used to set the width of image.
-     * @return Image
+     * @return Image image width
      */
     public Image setImageWidth(int imageWidth) {
         this.imageWidth = imageWidth;
@@ -156,8 +234,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets image height.
+     *
      * @param imageHeight It used to set the height of image.
-     * @return Image
+     * @return Image image height
      */
     public Image setImageHeight(int imageHeight) {
         this.imageHeight = imageHeight;
@@ -165,8 +245,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets image.
+     *
      * @param image It used to create image for pdf document.
-     * @return Image
+     * @return Image image
      */
     public Image setImage(Bitmap image) {
         this.image = image;
@@ -174,8 +256,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets border.
+     *
      * @param border It used to set the border of image.
-     * @return Image
+     * @return Image border
      */
     public Image setBorder(boolean border) {
         this.border = border;
@@ -183,8 +267,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets padding.
+     *
      * @param padding It used to specify extra space on the LEFT, TOP, RIGHT, BOTTOM side's inside the view.
-     * @return Image
+     * @return Image padding
      */
     public Image setPadding(int padding) {
         setPaddingLeft(padding);
@@ -195,11 +281,13 @@ public class Image extends Element {
     }
 
     /**
-     * @param paddingLeft It used to specify extra space on the LEFT side inside the view.
-     * @param paddingTop It used to specify extra space on the TOP side inside the view.
-     * @param paddingRight It used to specify extra space on the RIGHT side inside the view.
+     * Sets padding.
+     *
+     * @param paddingLeft   It used to specify extra space on the LEFT side inside the view.
+     * @param paddingTop    It used to specify extra space on the TOP side inside the view.
+     * @param paddingRight  It used to specify extra space on the RIGHT side inside the view.
      * @param paddingBottom It used to specify extra space on the BOTTOM side inside the view.
-     * @return Text
+     * @return Text padding
      */
     public Image setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
         setPaddingLeft(paddingLeft);
@@ -210,8 +298,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets margin.
+     *
      * @param margin It specifies extra space on the LEFT, TOP, RIGHT, BOTTOM side's of the view.
-     * @return Image
+     * @return Image margin
      */
     public Image setMargin(int margin) {
         setMarginLeft(margin);
@@ -222,11 +312,13 @@ public class Image extends Element {
     }
 
     /**
-     * @param marginLeft It specifies extra space on the LEFT side of the view.
-     * @param marginTop It specifies extra space on the TOP side of the view.
-     * @param marginRight It specifies extra space on the RIGHT side of the view.
+     * Sets margin.
+     *
+     * @param marginLeft   It specifies extra space on the LEFT side of the view.
+     * @param marginTop    It specifies extra space on the TOP side of the view.
+     * @param marginRight  It specifies extra space on the RIGHT side of the view.
      * @param marginBottom It specifies extra space on the BOTTOM side of the view.
-     * @return Text
+     * @return Text margin
      */
     public Image setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
         setMarginLeft(marginLeft);
@@ -237,8 +329,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets scale type.
+     *
      * @param scaleType It used to set the scaleType of image.
-     * @return Image
+     * @return Image scale type
      */
     public Image setScaleType(ImageView.ScaleType scaleType) {
         this.scaleType = scaleType;
@@ -246,8 +340,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets border width.
+     *
      * @param borderWidth It used to set the strokeWidth of image border.
-     * @return Image
+     * @return Image border width
      */
     public Image setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
@@ -255,8 +351,10 @@ public class Image extends Element {
     }
 
     /**
+     * Sets border color.
+     *
      * @param borderColor It used to set the color of image border.
-     * @return Image
+     * @return Image border color
      */
     public Image setBorderColor(int borderColor) {
         this.borderColor = borderColor;
@@ -264,82 +362,174 @@ public class Image extends Element {
     }
 
     /**
+     * Sets background color.
+     *
      * @param backgroundColor It used to set the background of image.
-     * @return Image
+     * @return Image background color
      */
     public Image setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
         return this;
     }
 
+    /**
+     * Gets row span.
+     *
+     * @return row span
+     */
     public int getRowSpan() {
         return rowSpan;
     }
 
+    /**
+     * Gets col span.
+     *
+     * @return col span
+     */
     public int getColSpan() {
         return colSpan;
     }
 
+    /**
+     * Gets margin left.
+     *
+     * @return margin left
+     */
     public int getMarginLeft() {
         return marginLeft;
     }
 
+    /**
+     * Gets margin top.
+     *
+     * @return the margin top
+     */
     public int getMarginTop() {
         return marginTop;
     }
 
+    /**
+     * Gets margin right.
+     *
+     * @return the margin right
+     */
     public int getMarginRight() {
         return marginRight;
     }
 
+    /**
+     * Gets margin bottom.
+     *
+     * @return the margin bottom
+     */
     public int getMarginBottom() {
         return marginBottom;
     }
 
+    /**
+     * Gets padding left.
+     *
+     * @return the padding left
+     */
     public int getPaddingLeft() {
         return paddingLeft;
     }
 
+    /**
+     * Gets padding top.
+     *
+     * @return the padding top
+     */
     public int getPaddingTop() {
         return paddingTop;
     }
 
+    /**
+     * Gets padding right.
+     *
+     * @return the padding right
+     */
     public int getPaddingRight() {
         return paddingRight;
     }
 
+    /**
+     * Gets padding bottom.
+     *
+     * @return the padding bottom
+     */
     public int getPaddingBottom() {
         return paddingBottom;
     }
 
+    /**
+     * Gets image width.
+     *
+     * @return the image width
+     */
     public int getImageWidth() {
         return imageWidth;
     }
 
+    /**
+     * Gets image height.
+     *
+     * @return the image height
+     */
     public int getImageHeight() {
         return imageHeight;
     }
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public Bitmap getImage() {
         return image;
     }
 
+    /**
+     * Is border boolean.
+     *
+     * @return the boolean
+     */
     public boolean isBorder() {
         return border;
     }
 
+    /**
+     * Gets border width.
+     *
+     * @return the border width
+     */
     public int getBorderWidth() {
         return borderWidth;
     }
 
+    /**
+     * Gets border color.
+     *
+     * @return the border color
+     */
     public int getBorderColor() {
         return borderColor;
     }
 
+    /**
+     * Gets background color.
+     *
+     * @return the background color
+     */
     public int getBackgroundColor() {
         return backgroundColor;
     }
 
+    /**
+     * Gets scale type.
+     *
+     * @return the scale type
+     */
     public ImageView.ScaleType getScaleType() {
         return scaleType;
     }
