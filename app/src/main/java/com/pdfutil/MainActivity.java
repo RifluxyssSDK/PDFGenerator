@@ -1,5 +1,6 @@
 package com.pdfutil;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         addGarments();
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void addGarments() {
 
         addHeaderText("Garments");
@@ -175,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addHeader() {
 
-        Drawable drawable = getDrawable(R.drawable.logo_print);
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getDrawable(R.drawable.logo_print);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
         document.add(new Paragraph().add(new Text(1, 15, "RENTAL SERVICE AGREEMENT").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).add(new Image(2, 5, bitmap).setPadding(10)).add(new Text(1, 15, "").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).setMarginBottom(15));

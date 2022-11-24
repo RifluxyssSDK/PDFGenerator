@@ -40,6 +40,11 @@ public class PdfGenerateFactory {
 
     }
 
+    /**
+     * It used to create Non-repeated View's
+     *
+     * @param document {@link Document}
+     */
     private void initContainer(Document document) {
 
         container = new CreateContainer(document, staticHeader.create(), staticFooter.create());
@@ -49,7 +54,9 @@ public class PdfGenerateFactory {
     }
 
     /**
-     * @param document Calculate no of pages
+     * Calculate no of pages
+     *
+     * @param document {@link Document}
      */
     private void initPageCount(Document document) {
 
@@ -65,7 +72,9 @@ public class PdfGenerateFactory {
     }
 
     /**
-     * @param document Create repeated View ( HEADER & FOOTER ).
+     * Create repeated View ( HEADER & FOOTER ).
+     *
+     * @param document {@link Document}
      */
     private void initStaticLayout(Document document) {
 
@@ -93,7 +102,9 @@ public class PdfGenerateFactory {
     }
 
     /**
-     * @param document Calculate actual document size.
+     * It used to calculate actual size for main content.
+     *
+     * @param document {@link Document}
      */
     private void initPageSize(Document document) {
 

@@ -4,10 +4,9 @@
 #generate the PDF Document on the this library.
 
 #We are using this technologies are used,
-#1.android.pdf.core.Document
-#2.android.graphics.Canvas;
-#3.android.graphics.Paint;
-#4.android.graphics.pdf.PdfDocument;
+#1.android.graphics.Canvas;
+#2.android.graphics.Paint;
+#3.android.graphics.pdf.PdfDocument;
 
 #Android Native libraries using generate the Dynamic PDF document.
 
