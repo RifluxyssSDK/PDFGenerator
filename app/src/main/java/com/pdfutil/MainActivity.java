@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
+import android.pdf.io.PageCount;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -43,9 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 20);
 
-//        createDocument();
+        createDocument();
 
         create();
+
+        int numberOfPages = document.getNumberOfPages();
+        for (int i = 1; i <= numberOfPages; i++)
+        {
+            PageCount pageCount = new PageCount("Page " + i + " / " + numberOfPages).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5);
+            document.setPageCount(pageCount);
+        }
 
         document.close();
 
@@ -94,14 +103,29 @@ public class MainActivity extends AppCompatActivity {
 
         addHeaderText("Garments");
 
-        document.add(new Paragraph().add(new Text(1, 11, "Garments").setTextSize(5).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Frequency").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Inventory").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Unit Price").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).setMarginTop(5));
+        document.add(new Paragraph()
+                .add(new Text(1, 11, "Garments").setTextSize(5).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Frequency").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Inventory").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Unit Price").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .setMarginTop(5)
+        );
 
         Drawable drawable = getDrawable(R.drawable.ic_garment);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
         for (int i = 0; i < 10; i++) {
 
-            document.add(new Paragraph().add(new Image(2, 2, bitmap).setPadding(5).setImageWidth(50).setImageHeight(50)).add(new Text(1, 9, "X10081").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setMarginTop(5)).add(new Text(2, 3, "Weekly").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 3, "11").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 1, "$").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 2, "0.00").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.END | Gravity.CENTER_VERTICAL).setPaddingRight(5)).add(new Text(1, 9, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(6)).setBorder(true).setBorderColor(Color.LTGRAY).setMarginTop(-1));
+            document.add(new Paragraph()
+                    .add(new Image(2, 2, bitmap).setPadding(5).setImageWidth(50).setImageHeight(50))
+                    .add(new Text(1, 9, "X10081").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setMarginTop(5))
+                    .add(new Text(2, 3, "Weekly").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 3, "11").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 1, "$").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 2, "0.00").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.END | Gravity.CENTER_VERTICAL).setPaddingRight(5))
+                    .add(new Text(1, 9, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(6))
+                    .setBorder(true).setBorderColor(Color.LTGRAY).setMarginTop(-1)
+            );
 
         }
 

@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Create container.
@@ -34,6 +35,8 @@ public class CreateContainer {
     private PageSize pageSize;
     private View pageCounterView;
 
+    private final List<Integer> totalPages = new ArrayList<>();
+
     /**
      * Instantiates a new Create container.
      *
@@ -45,6 +48,7 @@ public class CreateContainer {
         this.header = header;
         this.footer = footer;
         this.document = document;
+        totalPages.clear();
     }
 
     /**
@@ -104,7 +108,7 @@ public class CreateContainer {
 
                 container.removeViews(1, (container.getChildCount() - 3));
 
-                addGridAttribute(gridLayout, singleColWeight , view );
+                addGridAttribute(gridLayout, singleColWeight, view);
             }
         }
 
@@ -118,9 +122,9 @@ public class CreateContainer {
     }
 
     /**
-     * @param gridLayout It used to adding the overlap View.
+     * @param gridLayout      It used to adding the overlap View.
      * @param singleColWeight It used basic Alignment.
-     * @param view This is the overlap View.
+     * @param view            This is the overlap View.
      */
     private void addGridAttribute(GridLayout gridLayout, float singleColWeight, View view) {
 
@@ -161,8 +165,9 @@ public class CreateContainer {
             canvas.drawBitmap(document.getBgImage().getImage(pageSize.documentWidth, pageSize.documentHeight), 0, 0, new Paint());
         }
 
+
         if (document.getPageCount() != null) {
-            pageCounterView = createPageCounterView((pdfDocument.getPages().size() + 1));
+            pageCounterView = createPageCounterView((pdfDocument.getPages().size()));
             view.removeViewAt((view.getChildCount() - 1));
             view.addView(pageCounterView);
         }
@@ -172,13 +177,15 @@ public class CreateContainer {
         view.draw(canvas);
 
         pdfDocument.finishPage(page);
+
+        int numberOfPages = pdfDocument.getPages().size() + 1;
+        totalPages.add(numberOfPages);
     }
 
     /**
-     * @param currentPageCount {@link CreatePageCount} Used to create Page No
      * @return View
      */
-    private View createPageCounterView(int currentPageCount) {
+    private View createPageCounterView(int pageCount) {
 
         if (document.getPageCount() == null) {
 
@@ -186,7 +193,7 @@ public class CreateContainer {
 
         } else {
 
-            return new CreatePageCount().create(document.getContext(), pageSize.pageWidth, currentPageCount, document.getPageCount());
+            return new CreatePageCount().create(document.getContext(), pageSize.pageWidth, document.getPageCountList().get(pageCount));
 
         }
     }
@@ -209,5 +216,14 @@ public class CreateContainer {
      */
     public int getPageCount() {
         return pdfDocument.getPages().size();
+    }
+
+    /**
+     * Gets Number of page count.
+     *
+     * @return the page count
+     */
+    public int getNumberOfPages() {
+        return totalPages.size();
     }
 }
