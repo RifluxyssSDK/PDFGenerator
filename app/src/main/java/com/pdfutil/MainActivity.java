@@ -11,6 +11,7 @@ import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
 import android.pdf.io.PageCount;
 import android.pdf.io.Sentence;
+import android.pdf.kernel.DocType;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     Document document;
-    
+
     ActivityMainBinding binding;
 
     @Override
@@ -45,15 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         document.open(20);
 
-        document.setPadding(20, 10, 20, 20);
+        document.setPadding(20, 10, 20, 10);
 
 //        createDocument();
 
 //        create();
 
-        checkSentence();
+//        checkSentence();
 
-        document.setPageCount(new PageCount("Page " , " / " ).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5).setMarginTop(40).setMarginBottom(40));
+        createTemp();
 
         document.close();
 
@@ -95,16 +96,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void createTemp() {
 
-        document.add(new Paragraph()
-                .add(new Text(1,20,"HELLO"))
-                .setPadding(10).setBorder(true)
+        document.add(DocType.HEADER,new Paragraph()
+                .add(new Text(1,20,"HEADER").setGravity(Gravity.CENTER).setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE).setPadding(5))
         );
 
-        for (int i = 0; i < 10; i++) {
-            document.add(new Paragraph()
-                    .add(new Text(1,20,"HELLO"))
-                    .setPadding(10).setBorder(true).setMarginTop(-1)
+        document.add(DocType.FOOTER,new Paragraph()
+                .add(new Text(1,20,"FOOTER").setGravity(Gravity.CENTER).setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE).setPadding(5))
+        );
+
+        document.setPageCount(new PageCount("Page " , " / " ).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5));
+
+        for (int i = 1; i <= 200; i++) {
+
+            document.add(DocType.NORMAL,new Paragraph()
+                    .add(new Text(1,20,i+". COMMON").setGravity(Gravity.CENTER).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setPadding(5))
             );
+
         }
 
     }
