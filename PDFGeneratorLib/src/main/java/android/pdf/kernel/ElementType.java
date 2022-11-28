@@ -31,4 +31,9 @@ public class ElementType {
      */
     public static final int AREA_BREAK = -5;
 
+    /**
+     * The constant SENTENCE.
+     */
+    public static final int SENTENCE = -6;
+
 }

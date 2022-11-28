@@ -78,7 +78,15 @@ public class CreateContainer {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
 
-                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell).setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
+                Paragraph paragraph = ((Paragraph) cell);
+
+                if (paragraph.isBorder()) {
+
+                    paragraph.setMarginTop(paragraph.getMarginTop() - paragraph.getBorderWidth());
+
+                }
+
+                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, paragraph.setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
 
             }
 

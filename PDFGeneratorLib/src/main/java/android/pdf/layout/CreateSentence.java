@@ -9,31 +9,29 @@ import android.pdf.custom.Utils;
 import android.pdf.io.Element;
 import android.pdf.io.Image;
 import android.pdf.io.Line;
-import android.pdf.io.Paragraph;
 import android.pdf.io.Text;
 import android.pdf.kernel.ElementType;
 
 /**
  * The type Create paragraph.
  */
-public class CreateParagraph {
+public class CreateSentence {
 
     /**
      * Create view.
      *
      * @param context         the context
      * @param singleColWeight the single col weight
-     * @param paragraph       the paragraph
-     * @param columnWeight    the column weight
+     * @param sentence        the sentence
      * @return the view
      */
-    public View create(Context context, float singleColWeight, Paragraph paragraph, int columnWeight) {
+    public View create(Context context, float singleColWeight, Sentence sentence, int columnWeight) {
 
-        singleColWeight = initCalc(singleColWeight, paragraph, columnWeight);
+        singleColWeight = initCalc(singleColWeight, sentence, columnWeight);
 
-        GridLayout gridLayout = createGrid(context, paragraph, columnWeight);
+        GridLayout gridLayout = createGrid(context, sentence, columnWeight);
 
-        for (Element element : paragraph.getElements()) {
+        for (Element element : sentence.getElements()) {
 
             if (element.getElementType() == ElementType.LINE) {
 
@@ -58,8 +56,8 @@ public class CreateParagraph {
 
             if (element.getElementType() == ElementType.SENTENCE) {
 
-                init(((Sentence) element).getColSpan(), columnWeight);
-                gridLayout.addView(new CreateSentence().create(context, singleColWeight, (Sentence) element, columnWeight));
+                init(((Image) element).getColSpan(), columnWeight);
+                gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
 
             }
         }
@@ -80,21 +78,21 @@ public class CreateParagraph {
 
     /**
      * @param context      Context
-     * @param paragraph    Paragraph
+     * @param sentence     Paragraph
      * @param columnWeight Total columnCount
      * @return Basic GridLayout
      */
-    private GridLayout createGrid(Context context, Paragraph paragraph, int columnWeight) {
+    private GridLayout createGrid(Context context, Sentence sentence, int columnWeight) {
 
         GridLayout gridLayout = new GridLayout(context);
         gridLayout.setColumnCount(columnWeight);
-        gridLayout.setPadding(paragraph.getPaddingLeft(), paragraph.getPaddingTop(), paragraph.getPaddingRight(), paragraph.getPaddingBottom());
-        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, paragraph.getRowSpan(), paragraph.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, paragraph.getColSpan(), paragraph.getColSpan()));
-        layoutParams.setMargins(paragraph.getMarginLeft(), paragraph.getMarginTop(), paragraph.getMarginRight(), paragraph.getMarginBottom());
+        gridLayout.setPadding(sentence.getPaddingLeft(), sentence.getPaddingTop(), sentence.getPaddingRight(), sentence.getPaddingBottom());
+        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, sentence.getRowSpan(), sentence.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, sentence.getColSpan(), sentence.getColSpan()));
+        layoutParams.setMargins(sentence.getMarginLeft(), sentence.getMarginTop(), sentence.getMarginRight(), sentence.getMarginBottom());
         gridLayout.setLayoutParams(layoutParams);
 
-        if (paragraph.isBorder()) {
-            gridLayout.setBackground(Utils.createBorder(paragraph.getBackgroundColor(), paragraph.getBorderColor(), paragraph.getBorderWidth()));
+        if (sentence.isBorder()) {
+            gridLayout.setBackground(Utils.createBorder(sentence.getBackgroundColor(), sentence.getBorderColor(), sentence.getBorderWidth()));
         }
 
         return gridLayout;
@@ -103,19 +101,20 @@ public class CreateParagraph {
 
     /**
      * @param singleColWeight singleColWeight
-     * @param paragraph       {@link Paragraph}
+     * @param sentence        {@link Sentence}
      * @param columnWeight    Maximum colCount
      * @return singleColumnWeight
      */
-    private float initCalc(float singleColWeight, Paragraph paragraph, int columnWeight) {
+    private float initCalc(float singleColWeight, Sentence sentence, int columnWeight) {
 
-        double minMaxWidth = singleColWeight * paragraph.getColSpan();
-        int elementWidth = (int) (minMaxWidth - (paragraph.getMarginRight() + paragraph.getMarginLeft()));
+        double minMaxWidth = singleColWeight * sentence.getColSpan();
+        int elementWidth = (int) (minMaxWidth - (sentence.getMarginRight() + sentence.getMarginLeft()));
 
-        int marginWidth = paragraph.getMarginLeft() + paragraph.getMarginRight();
-        int paddingWidth = paragraph.getPaddingLeft() + paragraph.getPaddingRight();
+        int marginWidth = sentence.getMarginLeft() + sentence.getMarginRight();
+        int paddingWidth = sentence.getPaddingLeft() + sentence.getPaddingRight();
         int contentWidth = elementWidth - (marginWidth + paddingWidth);
         return (float) contentWidth / columnWeight;
 
     }
 }
+
