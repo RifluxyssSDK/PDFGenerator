@@ -9,8 +9,6 @@ import android.widget.TextView;
 import android.pdf.custom.Utils;
 import android.pdf.io.PageCount;
 
-import java.util.List;
-
 
 /**
  * The type Create page count.
@@ -22,33 +20,33 @@ public class CreatePageCount {
      *
      * @param context          the context
      * @param pageWidth        the page width
-     * @param pageCountText        the page count
+     * @param currentPageCount the current page count
+     * @param pageCount        the page count
      * @return the view
      */
     @SuppressLint("SetTextI18n")
-    public View create(Context context, int pageWidth, PageCount pageCountText) {
+    public View create(Context context, int pageWidth, int currentPageCount, PageCount pageCount) {
+
+        int cellWidth = pageWidth - (pageCount.getMarginLeft() + pageCount.getMarginRight());
 
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-        int cellWidth = pageWidth - (pageCountText.getMarginLeft() + pageCountText.getMarginRight());
-
-        linearLayout.setPadding(pageCountText.getMarginLeft(), pageCountText.getMarginTop(), pageCountText.getMarginRight(), pageCountText.getMarginBottom());
+        linearLayout.setPadding(pageCount.getMarginLeft(), pageCount.getMarginTop(), pageCount.getMarginRight(), pageCount.getMarginBottom());
 
         TextView textView = new TextView(context);
         textView.setMaxWidth(cellWidth);
         textView.setMinimumWidth(cellWidth);
-        textView.setText(pageCountText.getMessage());
-        textView.setTextColor(pageCountText.getTextColor());
-        textView.setGravity(pageCountText.getGravity());
-        textView.setTextSize(pageCountText.getTextSize());
-        textView.setTypeface(Utils.createGetFont(context, pageCountText.getFontStyle()));
-        textView.setPadding(pageCountText.getPaddingLeft(), pageCountText.getPaddingTop(), pageCountText.getPaddingRight(), pageCountText.getPaddingBottom());
+        textView.setText(pageCount.getStartMessage() + currentPageCount + pageCount.getMiddleMessage() + pageCount.getTotalPageCount());
+        textView.setTextColor(pageCount.getTextColor());
+        textView.setGravity(pageCount.getGravity());
+        textView.setTextSize(pageCount.getTextSize());
+        textView.setTypeface(Utils.createGetFont(context, pageCount.getFontStyle()));
+        textView.setPadding(pageCount.getPaddingLeft(), pageCount.getPaddingTop(), pageCount.getPaddingRight(), pageCount.getPaddingBottom());
 
-        if (pageCountText.isBorder()) {
-            textView.setBackground(Utils.createBorder(pageCountText.getBackgroundColor(), pageCountText.getBorderColor(), pageCountText.getBorderWidth()));
+        if (pageCount.isBorder()) {
+            textView.setBackground(Utils.createBorder(pageCount.getBackgroundColor(), pageCount.getBorderColor(), pageCount.getBorderWidth()));
         } else {
-            textView.setBackgroundColor(pageCountText.getBackgroundColor());
+            textView.setBackgroundColor(pageCount.getBackgroundColor());
         }
 
         linearLayout.addView(textView);

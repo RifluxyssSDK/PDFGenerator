@@ -80,15 +80,7 @@ public class CreateContainer {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
 
-                Paragraph paragraph = ((Paragraph) cell);
-
-                if (paragraph.isBorder()) {
-
-                    paragraph.setMarginTop(paragraph.getMarginTop() - paragraph.getBorderWidth());
-
-                }
-
-                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, paragraph.setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
+                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell).setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
 
             }
 
@@ -174,7 +166,7 @@ public class CreateContainer {
         }
 
         if (document.getPageCount() != null) {
-            pageCounterView = createPageCounterView((pdfDocument.getPages().size()));
+            pageCounterView = createPageCounterView((pdfDocument.getPages().size()+1));
             view.removeViewAt((view.getChildCount() - 1));
             view.addView(pageCounterView);
         }
@@ -201,7 +193,7 @@ public class CreateContainer {
 
         } else {
 
-            return new CreatePageCount().create(document.getContext(), pageSize.pageWidth, document.getPageCountList().get(pageCount));
+            return new CreatePageCount().create(document.getContext(), pageSize.pageWidth, pageCount, document.getPageCount());
 
         }
     }

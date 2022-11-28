@@ -21,8 +21,6 @@ public class PdfGenerateFactory {
     private CreateStatic staticFooter;
     private CreateContainer container;
 
-    private Document document;
-
     /**
      * Init.
      *
@@ -30,15 +28,13 @@ public class PdfGenerateFactory {
      */
     public void init(Document document) {
 
-        this.document = document;
-
         initDimension(document.context);
 
         initPageSize(document);
 
         initStaticLayout(document);
 
-        //initPageCount(document);
+        initPageCount(document);
 
         initContainer(document);
 
@@ -66,13 +62,13 @@ public class PdfGenerateFactory {
 
         PageCount pageCount = document.getPageCount();
 
-        /*if (pageCount != null) {
+        if (pageCount != null) {
 
-           // CreateContainer calculatePageCount = new CreateContainer(document, staticHeader.create(), staticFooter.create());
+            CreateContainer calculatePageCount = new CreateContainer(document, staticHeader.create(), staticFooter.create());
 
-            //pageCount.setTotalPageCount(calculatePageCount.create().getPageCount());
+            pageCount.setTotalPageCount(calculatePageCount.create().getPageCount());
 
-        }*/
+        }
     }
 
     /**
@@ -130,15 +126,5 @@ public class PdfGenerateFactory {
 
         container.finish(file);
 
-    }
-
-    /**
-     * Gets Number of page count.
-     *
-     * @return the page count
-     */
-    public int getNumberOfPages() {
-        CreateContainer calculatePageCount = new CreateContainer(document, staticHeader.create(), staticFooter.create());
-        return calculatePageCount.create().getNumberOfPages();
     }
 }
