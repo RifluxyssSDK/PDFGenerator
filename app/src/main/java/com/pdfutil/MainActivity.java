@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         document.setPadding(20, 10, 20, 20);
 
         createDocument();
-
         create();
 
         int numberOfPages = document.getNumberOfPages();
