@@ -70,6 +70,8 @@ public class CreateContainer {
         GridLayout gridLayout = new GridLayout(document.getContext());
         gridLayout.setColumnCount(document.getColumnWeight());
 
+        gridStretchable(gridLayout, singleColWeight);
+
         for (Cell cell : document.getCells()) {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
@@ -112,7 +114,9 @@ public class CreateContainer {
 
                 container.removeViews(1, (container.getChildCount() - 3));
 
-                addGridAttribute(gridLayout, singleColWeight , view );
+                gridStretchable(gridLayout, singleColWeight);
+
+                gridLayout.addView(view);
             }
         }
 
@@ -126,15 +130,11 @@ public class CreateContainer {
     }
 
     /**
-     * @param gridLayout It used to adding the overlap View.
+     * @param gridLayout      It used to adding the overlap View.
      * @param singleColWeight It used basic Alignment.
-     * @param view This is the overlap View.
      */
-    private void addGridAttribute(GridLayout gridLayout, float singleColWeight, View view) {
-
+    private void gridStretchable(GridLayout gridLayout, float singleColWeight) {
         gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(1)));
-
-        gridLayout.addView(view);
     }
 
     /**

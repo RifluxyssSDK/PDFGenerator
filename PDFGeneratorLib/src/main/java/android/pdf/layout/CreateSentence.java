@@ -21,7 +21,7 @@ public class CreateSentence {
      * Create view.
      *
      * @param context         the context
-     * @param singleColWeight the single col weight
+     * @param singleColWeight the singleCol weight
      * @param sentence        the sentence
      * @return the view
      */

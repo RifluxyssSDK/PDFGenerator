@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
+import android.pdf.io.AreaBreak;
 import android.pdf.io.Sentence;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 20);
 
-//        createDocument();
+        createDocument();
 
-//        create();
+        create();
 
         createTemp();
 
@@ -63,18 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void createTemp() {
 
-        Sentence sentence = new Sentence(1,5)
-                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .setBorder(true);
+        Sentence sentence = new Sentence(1,10)
+                .add(new Text(1,10,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Line(1,10).setMarginTop(40))
+                .setBorder(true).setBackgroundColor(Color.GREEN);
 
-        Sentence sentence1 = new Sentence(1,5)
-                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Text(1,20,"T").setPadding(10).setGravity(Gravity.CENTER))
-                .setBorder(true);
+        Sentence sentence1 = new Sentence(1,10)
+                .add(new Text(1,5,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Text(1,5,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Text(1,5,"T").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Line(1,10).setMarginBottom(5))
+                .setBorder(true).setMarginLeft(-1).setBackgroundColor(Color.CYAN).setMargin(10);
 
-        document.add(new Paragraph().add(sentence).add(sentence1).add(sentence).add(sentence));
+        for (int i = 0; i < 10; i++) {
+            document.add(new Paragraph().add(sentence).add(sentence1).setMarginBottom(10));
+        }
 
     }
 
