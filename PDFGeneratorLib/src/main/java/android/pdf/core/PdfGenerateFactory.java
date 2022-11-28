@@ -98,7 +98,6 @@ public class PdfGenerateFactory {
             new Dimension(context);
 
         }
-
     }
 
     /**
