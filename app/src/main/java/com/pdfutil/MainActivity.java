@@ -32,6 +32,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     Document document;
+    
     ActivityMainBinding binding;
 
     @Override
