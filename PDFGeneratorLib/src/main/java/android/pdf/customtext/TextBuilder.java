@@ -2,7 +2,6 @@ package android.pdf.customtext;
 
 import android.content.Context;
 import android.pdf.custom.Utils;
-import android.pdf.kernel.PageSize;
 import android.text.Spannable;
 import android.text.SpannableString;
 
