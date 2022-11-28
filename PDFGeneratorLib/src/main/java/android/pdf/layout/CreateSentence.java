@@ -93,6 +93,8 @@ public class CreateSentence {
 
         if (sentence.isBorder()) {
             gridLayout.setBackground(Utils.createBorder(sentence.getBackgroundColor(), sentence.getBorderColor(), sentence.getBorderWidth()));
+        } else {
+            gridLayout.setBackgroundColor(sentence.getBackgroundColor());
         }
 
         return gridLayout;

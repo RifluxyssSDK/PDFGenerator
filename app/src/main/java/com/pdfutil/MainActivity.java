@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 20);
 
-        createDocument();
+//        createDocument();
 
 //        create();
 
-//        createTemp();
+        checkSentence();
 
         document.setPageCount(new PageCount("Page " , " / " ).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5).setMarginTop(40).setMarginBottom(40));
 
@@ -63,6 +63,33 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void checkSentence() {
+
+        document.add(new Paragraph()
+                .add(new Sentence(1,10)
+                        .add(new Text(1,20,"HELLO WORLD").setBackgroundColor(Color.GREEN).setPadding(5).setTextColor(Color.WHITE))
+                        .setBorder(true).setBorderColor(Color.RED).setPadding(10).setMargin(10)
+                )
+                .add(new Sentence(1,10)
+                        .add(new Text(1,20,"HELLO WORLD").setBackgroundColor(Color.GREEN).setPadding(5).setTextColor(Color.WHITE))
+                        .setBorder(true).setBorderColor(Color.RED).setPadding(10).setMarginLeft(-1).setMargin(10)
+                )
+                .add(new Sentence(1,6)
+                        .add(new Text(1,20,"HELLO WORLD").setBackgroundColor(Color.GREEN).setPadding(5).setTextColor(Color.WHITE))
+                        .setBorder(true).setBorderColor(Color.RED).setPadding(10).setMargin(10)
+                )
+                .add(new Sentence(1,8)
+                        .add(new Text(1,20,"HELLO WORLD").setBackgroundColor(Color.GREEN).setPadding(5).setTextColor(Color.WHITE))
+                        .setBorder(true).setBorderColor(Color.RED).setPadding(10).setMarginLeft(-1).setMargin(10)
+                )
+                .add(new Sentence(1,6)
+                        .add(new Text(1,20,"HELLO WORLD").setBackgroundColor(Color.GREEN).setPadding(5).setTextColor(Color.WHITE))
+                        .setBorder(true).setBorderColor(Color.RED).setPadding(10).setMargin(10)
+                )
+                .setBackgroundColor(Color.GRAY).setBorder(true)
+        );
     }
 
     private void createTemp() {

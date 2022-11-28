@@ -95,6 +95,8 @@ public class CreateParagraph {
 
         if (paragraph.isBorder()) {
             gridLayout.setBackground(Utils.createBorder(paragraph.getBackgroundColor(), paragraph.getBorderColor(), paragraph.getBorderWidth()));
+        } else {
+            gridLayout.setBackgroundColor(paragraph.getBackgroundColor());
         }
 
         return gridLayout;
