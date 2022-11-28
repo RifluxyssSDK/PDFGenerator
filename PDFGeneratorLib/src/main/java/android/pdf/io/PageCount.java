@@ -2,6 +2,9 @@ package android.pdf.io;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The type Page count.
  */
@@ -75,11 +78,7 @@ public class PageCount {
     /**
      * The Start message.
      */
-    String startMessage;
-    /**
-     * The Middle message.
-     */
-    String middleMessage;
+    String message;
 
     /**
      * The Font style.
@@ -95,19 +94,18 @@ public class PageCount {
      */
     int totalPageCount;
 
+
     /**
      * Instantiates a new Page count.
      *
-     * @param startMessage  This string used to create pageCount on pdf document.
-     * @param middleMessage This string used to create pageCount on pdf document.
+     * @param message  This string used to create pageCount on pdf document.
      */
-    public PageCount(String startMessage, String middleMessage) {
+    public PageCount(String message) {
         setTextSize(6);
         setBorderWidth(1);
         setTextColor(Color.BLACK);
         setBorderColor(Color.BLACK);
-        setStartMessage(startMessage);
-        setMiddleMessage(middleMessage);
+        setStartMessage(message);
     }
 
     /**
@@ -282,20 +280,10 @@ public class PageCount {
      * @return start message
      */
     public PageCount setStartMessage(String startMessage) {
-        this.startMessage = startMessage;
+        this.message = startMessage;
         return this;
     }
 
-    /**
-     * Sets middle message.
-     *
-     * @param middleMessage It used to set the middleMessage of pageCount view.
-     * @return middle message
-     */
-    public PageCount setMiddleMessage(String middleMessage) {
-        this.middleMessage = middleMessage;
-        return this;
-    }
 
     /**
      * Sets font style.
@@ -498,18 +486,10 @@ public class PageCount {
      *
      * @return the start message
      */
-    public String getStartMessage() {
-        return startMessage;
+    public String getMessage() {
+        return message;
     }
 
-    /**
-     * Gets middle message.
-     *
-     * @return the middle message
-     */
-    public String getMiddleMessage() {
-        return middleMessage;
-    }
 
     /**
      * Gets font style.
@@ -537,4 +517,5 @@ public class PageCount {
     public int getTotalPageCount() {
         return totalPageCount;
     }
+
 }

@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
-import android.pdf.io.AreaBreak;
-import android.pdf.io.Sentence;
+import android.pdf.io.PageCount;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -49,7 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
         create();
 
-        createTemp();
+        int numberOfPages = document.getNumberOfPages();
+        for (int i = 1; i <= numberOfPages; i++)
+        {
+            PageCount pageCount = new PageCount("Page " + i + " / " + numberOfPages).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5);
+            document.setPageCount(pageCount);
+        }
 
         document.close();
 
@@ -58,26 +63,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Doc Created", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void createTemp() {
-
-        Sentence sentence = new Sentence(1,10)
-                .add(new Text(1,10,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Line(1,10).setMarginTop(40))
-                .setBorder(true).setBackgroundColor(Color.GREEN);
-
-        Sentence sentence1 = new Sentence(1,10)
-                .add(new Text(1,5,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Text(1,5,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Text(1,5,"T").setPadding(10).setGravity(Gravity.CENTER))
-                .add(new Line(1,10).setMarginBottom(5))
-                .setBorder(true).setMarginLeft(-1).setBackgroundColor(Color.CYAN).setMargin(10);
-
-        for (int i = 0; i < 10; i++) {
-            document.add(new Paragraph().add(sentence).add(sentence1).setMarginBottom(10));
         }
 
     }
@@ -99,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             document.add(new Paragraph()
                     .add(new Text(1, 20, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
+                    .setMarginTop(-1)
             );
         }
 
@@ -117,14 +103,29 @@ public class MainActivity extends AppCompatActivity {
 
         addHeaderText("Garments");
 
-        document.add(new Paragraph().add(new Text(1, 11, "Garments").setTextSize(5).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Frequency").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Inventory").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).add(new Text(1, 3, "Unit Price").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY)).setMarginTop(5));
+        document.add(new Paragraph()
+                .add(new Text(1, 11, "Garments").setTextSize(5).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Frequency").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Inventory").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .add(new Text(1, 3, "Unit Price").setTextSize(5).setMarginLeft(-1).setFontStyle(FontStyle.HELVETICA).setPadding(5, 3, 3, 3).setBackgroundColor(Color.rgb(243, 250, 253)).setBorder(true).setBorderColor(Color.LTGRAY))
+                .setMarginTop(5)
+        );
 
         Drawable drawable = getDrawable(R.drawable.ic_garment);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
         for (int i = 0; i < 10; i++) {
 
-            document.add(new Paragraph().add(new Image(2, 2, bitmap).setPadding(5).setImageWidth(50).setImageHeight(50)).add(new Text(1, 9, "X10081").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setMarginTop(5)).add(new Text(2, 3, "Weekly").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 3, "11").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 1, "$").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5)).add(new Text(2, 2, "0.00").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.END | Gravity.CENTER_VERTICAL).setPaddingRight(5)).add(new Text(1, 9, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(6)).setBorder(true).setBorderColor(Color.LTGRAY).setMarginTop(-1));
+            document.add(new Paragraph()
+                    .add(new Image(2, 2, bitmap).setPadding(5).setImageWidth(50).setImageHeight(50))
+                    .add(new Text(1, 9, "X10081").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setMarginTop(5))
+                    .add(new Text(2, 3, "Weekly").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 3, "11").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 1, "$").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
+                    .add(new Text(2, 2, "0.00").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.END | Gravity.CENTER_VERTICAL).setPaddingRight(5))
+                    .add(new Text(1, 9, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(6))
+                    .setBorder(true).setBorderColor(Color.LTGRAY).setMarginTop(-1)
+            );
 
         }
 
@@ -169,15 +170,13 @@ public class MainActivity extends AppCompatActivity {
                 .setPadding(10, 5, 10, 5).setBorder(true).setBorderColor(Color.GRAY).setMarginTop(15)
         );
 
-        addSmallText();
+        addSmallText("*This agreement is effective as of the date of execution for a term of 80 months from the date of installation.");
 
     }
 
-    private void addSmallText() {
+    private void addSmallText(String message) {
 
-        document.add(new Paragraph().add(new Text(1, 20, "*This agreement is effective " +
-                "as of the date of execution for a term of 80 months from the date of installation.")
-                .setTextSize(5).setFontStyle(FontStyle.HELVETICA).setMarginTop(5)));
+        document.add(new Paragraph().add(new Text(1, 20, message).setTextSize(5).setFontStyle(FontStyle.HELVETICA).setMarginTop(5)));
 
     }
 
@@ -205,10 +204,7 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getDrawable(R.drawable.logo_print);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
-        document.add(new Paragraph()
-                .add(new Text(1, 15, "RENTAL SERVICE AGREEMENT").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD))
-                .add(new Image(2, 5, bitmap).setPadding(10))
-                .add(new Text(1, 15, "").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD))
-                .setMarginBottom(15));
+        document.add(new Paragraph().add(new Text(1, 15, "RENTAL SERVICE AGREEMENT").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).add(new Image(2, 5, bitmap).setPadding(10)).add(new Text(1, 15, "").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).setMarginBottom(15));
+
     }
 }

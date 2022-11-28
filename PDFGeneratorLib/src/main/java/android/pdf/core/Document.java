@@ -11,6 +11,7 @@ import android.pdf.kernel.PageSize;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Document {
@@ -69,6 +70,11 @@ public class Document {
     PageCount pageCount;
 
     /**
+     * The Total page count List.
+     */
+    List<PageCount> pageCountList = new ArrayList<>();
+
+    /**
      * @param pageSize This constructor assign PageSize from the given input. ( EX : A4, A3, etc ) {@link PageSize}.
      */
     public Document(PageSize pageSize) {
@@ -88,6 +94,7 @@ public class Document {
      */
     public Document init(Context context) {
         this.context = context;
+        pdfGenerateFactory.init((this));
         return this;
     }
 
@@ -205,6 +212,7 @@ public class Document {
      */
     public void setPageCount(PageCount pageCount) {
         this.pageCount = pageCount;
+        pageCountList.add(pageCount);
     }
 
     /**
@@ -274,6 +282,23 @@ public class Document {
 
         pdfGenerateFactory.finish(file);
 
+    }
+
+    /**
+     * Gets Number of page count.
+     *
+     * @return the page count
+     */
+    public int getNumberOfPages() { return pdfGenerateFactory.getNumberOfPages(); }
+
+
+    /**
+     * Gets total page count List.
+     *
+     * @return the total page count text
+     */
+    public List<PageCount> getPageCountList() {
+        return pageCountList;
     }
 
 }
