@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
+import android.pdf.io.Sentence;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        createDocument();
 
-        create();
+//        create();
+
+        createTemp();
 
         document.close();
 
@@ -55,6 +58,23 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void createTemp() {
+
+        Sentence sentence = new Sentence(1,5)
+                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .setBorder(true);
+
+        Sentence sentence1 = new Sentence(1,5)
+                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Text(1,20,"HELLO").setPadding(10).setGravity(Gravity.CENTER))
+                .add(new Text(1,20,"T").setPadding(10).setGravity(Gravity.CENTER))
+                .setBorder(true);
+
+        document.add(new Paragraph().add(sentence).add(sentence1).add(sentence).add(sentence));
 
     }
 
@@ -75,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             document.add(new Paragraph()
                     .add(new Text(1, 20, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
-                    .setMarginTop(-1)
             );
         }
 
@@ -146,13 +165,15 @@ public class MainActivity extends AppCompatActivity {
                 .setPadding(10, 5, 10, 5).setBorder(true).setBorderColor(Color.GRAY).setMarginTop(15)
         );
 
-        addSmallText("*This agreement is effective as of the date of execution for a term of 80 months from the date of installation.");
+        addSmallText();
 
     }
 
-    private void addSmallText(String message) {
+    private void addSmallText() {
 
-        document.add(new Paragraph().add(new Text(1, 20, message).setTextSize(5).setFontStyle(FontStyle.HELVETICA).setMarginTop(5)));
+        document.add(new Paragraph().add(new Text(1, 20, "*This agreement is effective " +
+                "as of the date of execution for a term of 80 months from the date of installation.")
+                .setTextSize(5).setFontStyle(FontStyle.HELVETICA).setMarginTop(5)));
 
     }
 
@@ -180,7 +201,10 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getDrawable(R.drawable.logo_print);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
-        document.add(new Paragraph().add(new Text(1, 15, "RENTAL SERVICE AGREEMENT").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).add(new Image(2, 5, bitmap).setPadding(10)).add(new Text(1, 15, "").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD)).setMarginBottom(15));
-
+        document.add(new Paragraph()
+                .add(new Text(1, 15, "RENTAL SERVICE AGREEMENT").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD))
+                .add(new Image(2, 5, bitmap).setPadding(10))
+                .add(new Text(1, 15, "").setTextColor(Color.rgb(0, 153, 204)).setTextSize(9).setFontStyle(FontStyle.HELVETICA_BOLD))
+                .setMarginBottom(15));
     }
 }
