@@ -71,18 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void verifySDK() {
 
-        document.add(new Paragraph()
-                .add(new Text(1,10,"START").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setPadding(10).setBorder(true))
-                .add(new Text(1,5,"MIDDLE").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setPadding(10).setBorder(true))
-                .add(new Text(1,5,"END").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setPadding(10).setBorder(true))
-        );
-
-        document.add(new Paragraph()
-                .add(new Text(1,10,"START").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setBorder(true))
-                .add(new Text(1,5,"MIDDLE").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
-                .add(new Text(1,5,"END").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
-                .setPadding(10)
-        );
+        for (int i = 0; i < 100; i++) {
+            document.add(new Paragraph()
+                    .add(new Text(1,10,"START").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setBorder(true))
+                    .add(new Text(1,5,"MIDDLE").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
+                    .add(new Text(1,5,"END").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
+                    .setPadding(10).setBorder(true)
+            );
+        }
     }
 
     private void checkSentence() {

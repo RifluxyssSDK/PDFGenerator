@@ -90,14 +90,23 @@ public class CreateParagraph {
         gridLayout.setColumnCount(columnWeight);
         gridLayout.setPadding(paragraph.getPaddingLeft(), paragraph.getPaddingTop(), paragraph.getPaddingRight(), paragraph.getPaddingBottom());
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, paragraph.getRowSpan(), paragraph.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, paragraph.getColSpan(), paragraph.getColSpan()));
-        layoutParams.setMargins(paragraph.getMarginLeft(), paragraph.getMarginTop(), paragraph.getMarginRight(), paragraph.getMarginBottom());
-        gridLayout.setLayoutParams(layoutParams);
+
 
         if (paragraph.isBorder()) {
+
+            layoutParams.setMargins(paragraph.getMarginLeft(), paragraph.getMarginTop() - paragraph.getBorderWidth(), paragraph.getMarginRight(), paragraph.getMarginBottom());
+
             gridLayout.setBackground(Utils.createBorder(paragraph.getBackgroundColor(), paragraph.getBorderColor(), paragraph.getBorderWidth()));
+
         } else {
+
+            layoutParams.setMargins(paragraph.getMarginLeft(), paragraph.getMarginTop(), paragraph.getMarginRight(), paragraph.getMarginBottom());
+
             gridLayout.setBackgroundColor(paragraph.getBackgroundColor());
+
         }
+
+        gridLayout.setLayoutParams(layoutParams);
 
         return gridLayout;
 
