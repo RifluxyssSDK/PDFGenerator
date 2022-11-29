@@ -434,11 +434,4 @@ public class Paragraph extends Cell {
     public ArrayList<Element> getElements() {
         return elements;
     }
-
-    /**
-     * Clear.
-     */
-    public void clear() {
-        elements.clear();
-    }
 }
