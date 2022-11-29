@@ -46,9 +46,9 @@ public class BgImage {
     }
 
     /**
-     * @param marginLeft This parameter used to creating a white space on image LEFT side.
-     * @param marginTop This parameter used to creating a white space on image TOP side.
-     * @param marginRight This parameter used to creating a white space on image RIGHT side.
+     * @param marginLeft   This parameter used to creating a white space on image LEFT side.
+     * @param marginTop    This parameter used to creating a white space on image TOP side.
+     * @param marginRight  This parameter used to creating a white space on image RIGHT side.
      * @param marginBottom This parameter used to creating a white space on image BOTTOM side.
      */
     public void setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
@@ -87,7 +87,7 @@ public class BgImage {
     }
 
     /**
-     * @param width This parameter used to createScaledBitmap for actual document size.
+     * @param width  This parameter used to createScaledBitmap for actual document size.
      * @param height This parameter used to createScaledBitmap for actual document size.
      * @return backgroundImage
      */
@@ -96,7 +96,7 @@ public class BgImage {
     }
 
     /**
-     * @param width This parameter used to createScaledBitmap for actual document size.
+     * @param width  This parameter used to createScaledBitmap for actual document size.
      * @param height This parameter used to createScaledBitmap for actual document size.
      * @return backgroundImage
      */
@@ -104,7 +104,7 @@ public class BgImage {
         Bitmap bitmap = Bitmap.createBitmap((image.getWidth() + getMarginLeft() + getMarginRight()), (image.getHeight() + getMarginTop() + getMarginBottom()), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
-        canvas.drawBitmap(image, marginLeft, marginTop, null);
+        canvas.drawBitmap(image, getMarginLeft(), getMarginTop(), null);
         return Bitmap.createScaledBitmap(bitmap, width, height, true);
     }
 }
