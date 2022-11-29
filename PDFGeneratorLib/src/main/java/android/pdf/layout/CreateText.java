@@ -35,6 +35,7 @@ public class CreateText {
         textView.setTextSize(text.getTextSize());
         textView.setTypeface(Utils.createGetFont(context, text.getFontStyle()));
         textView.setPadding(text.getPaddingLeft(), text.getPaddingTop(), text.getPaddingRight(), text.getPaddingBottom());
+        textView.setLineSpacing(text.getLineSpace(),text.getLineSpace());
 
         if (text.isBorder()) {
             textView.setBackground(Utils.createBorder(text.getBackgroundColor(), text.getBorderColor(), text.getBorderWidth()));

@@ -48,21 +48,26 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 10);
 
-//        createDocument();
+        createDocument();
 
 //        create();
 
 //        checkSentence();
 
         createTemp();
-
+        
         document.close();
 
         try {
+
             document.finish(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Doc.pdf"));
+
             Toast.makeText(this, "Doc Created", Toast.LENGTH_SHORT).show();
+
         } catch (IOException e) {
+
             Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
         }
 
     }

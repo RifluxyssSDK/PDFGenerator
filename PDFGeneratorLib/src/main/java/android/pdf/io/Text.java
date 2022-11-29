@@ -84,6 +84,10 @@ public class Text extends Element {
      * It used to set the color of text border.
      */
     int borderColor;
+    /**
+     * It used to set lineSpace between lines.
+     */
+    int lineSpace;
 
     /**
      * It used to create text for pdf document.
@@ -103,6 +107,7 @@ public class Text extends Element {
         setRowSpan(rowSpan);
         setColSpan(colSpan);
         setMessage(message);
+        setLineSpace(1);
         init();
     }
 
@@ -299,6 +304,15 @@ public class Text extends Element {
     }
 
     /**
+     * @param lineSpace It used to set space between Line.
+     * @return Text
+     */
+    public Text setLineSpace(int lineSpace) {
+        this.lineSpace = lineSpace;
+        return this;
+    }
+
+    /**
      * @param message It used to create text for pdf document.
      * @return Text
      */
@@ -485,6 +499,13 @@ public class Text extends Element {
      */
     public int getBorderColor() {
         return borderColor;
+    }
+
+    /**
+     * @return lineSpace
+     */
+    public int getLineSpace() {
+        return lineSpace;
     }
 
     /**
