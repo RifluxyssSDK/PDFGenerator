@@ -27,7 +27,7 @@ public class CreateText {
         int elementWidth = (int) (minMaxWidth - (text.getMarginRight() + text.getMarginLeft()));
 
         TextView textView = new TextView(context);
-        textView.setText(text.getMessage() != null ? text.getMessage() : text.getTextBuilder().get());
+        textView.setText(text.getTextBuilder() == null ? text.getMessage() : text.getTextBuilder().get());
         textView.setMinWidth(elementWidth);
         textView.setMaxWidth(elementWidth);
         textView.setTextColor(text.getTextColor());

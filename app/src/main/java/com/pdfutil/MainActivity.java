@@ -48,14 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 10);
 
-        createDocument();
+//        createDocument();
 
-//        create();
+        create();
 
 //        checkSentence();
 
-        createTemp();
-        
         document.close();
 
         try {
@@ -99,28 +97,6 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private void createTemp() {
-
-        document.add(DocType.HEADER,new Paragraph()
-                .add(new Text(1,20,"HEADER").setGravity(Gravity.CENTER).setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE).setPadding(5))
-        );
-
-        document.add(DocType.FOOTER,new Paragraph()
-                .add(new Text(1,20,"FOOTER").setGravity(Gravity.CENTER).setBackgroundColor(Color.BLACK).setTextColor(Color.WHITE).setPadding(5))
-        );
-
-        document.setPageCount(new PageCount("Page " , " / " ).setTextColor(Color.GRAY).setGravity(Gravity.CENTER).setTextSize(5).setPadding(5));
-
-        for (int i = 1; i <= 200; i++) {
-
-            document.add(DocType.NORMAL,new Paragraph()
-                    .add(new Text(1,20,i+". COMMON").setGravity(Gravity.CENTER).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setPadding(5))
-            );
-
-        }
-
-    }
-
     private void create() {
 
         TextBuilder textBuilder = new TextBuilder(this);
@@ -131,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
         textBuilder.append("HELVETICA_OBLIQUE\n", FontStyle.HELVETICA_OBLIQUE);
         textBuilder.append("HELVETICA_COMPRESSED\n", FontStyle.HELVETICA_COMPRESSED);
 
+        binding.sampleText.setText(textBuilder.get());
+
         document.add(new Paragraph()
-                .add(new Text(1, 20, textBuilder).setTextColor(Color.BLUE).setBorder(true).setPadding(5))
+                .add(new Text(1, 20, "textBuilder").setTextColor(Color.BLUE).setBorder(true).setPadding(5))
         );
 
         for (int i = 0; i < 30; i++) {

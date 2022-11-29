@@ -89,15 +89,8 @@ public class PdfGenerateFactory {
      */
     private void initDimension(Context context) {
 
-        if (context == null) {
+        new Dimension(context);
 
-            throw new Error("You been must call 'init' method to initialize library. or Null Context");
-
-        } else {
-
-            new Dimension(context);
-
-        }
     }
 
     /**

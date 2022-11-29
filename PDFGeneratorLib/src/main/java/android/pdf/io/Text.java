@@ -107,7 +107,6 @@ public class Text extends Element {
         setRowSpan(rowSpan);
         setColSpan(colSpan);
         setMessage(message);
-        setLineSpace(1);
         init();
     }
 
@@ -128,6 +127,7 @@ public class Text extends Element {
      */
     private void init(){
         setTextSize(7);
+        setLineSpace(1);
         setBorderWidth(1);
         setTextColor(Color.BLACK);
         setBorderColor(Color.BLACK);
