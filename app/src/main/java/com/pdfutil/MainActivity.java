@@ -14,9 +14,6 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
-import com.pdfutil.databinding.ActivityMainBinding;
 
 import android.pdf.io.Image;
 import android.pdf.io.Line;
@@ -31,13 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     Document document;
 
-    ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
         document = new Document().init(this);
 
@@ -117,8 +111,6 @@ public class MainActivity extends AppCompatActivity {
         textBuilder.append("HELVETICA_LIGHT\n", FontStyle.HELVETICA_LIGHT);
         textBuilder.append("HELVETICA_OBLIQUE\n", FontStyle.HELVETICA_OBLIQUE);
         textBuilder.append("HELVETICA_COMPRESSED\n", FontStyle.HELVETICA_COMPRESSED);
-
-        binding.sampleText.setText(textBuilder.get());
 
         document.add(new Paragraph()
                 .add(new Text(1, 20, "textBuilder").setTextColor(Color.BLUE).setBorder(true).setPadding(5))
