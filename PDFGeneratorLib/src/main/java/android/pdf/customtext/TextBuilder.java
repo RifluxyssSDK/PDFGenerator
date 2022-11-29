@@ -56,21 +56,15 @@ public class TextBuilder {
     public Spannable get() {
 
         StringBuilder stringBuilder = new StringBuilder();
-
         Spannable spannable = new SpannableString(message);
 
         for (int i = 0; i < textBuilderList.size(); i++) {
 
             TextBuilderModel textBuilderModel = textBuilderList.get(i);
-
-            spannable.setSpan( new CustomTypefaceSpan(textBuilderModel.getText(), Utils.createGetFont(context, textBuilderModel.getFontStyle())),
-                    stringBuilder.length(), (stringBuilder.length() + textBuilderModel.getLength()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+            spannable.setSpan(new CustomTypefaceSpan(textBuilderModel.getText(), Utils.createGetFont(context, textBuilderModel.getFontStyle())), stringBuilder.length(), (stringBuilder.length() + textBuilderModel.getLength()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             stringBuilder.append(textBuilderModel.getText());
-
         }
 
         return spannable;
-
     }
 }

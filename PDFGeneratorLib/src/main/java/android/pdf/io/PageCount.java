@@ -1,6 +1,7 @@
 package android.pdf.io;
 
 import android.graphics.Color;
+import android.view.Gravity;
 
 /**
  * The type Page count.
@@ -105,6 +106,7 @@ public class PageCount {
         setTextSize(6);
         setBorderWidth(1);
         setTextColor(Color.BLACK);
+        setGravity(Gravity.CENTER);
         setBorderColor(Color.BLACK);
         setStartMessage(startMessage);
         setMiddleMessage(middleMessage);
