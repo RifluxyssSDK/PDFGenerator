@@ -87,7 +87,7 @@ public class Text extends Element {
     /**
      * It used to set lineSpace between lines.
      */
-    int lineSpace;
+    float lineSpace;
 
     /**
      * It used to create text for pdf document.
@@ -307,7 +307,7 @@ public class Text extends Element {
      * @param lineSpace It used to set space between Line.
      * @return Text
      */
-    public Text setLineSpace(int lineSpace) {
+    public Text setLineSpace(float lineSpace) {
         this.lineSpace = lineSpace;
         return this;
     }
@@ -504,7 +504,7 @@ public class Text extends Element {
     /**
      * @return lineSpace
      */
-    public int getLineSpace() {
+    public float getLineSpace() {
         return lineSpace;
     }
 
