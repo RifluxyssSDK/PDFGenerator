@@ -91,7 +91,6 @@ public class CreateParagraph {
         gridLayout.setPadding(paragraph.getPaddingLeft(), paragraph.getPaddingTop(), paragraph.getPaddingRight(), paragraph.getPaddingBottom());
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, paragraph.getRowSpan(), paragraph.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, paragraph.getColSpan(), paragraph.getColSpan()));
 
-
         if (paragraph.isBorder()) {
 
             layoutParams.setMargins(paragraph.getMarginLeft(), (paragraph.getMarginTop() - paragraph.getBorderWidth()), paragraph.getMarginRight(), paragraph.getMarginBottom());
@@ -109,7 +108,6 @@ public class CreateParagraph {
         gridLayout.setLayoutParams(layoutParams);
 
         return gridLayout;
-
     }
 
     /**

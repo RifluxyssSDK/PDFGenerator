@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
     private void verifySDK() {
 
         document.add(new Paragraph()
-                .add(new Text(1,10,"START").setBackgroundColor(Color.GREEN).setTextColor(Color.WHITE).setBorder(true))
-                .add(new Text(2,10,"MIDDLE").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
-                .add(new Text(1,10,"END").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
+                .add(new Text(1,10,"START").setBackgroundColor(Color.GREEN).setPadding(10).setTextColor(Color.WHITE).setBorder(true))
+                .add(new Text(2,10,"MIDDLE").setBackgroundColor(Color.GREEN).setPadding(10).setTextColor(Color.WHITE).setBorder(true))
+                .add(new Text(1,10,"END").setBackgroundColor(Color.GREEN).setPadding(10).setTextColor(Color.WHITE).setBorder(true))
                 .setPadding(10).setBorder(true)
         );
     }
