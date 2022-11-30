@@ -26,7 +26,7 @@ public class Utils {
      *
      * @param backgroundColor the background color
      * @param borderColor     the border color
-     * @param width           the width
+     * @param width           the width of border
      * @return the drawable
      */
     public static Drawable createBorder(int backgroundColor, int borderColor, int width) {
