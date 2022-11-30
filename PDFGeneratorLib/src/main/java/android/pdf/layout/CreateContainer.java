@@ -76,9 +76,6 @@ public class CreateContainer {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
 
-                Paragraph paragraph = ((Paragraph) cell);
-
-                if (paragraph.isBorder()) { paragraph.setMarginTop(- paragraph.getBorderWidth()); }
                 gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell).setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
 
             }
