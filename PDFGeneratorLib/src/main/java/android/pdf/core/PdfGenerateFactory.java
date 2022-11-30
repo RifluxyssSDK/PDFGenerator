@@ -28,7 +28,7 @@ public class PdfGenerateFactory {
      */
     public void init(Document document) {
 
-        initDimension(document.context);
+        initDimension(document.getContext());
 
         initPageSize(document);
 
@@ -100,10 +100,10 @@ public class PdfGenerateFactory {
      */
     private void initPageSize(Document document) {
 
-        int paddingWidth = document.paddingLeft + document.paddingRight;
-        int paddingHeight = document.paddingTop + document.paddingBottom;
+        int paddingWidth = document.getPaddingLeft() + document.getPaddingRight();
+        int paddingHeight = document.getPaddingTop() + document.getPaddingBottom();
 
-        PageSize pageSize = document.pageSize;
+        PageSize pageSize = document.getPageSize();
         pageSize.decreasePadding(paddingWidth, paddingHeight);
 
     }

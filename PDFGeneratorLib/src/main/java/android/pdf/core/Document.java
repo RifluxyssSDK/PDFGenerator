@@ -18,19 +18,19 @@ public class Document {
     /**
      * It used to create document on custom size. ( Ex : A4, A3 , etc.. ) {@link PageSize}.
      */
-    final PageSize pageSize;
+    private final PageSize pageSize;
     /**
      * It used to store the Cell to create Non-repeated View's {@link Cell}.
      */
-    final ArrayList<Cell> cells = new ArrayList<>();
+    private final ArrayList<Cell> cells = new ArrayList<>();
     /**
      * It used to store the Cell to create repeated ( HEADER ) View's {@link Cell}.
      */
-    final ArrayList<Cell> headerCells = new ArrayList<>();
+    private final ArrayList<Cell> headerCells = new ArrayList<>();
     /**
      * It used to store the Cell to create repeated ( FOOTER ) View's {@link Cell}.
      */
-    final ArrayList<Cell> footerCells = new ArrayList<>();
+    private final ArrayList<Cell> footerCells = new ArrayList<>();
     /**
      * This class used to create View.
      */
@@ -38,35 +38,35 @@ public class Document {
     /**
      * It used to creating View.
      */
-    Context context;
+    private Context context;
     /**
      * It used to set paddingLeft for every single page.
      */
-    int paddingLeft;
+    private int paddingLeft;
     /**
      * It used to set paddingTop for every single page.
      */
-    int paddingTop;
+    private int paddingTop;
     /**
      * It used to set paddingRight for every single page.
      */
-    int paddingRight;
+    private int paddingRight;
     /**
      * It used to set paddingBottom for every single page.
      */
-    int paddingBottom;
+    private int paddingBottom;
     /**
      * It used to set weight of single column.
      */
-    int columnWeight;
+    private int columnWeight;
     /**
      * It used to set BackgroundImage for each page.
      */
-    BgImage bgImage;
+    private BgImage bgImage;
     /**
      * It used to set PageCount for each page.
      */
-    PageCount pageCount;
+    private PageCount pageCount;
 
     /**
      * @param pageSize This constructor assign PageSize from the given input. ( EX : A4, A3, etc ) {@link PageSize}.
