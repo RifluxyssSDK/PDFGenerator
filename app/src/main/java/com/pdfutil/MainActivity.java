@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createDocument() {
 
-        document.add(new Paragraph().add(new Text(1, 20, "Hello World...").setPadding(10).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE)));
+        document.add(new Paragraph().add(new Text(1, 20, "Hello Document...").setPadding(10)));
 
     }
 }
