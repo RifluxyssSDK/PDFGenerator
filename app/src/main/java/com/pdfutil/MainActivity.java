@@ -11,6 +11,7 @@ import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
 import android.pdf.io.Sentence;
 import android.view.Gravity;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 10);
 
-//        createDocument();
+        createDocument();
 
 //        create();
 
 //        checkSentence();
 
-        verifySDK();
+//        verifySDK();
 
         document.close();
 
@@ -149,16 +150,16 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
 
             document.add(new Paragraph()
-                    .add(new Image(2, 2, bitmap).setPadding(5).setImageWidth(50).setImageHeight(50))
+                    .add(new Image(3, 2, bitmap).setPadding(5).setScaleType(ImageView.ScaleType.FIT_CENTER))
                     .add(new Text(1, 9, "X10081").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setMarginTop(5))
                     .add(new Text(2, 3, "Weekly").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
                     .add(new Text(2, 3, "11").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
                     .add(new Text(2, 1, "$").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setTextColor(Color.GRAY).setGravity(Gravity.CENTER_VERTICAL).setPaddingLeft(5))
                     .add(new Text(2, 2, "0.00").setFontStyle(FontStyle.HELVETICA).setTextSize(6).setGravity(Gravity.END | Gravity.CENTER_VERTICAL).setPaddingRight(5))
                     .add(new Text(1, 9, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(6))
-                    .setBorder(true).setBorderColor(Color.LTGRAY).setMarginTop(-1)
+                    .add(new Text(1, 18, "X10081-GLENGUARD FR PANT").setFontStyle(FontStyle.HELVETICA).setTextSize(4).setTextColor(Color.GRAY).setPaddingRight(5).setGravity(Gravity.END))
+                    .setBorder(true).setBorderColor(Color.LTGRAY)
             );
-
         }
 
         addHeaderText("Non - Garments");

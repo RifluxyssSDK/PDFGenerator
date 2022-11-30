@@ -31,13 +31,11 @@ public class CreateImage {
 
             ImageView imageView = new ImageView(context);
 
-            imageView.setImageBitmap(Bitmap.createScaledBitmap(image.getImage(), image.getImageWidth(), image.getImageHeight(), (true)));
+            imageView.setImageBitmap(image.getImage());
 
-            imageView.setMinimumWidth(elementWidth);
+            imageView.setMinimumWidth(image.getImageWidth());
 
             imageView.setMaxWidth(elementWidth);
-
-            imageView.setMaxHeight(image.getImageHeight());
 
             imageView.setAdjustViewBounds(true);
 
