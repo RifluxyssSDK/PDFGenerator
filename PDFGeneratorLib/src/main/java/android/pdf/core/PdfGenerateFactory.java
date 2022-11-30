@@ -1,8 +1,6 @@
 package android.pdf.core;
 
-import android.content.Context;
-
-import android.pdf.custom.Dimension;
+import android.pdf.dimension.Dimension;
 import android.pdf.io.PageCount;
 import android.pdf.kernel.PageSize;
 import android.pdf.layout.CreateContainer;
@@ -17,6 +15,7 @@ import java.io.IOException;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class PdfGenerateFactory {
 
+    private Dimension dimension;
     private CreateStatic staticHeader;
     private CreateStatic staticFooter;
     private CreateContainer container;
@@ -28,7 +27,7 @@ public class PdfGenerateFactory {
      */
     public void init(Document document) {
 
-        initDimension(document.getContext());
+        initCustomDimension(document);
 
         initPageSize(document);
 
@@ -38,6 +37,7 @@ public class PdfGenerateFactory {
 
         initContainer(document);
 
+        initDefaultDimension();
     }
 
     /**
@@ -87,9 +87,20 @@ public class PdfGenerateFactory {
     /**
      * initDimension {@link Dimension}
      */
-    private void initDimension(Context context) {
+    private void initCustomDimension(Document document) {
 
-        new Dimension(context);
+        dimension = new Dimension(document);
+
+        dimension.init();
+
+    }
+
+    /**
+     * initDefaultDimension {@link Dimension}
+     */
+    private void initDefaultDimension() {
+
+        dimension.setDefault();
 
     }
 
