@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 .add(new Text(1,10,"END").setBackgroundColor(Color.GREEN).setPaddingLeft(10).setTextColor(Color.WHITE).setBorder(true))
                 .setPadding(10).setBorder(true)
         );
-
     }
 
     private void checkSentence() {
