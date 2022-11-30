@@ -8,6 +8,7 @@ import android.text.style.TypefaceSpan;
 /**
  * The type Custom typeface span.
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class CustomTypefaceSpan extends TypefaceSpan {
 
     private final Typeface newType;

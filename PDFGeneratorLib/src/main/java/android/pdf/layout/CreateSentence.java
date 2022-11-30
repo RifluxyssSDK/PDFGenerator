@@ -1,16 +1,16 @@
 package android.pdf.layout;
 
 import android.content.Context;
-import android.pdf.io.Sentence;
+import android.pdf.abstract_io.Element;
+import android.pdf.element.Sentence;
 import android.view.View;
 import android.widget.GridLayout;
 
-import android.pdf.custom.Utils;
-import android.pdf.io.Element;
-import android.pdf.io.Image;
-import android.pdf.io.Line;
-import android.pdf.io.Text;
-import android.pdf.kernel.ElementType;
+import android.pdf.utility.Utils;
+import android.pdf.element.Image;
+import android.pdf.element.Line;
+import android.pdf.element.Text;
+import android.pdf.constant.ElementType;
 
 /**
  * The type Create paragraph.

@@ -1,5 +1,6 @@
 package android.pdf.dimension;
 
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class DimensionModel {
 
     private final float xdpi;

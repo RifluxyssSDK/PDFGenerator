@@ -1,13 +1,13 @@
 package android.pdf.layout;
 
 import android.content.Context;
+import android.pdf.abstract_io.Cell;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import android.pdf.io.Cell;
-import android.pdf.io.Paragraph;
-import android.pdf.kernel.ElementType;
-import android.pdf.kernel.PageSize;
+import android.pdf.cell.Paragraph;
+import android.pdf.constant.ElementType;
+import android.pdf.constant.PageSize;
 
 import java.util.ArrayList;
 

@@ -3,17 +3,17 @@ package android.pdf.layout;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.pdf.abstract_io.Cell;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import android.pdf.core.Document;
-import android.pdf.custom.Utils;
-import android.pdf.io.Cell;
-import android.pdf.io.Paragraph;
-import android.pdf.io.Text;
-import android.pdf.kernel.ElementType;
-import android.pdf.kernel.PageSize;
+import android.pdf.utility.Utils;
+import android.pdf.cell.Paragraph;
+import android.pdf.element.Text;
+import android.pdf.constant.ElementType;
+import android.pdf.constant.PageSize;
 
 import java.io.File;
 import java.io.FileOutputStream;

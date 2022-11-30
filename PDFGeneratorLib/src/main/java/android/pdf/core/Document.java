@@ -2,12 +2,11 @@ package android.pdf.core;
 
 import android.content.Context;
 
+import android.pdf.abstract_io.Cell;
 import android.pdf.bgImage.BgImage;
-import android.pdf.dimension.DimensionModel;
-import android.pdf.io.Cell;
 import android.pdf.io.PageCount;
-import android.pdf.kernel.DocType;
-import android.pdf.kernel.PageSize;
+import android.pdf.constant.DocType;
+import android.pdf.constant.PageSize;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,11 +67,6 @@ public class Document {
      * It used to set PageCount for each page.
      */
     private PageCount pageCount;
-
-    /**
-     * It used to page Alignment.
-     */
-    private DimensionModel dimensionModel;
 
     /**
      * @param pageSize This constructor assign PageSize from the given input. ( EX : A4, A3, etc ) {@link PageSize}.
@@ -253,21 +247,6 @@ public class Document {
      */
     public void setBackgroundImage(BgImage bgImage) {
         this.bgImage = bgImage;
-    }
-
-    /**
-     * @return DimensionModel
-     */
-    public DimensionModel getDimensionModel() {
-        return dimensionModel;
-    }
-
-    /**
-     * @param dimensionModel
-     * This parameter used to for page alignment {@link DimensionModel}
-     */
-    public void setDimensionModel(DimensionModel dimensionModel) {
-        this.dimensionModel = dimensionModel;
     }
 
     /**

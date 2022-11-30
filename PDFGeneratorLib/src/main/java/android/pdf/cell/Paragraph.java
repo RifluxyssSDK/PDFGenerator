@@ -1,8 +1,10 @@
-package android.pdf.io;
+package android.pdf.cell;
 
 import android.graphics.Color;
 
-import android.pdf.kernel.ElementType;
+import android.pdf.abstract_io.Cell;
+import android.pdf.abstract_io.Element;
+import android.pdf.constant.ElementType;
 
 import java.util.ArrayList;
 

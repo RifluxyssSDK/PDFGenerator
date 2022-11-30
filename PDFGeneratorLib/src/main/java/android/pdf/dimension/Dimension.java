@@ -1,28 +1,27 @@
 package android.pdf.dimension;
 
 import android.content.Context;
-import android.pdf.core.Document;
 import android.util.DisplayMetrics;
 
 /**
  * The Dimension Class Used To Create Document As A Fixed Size.
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Dimension {
 
     private final Context context;
-    private final Document document;
+    private final DimensionModel dimensionModel;
 
     /**
      * Instantiates a new Dimension.
      *
-     * @param document the Document
+     * @param context the Context
      */
-    public Dimension(Document document) {
+    public Dimension(Context context) {
 
-        this.document = document;
-        this.context = document.getContext();
+        this.context = context;
 
-        document.setDimensionModel(new DimensionModel(
+        dimensionModel = new DimensionModel(
                 context.getResources().getDisplayMetrics().xdpi,
                 context.getResources().getDisplayMetrics().ydpi,
                 context.getResources().getDisplayMetrics().density,
@@ -30,10 +29,12 @@ public class Dimension {
                 context.getResources().getDisplayMetrics().densityDpi,
                 context.getResources().getDisplayMetrics().heightPixels,
                 context.getResources().getDisplayMetrics().widthPixels
-        ));
+        );
+
+        this.init();
     }
 
-    public void init() {
+    private void init() {
 
         DisplayMetrics metrics = new DisplayMetrics();
 
@@ -51,8 +52,6 @@ public class Dimension {
     public void setDefault() {
 
         DisplayMetrics metrics = new DisplayMetrics();
-
-        DimensionModel dimensionModel = document.getDimensionModel();
 
         metrics.density = dimensionModel.getDensity();
         metrics.densityDpi = dimensionModel.getDensityDpi();

@@ -1,4 +1,6 @@
-package android.pdf.io;
+package android.pdf.abstract_io;
+
+import android.pdf.cell.Paragraph;
 
 /**
  * This class to used to find the elementType on {@link Paragraph}.

@@ -1,7 +1,7 @@
 package android.pdf.customtext;
 
 import android.content.Context;
-import android.pdf.custom.Utils;
+import android.pdf.utility.Utils;
 import android.text.Spannable;
 import android.text.SpannableString;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * The type Text builder.
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class TextBuilder {
 
     /**

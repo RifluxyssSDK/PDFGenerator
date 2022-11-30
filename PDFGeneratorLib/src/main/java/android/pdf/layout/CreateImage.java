@@ -1,13 +1,12 @@
 package android.pdf.layout;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import android.pdf.io.Image;
+import android.pdf.element.Image;
 
 /**
  * The type Create image.

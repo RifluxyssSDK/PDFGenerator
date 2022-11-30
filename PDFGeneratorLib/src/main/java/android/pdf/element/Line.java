@@ -1,8 +1,9 @@
-package android.pdf.io;
+package android.pdf.element;
 
 import android.graphics.Color;
 
-import android.pdf.kernel.ElementType;
+import android.pdf.abstract_io.Element;
+import android.pdf.constant.ElementType;
 
 /**
  * This class used to create each line for pdf document.

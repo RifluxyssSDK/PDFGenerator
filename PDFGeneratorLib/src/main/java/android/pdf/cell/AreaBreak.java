@@ -1,6 +1,7 @@
-package android.pdf.io;
+package android.pdf.cell;
 
-import android.pdf.kernel.ElementType;
+import android.pdf.abstract_io.Cell;
+import android.pdf.constant.ElementType;
 
 /**
  * This class used to create empty white space for creating a new page.

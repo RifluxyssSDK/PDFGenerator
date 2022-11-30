@@ -1,4 +1,4 @@
-package android.pdf.custom;
+package android.pdf.utility;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -7,7 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.view.View;
 
-import android.pdf.kernel.FontStyle;
+import android.pdf.constant.FontStyle;
 
 import androidx.core.content.res.ResourcesCompat;
 

@@ -1,9 +1,10 @@
-package android.pdf.io;
+package android.pdf.element;
 
 import android.graphics.Bitmap;
+import android.pdf.abstract_io.Element;
 import android.widget.ImageView;
 
-import android.pdf.kernel.ElementType;
+import android.pdf.constant.ElementType;
 
 /**
  * This class used to create each image for pdf document.
