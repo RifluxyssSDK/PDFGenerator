@@ -94,7 +94,7 @@ public class CreateParagraph {
 
         if (paragraph.isBorder()) {
 
-            layoutParams.setMargins(paragraph.getMarginLeft(), paragraph.getMarginTop() - paragraph.getBorderWidth(), paragraph.getMarginRight(), paragraph.getMarginBottom());
+            layoutParams.setMargins(paragraph.getMarginLeft(), (paragraph.getMarginTop() - paragraph.getBorderWidth()), paragraph.getMarginRight(), paragraph.getMarginBottom());
 
             gridLayout.setBackground(Utils.createBorder(paragraph.getBackgroundColor(), paragraph.getBorderColor(), paragraph.getBorderWidth()));
 

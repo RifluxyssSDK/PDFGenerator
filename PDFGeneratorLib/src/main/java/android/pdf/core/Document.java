@@ -255,7 +255,7 @@ public class Document {
     public void close() {
 
         if (context == null) {
-            throw new Error("You been must call 'init' method to initialize library.");
+            throw new Error("You been must call 'init' method to initialize library (or) Null Context");
         }
 
         if (columnWeight == 0) {
