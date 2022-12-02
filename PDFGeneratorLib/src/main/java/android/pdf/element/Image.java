@@ -487,7 +487,16 @@ public class Image extends Element {
      * @return the image
      */
     public Bitmap getImage() {
-        return image;
+        return this.getOptimizeImage();
+    }
+
+    /**
+     *  Gets Optimized Image ( ARGB_4444 - Config )
+     *
+     * @return image
+     */
+    private Bitmap getOptimizeImage() {
+        return image.copy(Bitmap.Config.ARGB_4444,true);
     }
 
     /**
