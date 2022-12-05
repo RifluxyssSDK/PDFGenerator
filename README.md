@@ -3,10 +3,10 @@ PDFGenerator
 
 PDFGenerator library, it's helps to creating PDF document from the given data.
 
-### NOTE ( STORAGE Permission required )
+### Permission
 
-If you are providing your custom filePath then your application must have **STORAGE READ-WRITE
-Permission** in order to store Pdf in provided path.
+If you are providing your custom filePath then your application must have 
+**STORAGE READ-WRITE PERMISSION** in order to store Pdf in provided path.
 
 ### How to integrate into your app ?
 
