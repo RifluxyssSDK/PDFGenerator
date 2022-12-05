@@ -53,5 +53,8 @@ required values and that's all you done!...
 * This is a simple and straight forward library for creating pdf document through your application.
 * Document design is customizable. To change the design go through the comments declared in codes and customize as per your need.
 
+### Authors
+* [Rifluxyss Team]
+
 ### Fork & Star if it helped you.
 
