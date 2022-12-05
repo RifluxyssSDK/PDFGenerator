@@ -56,11 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
-        bitmaps.add(getBitmap(R.raw.four_cover));
-        bitmaps.add(getBitmap(R.raw.thirtyone_outerwear));
+        Bitmap bitmap = compress(getBitmap(R.raw.thirtyone_outerwear));
+
+        bitmaps.add(bitmap);
 
         createDocument(bitmaps);
 
+    }
+
+    private Bitmap compress(Bitmap bitmap) {
+
+
+        return bitmap;
     }
 
     private void createDocument(ArrayList<Bitmap> bitmaps) throws IOException {
