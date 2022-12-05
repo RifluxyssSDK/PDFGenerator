@@ -54,7 +54,7 @@ required values and that's all you done!...
 * Document design is customizable. To change the design go through the comments declared in codes and customize as per your need.
 
 ### Authors
-* [Rifluxyss Team]
+[Rifluxyss Team]
 
 ### Fork & Star if it helped you.
 
