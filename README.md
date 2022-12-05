@@ -21,15 +21,11 @@ of repositories:
 >              }
 >            }
 
-Step 2. Add the dependency:
+Step 2. Add the dependency: ( NOTE: Replace the tag with latest version )
 
 >            dependencies {
->                'implementation 'com.github.RifluxyssSDK:PDFGenerator:{Tag}'
->            }
->
->            NOTE: Replace the tag with current release version, e.g
->
->            'implementation 'com.github.RifluxyssSDK:PDFGenerator:2.0.13'
+>                'implementation 'com.github.RifluxyssSDK:PDFGenerator:2.0.13'
+>            } 
 
 ### Quick Start
 
@@ -47,10 +43,13 @@ required values and that's all you done!...
 * Java 8
 * View
 * Canvas
-* PdfDocument
 * Bitmap Config
+* Exception Handling 
+* PdfDocument ( native )
 
-# Android Native libraries using generate the Dynamic PDF document.
+### description 
+
+Android Native libraries using generate the Dynamic PDF document.
 
 # We are Some of the challenges face in the future are
 
