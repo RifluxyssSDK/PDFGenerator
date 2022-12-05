@@ -1,14 +1,14 @@
-#PDFGenerator
+##PDFGenerator
 ===============
 
-PDFGenerator library, it's helps to creating PDF document from given data.
+PDFGenerator library, it's helps to creating PDF document from the given data.
 
-## NOTE ( STORAGE Permission required )
+### NOTE ( STORAGE Permission required )
 
 If you are providing your custom filePath then your application must have STORAGE READ-WRITE
 Permission in order to store Pdf in provided path.
 
-## How to integrate into your app ?
+### How to integrate into your app ?
 
 Integrating the project is simple, All you need to do is follow the below steps.
 
@@ -31,24 +31,24 @@ Step 2. Add the dependency:
 >
 >            'implementation 'com.github.RifluxyssSDK:PDFGenerator:2.0.13'
 
-## Quick Start
+### Quick Start
 
 In order to start using PdfGenerator, Just copy below code to your project and just pass the
-required values and that's all you done!
-        `
-        Document document = new Document().init(context);
-        document.open(10);
-        document.add(new Paragraph().add(new Text(1,10,"Hello Document")));
-        document.close();
-        try { document.finish(file); } catch (IOException e) { e.printStackTrace(); }
-        `
-## Technologies we used
+required values and that's all you done!...
+        
+>        Document document = new Document().init(context);
+>        document.open(10);
+>        document.add(new Paragraph().add(new Text(1,10,"Hello Document")));
+>        document.close();
+>        try { document.finish(file); } catch (IOException e) { e.printStackTrace(); }
 
-* [Java 8]
-* [View](# android.view)
-* [Bitmap](# android.graphics.Bitmap)
-* [Canvas](# android.graphics.Canvas)
-* [PdfDocument](# android.graphics.pdf.PdfDocument)
+### Technologies we used
+
+* Java 8
+* View
+* Canvas
+* PdfDocument
+* Bitmap Config
 
 # Android Native libraries using generate the Dynamic PDF document.
 
