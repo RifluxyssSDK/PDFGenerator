@@ -11,6 +11,7 @@ import android.pdf.cell.Paragraph;
 import android.pdf.element.Image;
 import android.pdf.element.Text;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap compress(Bitmap bitmap) {
 
+        bitmap.setDensity(12);
 
         return bitmap;
     }

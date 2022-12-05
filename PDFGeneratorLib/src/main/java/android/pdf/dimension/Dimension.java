@@ -50,6 +50,7 @@ public class Dimension {
     public void setDefault() {
 
         DisplayMetrics metrics = new DisplayMetrics();
+
         context.getResources().getDisplayMetrics().setTo(displayMetrics);
 
     }
