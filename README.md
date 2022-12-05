@@ -5,8 +5,8 @@ PDFGenerator library, it's helps to creating PDF document from the given data.
 
 ### NOTE ( STORAGE Permission required )
 
-If you are providing your custom filePath then your application must have STORAGE READ-WRITE
-Permission in order to store Pdf in provided path.
+If you are providing your custom filePath then your application must have **STORAGE READ-WRITE
+Permission** in order to store Pdf in provided path.
 
 ### How to integrate into your app ?
 
@@ -47,7 +47,7 @@ required values and that's all you done!...
 * Exception Handling 
 * PdfDocument ( native )
 
-### description 
+### Description 
 
 Android Native libraries using generate the Dynamic PDF document.
 
