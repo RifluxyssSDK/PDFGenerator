@@ -5,7 +5,7 @@ PDFGenerator library, it's helps to creating PDF document from the given data.
 
 ### Permission*
 
-If you are providing your custom filePath then your application must have 
+If you are providing your custom file path then your application must have 
 **STORAGE READ-WRITE PERMISSION** in order to store Pdf in provided path.
 
 ### How to integrate into your app ?
@@ -43,19 +43,15 @@ required values and that's all you done!...
 * Java 8
 * View
 * Canvas
+* Layout
 * Bitmap Config
 * Exception Handling 
-* PdfDocument ( native )
+* PdfDocument ( Android Native )
 
 ### Description 
 
-Android Native libraries using generate the Dynamic PDF document.
+* This is a simple and straight forward library for creating pdf document through your application.
+* Document design is customizable. To change the design go through the comments declared in codes and customize as per your need.
 
-# We are Some of the challenges face in the future are
-
-# Programmatically generate the view of the grid layout, text view and image view & draw the view
-
-# of the line we are generate some of the challenges are facing.
-
-# table of contents to make it easy for users to navigate to different sections easily
+### Fork & Star if it helped you.
 
