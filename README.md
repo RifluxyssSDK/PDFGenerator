@@ -6,7 +6,11 @@ PDFGenerator library, it's helps to creating PDF document from the given data.
 ### Permission*
 
 If you are providing your custom file path then your application must have 
-**STORAGE READ-WRITE PERMISSION** in order to store Pdf in provided path.
+**STORAGE READ-WRITE PERMISSION** in order to store PDF in provided path.
+
+>           <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+>           <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+>           <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
 ### How to integrate into your app ?
 
@@ -50,7 +54,7 @@ required values and that's all you done!...
 
 ### Description 
 
-* This is a simple and straight forward library for creating pdf document through your application.
+* This is a simple and straight forward library for creating PDF document through your application.
 * Document design is customizable. To change the design go through the comments declared in codes and customize as per your need.
 
 ### Authors
