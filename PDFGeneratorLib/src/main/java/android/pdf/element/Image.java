@@ -496,7 +496,8 @@ public class Image extends Element {
      * @return image
      */
     private Bitmap getOptimizeImage() {
-        return image.copy(Bitmap.Config.ARGB_4444,true);
+//        return image.copy(Bitmap.Config.ARGB_4444,true);
+        return image;
     }
 
     /**

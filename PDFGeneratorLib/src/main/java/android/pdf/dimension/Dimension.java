@@ -10,7 +10,7 @@ import android.util.DisplayMetrics;
 public class Dimension {
 
     private final Context context;
-    private final DimensionModel dimensionModel;
+    private final DisplayMetrics displayMetrics;
 
     /**
      * Instantiates a new Dimension.
@@ -21,19 +21,14 @@ public class Dimension {
 
         this.context = context;
 
-        dimensionModel = new DimensionModel(
-                context.getResources().getDisplayMetrics().xdpi,
-                context.getResources().getDisplayMetrics().ydpi,
-                context.getResources().getDisplayMetrics().density,
-                context.getResources().getDisplayMetrics().scaledDensity,
-                context.getResources().getDisplayMetrics().densityDpi,
-                context.getResources().getDisplayMetrics().heightPixels,
-                context.getResources().getDisplayMetrics().widthPixels
-        );
+        displayMetrics = context.getResources().getDisplayMetrics();
 
         this.init();
     }
 
+    /**
+     * Change to custom {@link DisplayMetrics}
+     */
     private void init() {
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -49,18 +44,13 @@ public class Dimension {
         context.getResources().getDisplayMetrics().setTo(metrics);
     }
 
+    /**
+     * Change to default {@link DisplayMetrics}
+     */
     public void setDefault() {
 
         DisplayMetrics metrics = new DisplayMetrics();
+        context.getResources().getDisplayMetrics().setTo(displayMetrics);
 
-        metrics.density = dimensionModel.getDensity();
-        metrics.densityDpi = dimensionModel.getDensityDpi();
-        metrics.heightPixels = dimensionModel.getHeightPixels();
-        metrics.widthPixels = dimensionModel.getWidthPixels();
-        metrics.scaledDensity = dimensionModel.getScaledDensity();
-        metrics.xdpi = dimensionModel.getXdpi();
-        metrics.ydpi = dimensionModel.getYdpi();
-
-        context.getResources().getDisplayMetrics().setTo(metrics);
     }
 }
