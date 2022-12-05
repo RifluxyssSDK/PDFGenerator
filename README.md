@@ -1,4 +1,4 @@
-##PDFGenerator
+PDFGenerator
 ===============
 
 PDFGenerator library, it's helps to creating PDF document from the given data.
