@@ -15,9 +15,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.pdf.cell.Paragraph;
+import android.pdf.constant.FontStyle;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
-import android.pdf.io.Sentence;
+import android.pdf.element.Image;
+import android.pdf.element.Line;
+import android.pdf.element.Sentence;
+import android.pdf.element.Text;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -26,12 +31,6 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.pdf.io.Image;
-import android.pdf.io.Line;
-import android.pdf.io.Paragraph;
-import android.pdf.io.Text;
-import android.pdf.kernel.FontStyle;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,8 +42,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import id.zelory.compressor.Compressor;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.pdf.custom.Utils;
-import android.util.Log;
+import android.pdf.element.Image;
+import android.pdf.utility.Utils;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import android.pdf.io.Image;
 
 import java.io.File;
 import java.io.FileInputStream;
