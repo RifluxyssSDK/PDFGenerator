@@ -1,12 +1,23 @@
 package android.pdf.layout;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
+import android.pdf.custom.Utils;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import android.pdf.element.Image;
+import android.pdf.io.Image;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The type Create image.
@@ -21,7 +32,7 @@ public class CreateImage {
      * @param image           the image
      * @return the view
      */
-    public View create(Context context, float singleColWeight, Image image) {
+    public View create(Context context, float singleColWeight, Image image) throws FileNotFoundException {
 
         double minMaxWidth = singleColWeight * image.getColSpan();
         int elementWidth = (int) (minMaxWidth - (image.getMarginRight() + image.getMarginLeft()));
@@ -30,7 +41,31 @@ public class CreateImage {
 
             ImageView imageView = new ImageView(context);
 
-            imageView.setImageBitmap(image.getImage());
+            if (image.isCompressImage()) {
+
+                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
+                if (!imageFile.exists()) { imageFile.mkdirs(); }
+
+                String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+                File imageResourceFile = new File(imageFile,fileName + Utils.fileExtension);
+
+                //Convert bitmap to byte array
+                image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile)); // YOU can also save it in JPEG
+
+                File compressImageFile = new Utils().compressImageFile(imageResourceFile,fileName,image.getImageWidth(),image.getImageHeight(),image.getCompressLevel());
+
+                BitmapFactory.Options optionsImage = new BitmapFactory.Options();
+                // explicitly state everything so the configuration is clear
+                optionsImage.inPreferredConfig = Bitmap.Config.RGB_565;
+
+                imageView.setImageBitmap(BitmapFactory.decodeStream(new FileInputStream(compressImageFile),null,optionsImage));
+
+                if (compressImageFile.exists()) { compressImageFile.delete(); imageResourceFile.delete(); }
+
+            } else {
+
+                imageView.setImageBitmap(image.getImage());
+            }
 
             imageView.setMinimumWidth(image.getImageWidth());
 

@@ -13,6 +13,8 @@ import android.pdf.cell.Paragraph;
 import android.pdf.element.Text;
 import android.pdf.constant.ElementType;
 
+import java.io.FileNotFoundException;
+
 /**
  * The type Create paragraph.
  */
@@ -52,7 +54,11 @@ public class CreateParagraph {
             if (element.getElementType() == ElementType.IMAGE) {
 
                 init(((Image) element).getColSpan(), columnWeight);
-                gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                try {
+                    gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
 

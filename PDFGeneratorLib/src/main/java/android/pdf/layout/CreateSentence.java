@@ -12,6 +12,8 @@ import android.pdf.element.Line;
 import android.pdf.element.Text;
 import android.pdf.constant.ElementType;
 
+import java.io.FileNotFoundException;
+
 /**
  * The type Create paragraph.
  */
@@ -50,14 +52,22 @@ public class CreateSentence {
             if (element.getElementType() == ElementType.IMAGE) {
 
                 init(((Image) element).getColSpan(), columnWeight);
-                gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                try {
+                    gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
 
             if (element.getElementType() == ElementType.SENTENCE) {
 
                 init(((Image) element).getColSpan(), columnWeight);
-                gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                try {
+                    gridLayout.addView(new CreateImage().create(context, singleColWeight, (Image) element));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         }

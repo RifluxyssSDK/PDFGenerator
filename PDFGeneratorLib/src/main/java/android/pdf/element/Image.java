@@ -90,6 +90,16 @@ public class Image extends Element {
     ImageView.ScaleType scaleType;
 
     /**
+     * The Compress image.
+     */
+    boolean compressImage;
+
+    /**
+     * The Compress.
+     */
+    int compressLevel;
+
+    /**
      * Instantiates a new Image.
      *
      * @param rowSpan It represents the number of rows to span.
@@ -543,5 +553,44 @@ public class Image extends Element {
      */
     public ImageView.ScaleType getScaleType() {
         return scaleType;
+    }
+
+
+    /**
+     * Is compress image boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isCompressImage() {
+        return compressImage;
+    }
+
+    /**
+     * Sets compress image.
+     *
+     * @param compressImage the compress image
+     */
+    public Image setCompressImage(boolean compressImage) {
+        this.compressImage = compressImage;
+        return this;
+    }
+
+    /**
+     * Gets compress level.
+     *
+     * @return the compress level
+     */
+    public int getCompressLevel() {
+        return compressLevel;
+    }
+
+    /**
+     * Sets compress level.
+     *
+     * @param compressLevel the compress level
+     */
+    public Image setCompressLevel(int compressLevel) {
+        this.compressLevel = compressLevel;
+        return this;
     }
 }

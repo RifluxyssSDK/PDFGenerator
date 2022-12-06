@@ -20,6 +20,7 @@ import android.pdf.customtext.TextBuilder;
 import android.pdf.io.Sentence;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -34,10 +35,16 @@ import android.pdf.kernel.FontStyle;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import id.zelory.compressor.Compressor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 10);
 
-//        createDocument();
-
-//        create();
-
-//        checkSentence();
 
         verifySDK();
 
@@ -66,7 +68,13 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            document.finish(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Doc.pdf"));
+            File fileCompress = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "document");
+            if (!fileCompress.exists()) {
+                fileCompress.mkdirs();
+            }
+            File imageFileCom = new File(fileCompress, "Document.pdf");
+
+            document.finish(imageFileCom);
 
             Toast.makeText(this, "Doc Created", Toast.LENGTH_SHORT).show();
 
@@ -79,43 +87,43 @@ public class MainActivity extends AppCompatActivity {
 
     private void verifySDK() {
 
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.four_cover, "four_cover"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.five_ur_differentiator_page, "five_ur_differentiator_page"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.six_fs_differentiator_page, "six_fs_differentiator_page"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seven_comfort_shirt, "six_fs_differentiator_page"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt, "eight_wrinkle_free_shirt"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt, "eight_wrinkle_free_shirt1"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.nine_performance_polo, "nine_performance_polo"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ten_oxford_exec_cargo, "ten_oxford_exec_cargo"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eleven_pro_knit_argyle_polo, "eleven_pro_knit_argyle_polo"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twelve_cargo_comfort_jeans, "twelve_cargo_comfort_jeans"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thireteen_pro_knit_tee_cargo_shorts, "thireteen_pro_knit_tee_cargo_shorts"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.forteen_women_workwear_a, "forteen_women_workwear_a"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.fifteen_women_workwear_b, "fifteen_women_workwear_b"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.sixteen_carhartt, "sixteen_carhartt"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr, "seventeen_carhartt_fr"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr, "seventeen_carhartt_fr1"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility, "eighteen_carhartt_fr_enhanced_visibility"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility, "eighteen_carhartt_fr_enhanced_visibility1"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ninteen_tecasafe, "ninteen_tecasafe"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_fr_outerwear, "twenty_fr_outerwear"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyone_e_viz_tecasafe_a, "twentyone_e_viz_tecasafe_a"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_two_viz_tecasafe_b, "twenty_two_viz_tecasafe_b"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentythree_e_viz_tecasafe_c, "twentythree_e_viz_tecasafe_c"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt, "twentyfour_high_visibility_shirt"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt, "twentyfour_high_visibility_shirt1"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfive_enhanced_visibility, "twentyfive_enhanced_visibility"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentysix_hundred_cotton, "twentysix_hundred_cotton"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyseven_food_pharma, "twentyseven_food_pharma"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyeight_culinary, "twentyeight_culinary"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentynine_chef_essential, "twentynine_chef_essential"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirty_chef_signature, "thirty_chef_signature"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyone_outerwear, "thirtyone_outerwear"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtytwo_floor_zone, "thirtytwo_floor_zone"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtythree_supply_closet, "thirtythree_supply_closet"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfour_restroom_zone, "thirtyfour_restroom_zone"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfive_kitchen_zone, "thirtyfive_kitchen_zone"))));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtysix_shop_zone, "thirtysix_shop_zone"))));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.four_cover, "four_cover")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.five_ur_differentiator_page, "five_ur_differentiator_page")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.six_fs_differentiator_page, "six_fs_differentiator_page")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seven_comfort_shirt, "six_fs_differentiator_page")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt, "eight_wrinkle_free_shirt")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt, "eight_wrinkle_free_shirt1")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.nine_performance_polo, "nine_performance_polo")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ten_oxford_exec_cargo, "ten_oxford_exec_cargo")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eleven_pro_knit_argyle_polo, "eleven_pro_knit_argyle_polo")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twelve_cargo_comfort_jeans, "twelve_cargo_comfort_jeans")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thireteen_pro_knit_tee_cargo_shorts, "thireteen_pro_knit_tee_cargo_shorts")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.forteen_women_workwear_a, "forteen_women_workwear_a")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.fifteen_women_workwear_b, "fifteen_women_workwear_b")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.sixteen_carhartt, "sixteen_carhartt")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr, "seventeen_carhartt_fr")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr, "seventeen_carhartt_fr1")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility, "eighteen_carhartt_fr_enhanced_visibility")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility, "eighteen_carhartt_fr_enhanced_visibility1")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ninteen_tecasafe, "ninteen_tecasafe")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_fr_outerwear, "twenty_fr_outerwear")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyone_e_viz_tecasafe_a, "twentyone_e_viz_tecasafe_a")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_two_viz_tecasafe_b, "twenty_two_viz_tecasafe_b")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentythree_e_viz_tecasafe_c, "twentythree_e_viz_tecasafe_c")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt, "twentyfour_high_visibility_shirt")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt, "twentyfour_high_visibility_shirt1")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfive_enhanced_visibility, "twentyfive_enhanced_visibility")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentysix_hundred_cotton, "twentysix_hundred_cotton")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyseven_food_pharma, "twentyseven_food_pharma")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyeight_culinary, "twentyeight_culinary")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentynine_chef_essential, "twentynine_chef_essential")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirty_chef_signature, "thirty_chef_signature")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyone_outerwear, "thirtyone_outerwear")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtytwo_floor_zone, "thirtytwo_floor_zone")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtythree_supply_closet, "thirtythree_supply_closet")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfour_restroom_zone, "thirtyfour_restroom_zone")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfive_kitchen_zone, "thirtyfive_kitchen_zone")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
+        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtysix_shop_zone, "thirtysix_shop_zone")).setImageWidth(579).setImageHeight(771).setCompressImage(true).setCompressLevel(90)));
 
     }
 
@@ -291,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap compressImage(int resourceUri, String fileName) {
 
         Bitmap scaledBitmap = null;
+        byte[] decodedString;
 
         try {
 
@@ -299,98 +308,49 @@ public class MainActivity extends AppCompatActivity {
             byte[] b = new byte[XmlFileInputStream.available()];
             XmlFileInputStream.read(b);
 
-            byte[] decodedString = Base64.decode(new String(b), Base64.DEFAULT);
+            decodedString = Base64.decode(new String(b), Base64.DEFAULT);
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-            options.inJustDecodeBounds = false;
-            options.inSampleSize = 1;
-            options.inScaled = false;
-            options.inTempStorage = new byte[16 * 1024];
+            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            Bitmap originalBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length, options);
+          /*  File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
+            if (!imageFile.exists()) { imageFile.mkdirs(); }
 
-            File file = new File(getFilesDir(), "Images");
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            File imageFile = new File(file, fileName + ".png");
-            imageFile.createNewFile();
+            File imageResourceFile = new File(imageFile,fileName + ".jpeg");
 
-//Convert bitmap to byte array
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            originalBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos); // YOU can also save it in JPEG
-            byte[] bitmapdata = bos.toByteArray();
+            //Convert bitmap to byte array
+            originalBitmap.compress(Bitmap.CompressFormat.WEBP, 90, new FileOutputStream(imageResourceFile)); // YOU can also save it in JPEG
 
-//write the bytes in file
-            FileOutputStream fos = new FileOutputStream(imageFile);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
+            File compressImageFile = compressImageFile(imageResourceFile,fileName);
 
+            int file_size = Integer.parseInt(String.valueOf(compressImageFile.length()/1024));
+
+            Log.e("status","check Image FileName===> " + compressImageFile.getName() + "FileSize====> " + file_size);
+
+
+            BitmapFactory.Options optionsImage = new BitmapFactory.Options();
+            // explicitly state everything so the configuration is clear
+            optionsImage.inPreferredConfig = Bitmap.Config.RGB_565;
+            optionsImage.inPremultiplied = false; // no alpha, but disable explicitly
+            optionsImage.inSampleSize = 1; // make sure pixels are 1:1
+            optionsImage.inPreferQualityOverSpeed = true; // doesn't make a difference
+            optionsImage.inTempStorage = new byte[16 * 1024];
+            scaledBitmap = BitmapFactory.decodeStream(new FileInputStream(compressImageFile),null,optionsImage);
+
+            if (compressImageFile.exists()) { compressImageFile.delete(); imageResourceFile.delete(); }*/
+
+
+            //scaledBitmap = compressImageBitmap(imageFile.getAbsolutePath(),originalBitmap);
+
+
+            /*Bitmap createdBitmap
+            scaledBitmap = createdBitmap.copy(Bitmap.Config.ARGB_8888,true);*/
+
+           /* Bitmap createdBitmap = Bitmap.createScaledBitmap(originalBitmap,579,771,true);
 
             String filePath = getRealPathFromURI(imageFile.getAbsolutePath());
-
-
             BitmapFactory.Options options1 = new BitmapFactory.Options();
+            Bitmap decodeFileBitmap = BitmapFactory.decodeFile(filePath, options1);*/
 
-            options1.inJustDecodeBounds = true;
-            Bitmap bmp = BitmapFactory.decodeFile(filePath, options1);
-
-            int actualHeight = options.outHeight;
-            int actualWidth = options.outWidth;
-
-            float maxHeight = 816.0f;
-            float maxWidth = 612.0f;
-            float imgRatio = actualWidth / actualHeight;
-            float maxRatio = maxWidth / maxHeight;
-
-            if (actualHeight > maxHeight || actualWidth > maxWidth) {
-                if (imgRatio < maxRatio) {
-                    imgRatio = maxHeight / actualHeight;
-                    actualWidth = (int) (imgRatio * actualWidth);
-                    actualHeight = (int) maxHeight;
-                } else if (imgRatio > maxRatio) {
-                    imgRatio = maxWidth / actualWidth;
-                    actualHeight = (int) (imgRatio * actualHeight);
-                    actualWidth = (int) maxWidth;
-                } else {
-                    actualHeight = (int) maxHeight;
-                    actualWidth = (int) maxWidth;
-
-                }
-            }
-
-            options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
-            options.inTempStorage = new byte[16 * 1024];
-
-            try {
-                bmp = BitmapFactory.decodeFile(filePath, options);
-            } catch (OutOfMemoryError exception) {
-                exception.printStackTrace();
-
-            }
-            try {
-                if (Build.VERSION.SDK_INT >= 33) {
-                    scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.RGBA_1010102);
-                } else {
-                    scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
-                }
-            } catch (OutOfMemoryError exception) {
-                exception.printStackTrace();
-            }
-
-            float ratioX = actualWidth / (float) options.outWidth;
-            float ratioY = actualHeight / (float) options.outHeight;
-            float middleX = actualWidth / 2.0f;
-            float middleY = actualHeight / 2.0f;
-
-            Matrix scaleMatrix = new Matrix();
-            scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
-
-            Canvas canvas = new Canvas(scaledBitmap);
-            canvas.setMatrix(scaleMatrix);
-            canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -400,36 +360,74 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private File compressImageFile(File imageFile,String fileName) {
 
-    private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+        File imageFileCom = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "compress");
+        if (!imageFileCom.exists()) {
+            imageFileCom.mkdirs();
         }
+
+        File compressImage = new File(imageFileCom, fileName + "1.jpeg");
+
+        try {
+            // write the compressed bitmap at the destination specified by destinationPath.
+            decodeSampledBitmapFromFile(imageFile, 579,771).compress( Bitmap.CompressFormat.WEBP, 75, new FileOutputStream(compressImage));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return compressImage;
+
     }
 
-    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    private Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight) throws IOException {
+        // First decode with inJustDecodeBounds=true to check dimensions
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+
+        Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+
+        //check the rotation of the image and display it properly
+        ExifInterface exif;
+        exif = new ExifInterface(imageFile.getAbsolutePath());
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
+        Matrix matrix = new Matrix();
+        if (orientation == 6) {
+            matrix.postRotate(90);
+        } else if (orientation == 3) {
+            matrix.postRotate(180);
+        } else if (orientation == 8) {
+            matrix.postRotate(290);
+        }
+        scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+        return scaledBitmap;
+    }
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
 
         if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-        }
-        final float totalPixels = width * height;
-        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
-        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
-            inSampleSize++;
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
         }
 
         return inSampleSize;
     }
-
 }
