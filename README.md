@@ -28,7 +28,7 @@ of repositories:
 Step 2. Add the dependency: ( NOTE: Replace the tag with latest version )
 
 >            dependencies {
->                'implementation 'com.github.RifluxyssSDK:PDFGenerator:2.0.13'
+>                implementation 'com.github.RifluxyssSDK:PDFGenerator:2.0.13'
 >            } 
 
 ### Quick Start
