@@ -58,7 +58,7 @@ public class CreateImage {
 
                 imageView.setImageBitmap(BitmapFactory.decodeStream(new FileInputStream(compressImageFile),null,optionsImage));
 
-                if (compressImageFile.exists()) { compressImageFile.delete(); imageResourceFile.delete(); }
+                if (imageResourceFile.exists()) { imageResourceFile.delete(); }
 
             } else {
 

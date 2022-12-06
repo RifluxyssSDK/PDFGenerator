@@ -110,21 +110,14 @@ public class Utils {
      */
     public File compressImageFile(File imageFile, String fileName, int bitmapWidth, int bitmapHeight,int compressLevel) {
 
-        File imageFileCom = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "compress");
-        if (!imageFileCom.exists()) {
-            imageFileCom.mkdirs();
-        }
-
-        File compressImage = new File(imageFileCom, fileName + "1.jpeg");
-
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight).compress( Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(compressImage));
+            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight).compress( Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return compressImage;
+        return imageFile;
 
     }
 
