@@ -4,15 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Environment;
 import android.pdf.cell.Paragraph;
 import android.pdf.core.Document;
 import android.pdf.element.Image;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
@@ -58,9 +55,8 @@ public class Testing {
 
     private void createDocument(Document document) throws IOException {
 
-        document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eight_wrinkle_free_shirt))));
-        /*document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eighteen_carhartt_fr_enhanced_visibility))));
-        document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eleven_pro_knit_argyle_polo))));
+        document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eighteen_carhartt_fr_enhanced_visibility))));
+        /*document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eleven_pro_knit_argyle_polo))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.fifteen_women_workwear_b))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.five_ur_differentiator_page))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.forteen_women_workwear_a))));
@@ -97,41 +93,12 @@ public class Testing {
 
     }
 
-    private Bitmap compressBitmap(Bitmap bitmap) throws IOException {
-
-        bitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() / 1.5), (int) (bitmap.getHeight() / 1.5), true);
-
-        return bitmap;
-    }
-
 
     private Bitmap decodeStream(int resPath) throws IOException {
-
         InputStream inputStream = context.getResources().openRawResource(resPath);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        byte[] bytes = new byte[1024];
-        int len;
-
-        while ((len = inputStream.read(bytes)) != -1) {
-            outputStream.write(bytes, 0, len);
-        }
-        outputStream.close();
-        inputStream.close();
-
-        bytes = Base64.decode(outputStream.toString(), Base64.DEFAULT);
-
-        inputStream = new ByteArrayInputStream(bytes);
-
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-        bitmap = bitmap.copy(Bitmap.Config.RGB_565,true);
-
-        Bitmap bitmap1 = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap1);
-        canvas.drawBitmap(bitmap,0,0,new Paint());
-        bitmap1 = bitmap1.copy(Bitmap.Config.RGB_565,true);
-
-        return bitmap1;
+        byte[] bytes = new byte[inputStream.available()];
+        inputStream.read(bytes);
+        bytes = Base64.decode(bytes, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }
