@@ -116,7 +116,7 @@ public class Utils {
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.PNG, compressLevel, new FileOutputStream(imageFile));
+            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
 
         } catch (IOException e) {
             e.printStackTrace();

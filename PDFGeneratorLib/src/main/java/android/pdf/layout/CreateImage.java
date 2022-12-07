@@ -52,36 +52,42 @@ public class CreateImage {
                 imageView.setImageBitmap(image.getImage());
             }*/
 
-            File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
-            if (!imageFile.exists()) {
-                imageFile.mkdirs();
+            if (image.getCompressLevel() > 0) {
+
+                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
+                if (!imageFile.exists()) {
+                    imageFile.mkdirs();
+                }
+
+                String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+                File imageResourceFile = new File(imageFile, fileName + Utils.fileExtension);
+
+                // YOU can also save it in WEBP
+                image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
+
+                File compressImageFile = new Utils().compressImageFile(imageResourceFile, image.getImageWidth(), image.getImageHeight(), image.getCompressLevel());
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.RGB_565;
+                // explicitly state everything so the configuration is clear
+                DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
+                options.inScreenDensity = metrics.densityDpi;
+                options.inTargetDensity = metrics.densityDpi;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    options.inDensity = DisplayMetrics.DENSITY_DEVICE_STABLE;
+                }
+
+                Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(compressImageFile), null, options);
+
+                if (imageResourceFile.exists()) { imageResourceFile.delete(); }
+                if (imageFile.isDirectory()) { imageFile.delete(); }
+
+                imageView.setImageBitmap(bm);
+
+            } else {
+
+                imageView.setImageBitmap(image.getImage());
             }
-
-            String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
-            File imageResourceFile = new File(imageFile, fileName + Utils.fileExtension);
-
-            // YOU can also save it in WEBP
-            image.getImage().compress(Bitmap.CompressFormat.PNG, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
-
-            File compressImageFile = new Utils().compressImageFile(imageResourceFile, image.getImageWidth(), image.getImageHeight(), image.getCompressLevel());
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            // explicitly state everything so the configuration is clear
-            DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
-            options.inScreenDensity = metrics.densityDpi;
-            options.inTargetDensity = metrics.densityDpi;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                options.inDensity = DisplayMetrics.DENSITY_DEVICE_STABLE;
-            }
-
-            Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(compressImageFile), null, options);
-
-            if (imageResourceFile.exists()) { imageResourceFile.delete(); }
-            if (imageFile.isDirectory()) { imageFile.delete(); }
-
-
-            imageView.setImageBitmap(bm);
 
             imageView.setMinimumWidth(image.getImageWidth());
 
