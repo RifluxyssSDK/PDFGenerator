@@ -52,7 +52,7 @@ public class CreateImage {
                 imageView.setImageBitmap(image.getImage());
             }*/
 
-            if (image.getCompressLevel() > 0) {
+            if (image.getCompressLevel() != 0) {
 
                 File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
                 if (!imageFile.exists()) {
