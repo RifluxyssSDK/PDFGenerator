@@ -36,7 +36,7 @@ public class Utils {
     /**
      * The constant fileExtension.
      */
-    public static String fileExtension = ".jpeg";
+    public static String fileExtension = ".png";
 
     /**
      * Create border drawable.
@@ -116,7 +116,7 @@ public class Utils {
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
+            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.PNG, compressLevel, new FileOutputStream(imageFile));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -179,36 +179,4 @@ public class Utils {
 
         return inSampleSize;
     }
-
-    //decodes image and scales it to reduce memory consumption
-    public Bitmap decodeFile(File decodeFile){
-        try {
-            //decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            FileInputStream stream1=new FileInputStream(decodeFile);
-            BitmapFactory.decodeStream(stream1,null,o);
-            stream1.close();
-            //Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE = 1024;
-            int width_tmp=o.outWidth, height_tmp=o.outHeight;
-            int scale=1;
-            while (width_tmp / 2 >= REQUIRED_SIZE && height_tmp / 2 >= REQUIRED_SIZE) {
-                width_tmp /= 2;
-                height_tmp /= 2;
-                scale *= 2;
-            }
-            //decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            FileInputStream stream2=new FileInputStream(decodeFile);
-            Bitmap bitmap=BitmapFactory.decodeStream(stream2, null, o2);
-            stream2.close();
-            return bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

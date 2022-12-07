@@ -61,12 +61,12 @@ public class CreateImage {
             File imageResourceFile = new File(imageFile, fileName + Utils.fileExtension);
 
             // YOU can also save it in WEBP
-            image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
+            image.getImage().compress(Bitmap.CompressFormat.PNG, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
 
             File compressImageFile = new Utils().compressImageFile(imageResourceFile, image.getImageWidth(), image.getImageHeight(), image.getCompressLevel());
 
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             // explicitly state everything so the configuration is clear
             DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
             options.inScreenDensity = metrics.densityDpi;
