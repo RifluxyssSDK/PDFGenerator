@@ -9,7 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import android.pdf.constant.FontStyle;
@@ -19,6 +21,8 @@ import androidx.core.content.res.ResourcesCompat;
 import com.rifluxyss.pdfgenerator.R;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -102,17 +106,18 @@ public class Utils {
      * Compress image file file.
      *
      * @param imageFile     the image file
-     * @param fileName      the file name
      * @param bitmapWidth   the bitmap width
      * @param bitmapHeight  the bitmap height
      * @param compressLevel the compress level
      * @return the file
      */
-    public File compressImageFile(File imageFile, String fileName, int bitmapWidth, int bitmapHeight,int compressLevel) {
+    public File compressImageFile(File imageFile, int bitmapWidth, int bitmapHeight,int compressLevel) {
+
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight).compress( Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
+            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,11 +126,14 @@ public class Utils {
 
     }
 
-    private Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight) throws IOException {
+    private Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight,int compressLevel) throws IOException {
         // First decode with inJustDecodeBounds=true to check dimensions
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
+
         BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+
+        BitmapFactory.Options optionsImage = new BitmapFactory.Options();
 
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
@@ -147,11 +155,11 @@ public class Utils {
         } else if (orientation == 8) {
             matrix.postRotate(270);
         }
-        scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-        return scaledBitmap;
+        return Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+
     }
 
-    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -171,4 +179,36 @@ public class Utils {
 
         return inSampleSize;
     }
+
+    //decodes image and scales it to reduce memory consumption
+    public Bitmap decodeFile(File decodeFile){
+        try {
+            //decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            FileInputStream stream1=new FileInputStream(decodeFile);
+            BitmapFactory.decodeStream(stream1,null,o);
+            stream1.close();
+            //Find the correct scale value. It should be the power of 2.
+            final int REQUIRED_SIZE = 1024;
+            int width_tmp=o.outWidth, height_tmp=o.outHeight;
+            int scale=1;
+            while (width_tmp / 2 >= REQUIRED_SIZE && height_tmp / 2 >= REQUIRED_SIZE) {
+                width_tmp /= 2;
+                height_tmp /= 2;
+                scale *= 2;
+            }
+            //decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize=scale;
+            FileInputStream stream2=new FileInputStream(decodeFile);
+            Bitmap bitmap=BitmapFactory.decodeStream(stream2, null, o2);
+            stream2.close();
+            return bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

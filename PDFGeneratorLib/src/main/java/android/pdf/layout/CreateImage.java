@@ -1,11 +1,16 @@
 package android.pdf.layout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Environment;
 import android.pdf.element.Image;
 import android.pdf.utility.Utils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -39,31 +44,44 @@ public class CreateImage {
 
             ImageView imageView = new ImageView(context);
 
-            if (image.isCompressImage()) {
+            /*if (image.isCompressImage()) {*/
 
-                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
-                if (!imageFile.exists()) { imageFile.mkdirs(); }
 
-                String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
-                File imageResourceFile = new File(imageFile,fileName + Utils.fileExtension);
-
-                //Convert bitmap to byte array
-                image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile)); // YOU can also save it in JPEG
-
-                File compressImageFile = new Utils().compressImageFile(imageResourceFile,fileName,image.getImageWidth(),image.getImageHeight(),image.getCompressLevel());
-
-                BitmapFactory.Options optionsImage = new BitmapFactory.Options();
-                // explicitly state everything so the configuration is clear
-                optionsImage.inPreferredConfig = Bitmap.Config.RGB_565;
-
-                imageView.setImageBitmap(BitmapFactory.decodeStream(new FileInputStream(compressImageFile),null,optionsImage));
-
-                if (imageResourceFile.exists()) { imageResourceFile.delete(); }
-
-            } else {
+            /*} else {
 
                 imageView.setImageBitmap(image.getImage());
+            }*/
+
+            File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
+            if (!imageFile.exists()) {
+                imageFile.mkdirs();
             }
+
+            String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+            File imageResourceFile = new File(imageFile, fileName + Utils.fileExtension);
+
+            // YOU can also save it in WEBP
+            image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
+
+            File compressImageFile = new Utils().compressImageFile(imageResourceFile, image.getImageWidth(), image.getImageHeight(), image.getCompressLevel());
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            // explicitly state everything so the configuration is clear
+            DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
+            options.inScreenDensity = metrics.densityDpi;
+            options.inTargetDensity = metrics.densityDpi;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                options.inDensity = DisplayMetrics.DENSITY_DEVICE_STABLE;
+            }
+
+            Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(compressImageFile), null, options);
+
+            if (imageResourceFile.exists()) { imageResourceFile.delete(); }
+            if (imageFile.isDirectory()) { imageFile.delete(); }
+
+
+            imageView.setImageBitmap(bm);
 
             imageView.setMinimumWidth(image.getImageWidth());
 
