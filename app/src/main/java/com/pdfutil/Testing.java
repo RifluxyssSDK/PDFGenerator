@@ -62,7 +62,7 @@ public class Testing {
 
         document.add(new Paragraph()
                 .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
-                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
                 .setBackgroundColor(Color.GRAY).setPadding(10)
         );
 

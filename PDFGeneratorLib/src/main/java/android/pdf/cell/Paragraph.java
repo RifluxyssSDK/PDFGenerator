@@ -15,15 +15,6 @@ import java.util.ArrayList;
 public class Paragraph extends Cell {
 
     /**
-     * The Row span.
-     */
-    int rowSpan;
-    /**
-     * The Col span.
-     */
-    int colSpan;
-
-    /**
      * The Margin left.
      */
     int marginLeft;
@@ -90,28 +81,6 @@ public class Paragraph extends Cell {
     @Override
     public byte getCellType() {
         return ElementType.PARAGRAPH;
-    }
-
-    /**
-     * Sets row span.
-     *
-     * @param rowSpan the row span
-     * @return the row span
-     */
-    public Paragraph setRowSpan(int rowSpan) {
-        this.rowSpan = rowSpan;
-        return this;
-    }
-
-    /**
-     * Sets col span.
-     *
-     * @param colSpan the col span
-     * @return the col span
-     */
-    public Paragraph setColSpan(int colSpan) {
-        this.colSpan = colSpan;
-        return this;
     }
 
     /**
@@ -300,24 +269,6 @@ public class Paragraph extends Cell {
     public Paragraph add(Element element) {
         elements.add(element);
         return this;
-    }
-
-    /**
-     * Gets row span.
-     *
-     * @return the row span
-     */
-    public int getRowSpan() {
-        return rowSpan;
-    }
-
-    /**
-     * Gets col span.
-     *
-     * @return the col span
-     */
-    public int getColSpan() {
-        return colSpan;
     }
 
     /**

@@ -48,6 +48,7 @@ public class CreateStatic {
         }
 
         LinearLayout linearLayout = new LinearLayout(context);
+
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         float singleColWeight = (float) pageSize.pageWidth / columnWeight;
@@ -56,7 +57,7 @@ public class CreateStatic {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
 
-                linearLayout.addView(new CreateParagraph().create(context, singleColWeight, ((Paragraph) cell).setRowSpan(1).setColSpan(columnWeight), columnWeight));
+                linearLayout.addView(new CreateParagraph().create(context, singleColWeight, ((Paragraph) cell), columnWeight));
 
             }
         }

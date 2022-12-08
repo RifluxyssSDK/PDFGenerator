@@ -89,7 +89,7 @@ public class CreateParagraph {
         GridLayout gridLayout = new GridLayout(context);
         gridLayout.setColumnCount(columnWeight);
         gridLayout.setPadding(paragraph.getPaddingLeft(), paragraph.getPaddingTop(), paragraph.getPaddingRight(), paragraph.getPaddingBottom());
-        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, paragraph.getRowSpan(), paragraph.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, paragraph.getColSpan(), paragraph.getColSpan()));
+        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, 1, 1), GridLayout.spec(GridLayout.UNDEFINED, columnWeight, columnWeight));
 
         if (paragraph.isBorder()) {
 
@@ -118,7 +118,7 @@ public class CreateParagraph {
      */
     private float initCalc(float singleColWeight, Paragraph paragraph, int columnWeight) {
 
-        double minMaxWidth = singleColWeight * paragraph.getColSpan();
+        double minMaxWidth = singleColWeight * columnWeight;
         int marginWidth = paragraph.getMarginLeft() + paragraph.getMarginRight();
         int paddingWidth = paragraph.getPaddingLeft() + paragraph.getPaddingRight();
         double contentWidth = minMaxWidth - (marginWidth + paddingWidth);

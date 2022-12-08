@@ -76,7 +76,7 @@ public class CreateContainer {
 
             if (cell.getCellType() == ElementType.PARAGRAPH) {
 
-                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell).setRowSpan(1).setColSpan(document.getColumnWeight()), document.getColumnWeight()));
+                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell), document.getColumnWeight()));
 
             }
 
