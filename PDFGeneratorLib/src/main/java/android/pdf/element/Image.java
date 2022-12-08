@@ -100,6 +100,11 @@ public class Image extends Element {
     int compressLevel;
 
     /**
+     * The Config.
+     */
+    Bitmap.Config config;
+
+    /**
      * Instantiates a new Image.
      *
      * @param rowSpan It represents the number of rows to span.
@@ -569,6 +574,7 @@ public class Image extends Element {
      * Sets compress image.
      *
      * @param compressImage the compress image
+     * @return the compress image
      */
     public Image setCompressImage(boolean compressImage) {
         this.compressImage = compressImage;
@@ -588,9 +594,30 @@ public class Image extends Element {
      * Sets compress level.
      *
      * @param compressLevel the compress level
+     * @return the compress level
      */
     public Image setCompressLevel(int compressLevel) {
         this.compressLevel = compressLevel;
         return this;
+    }
+
+    /**
+     * Sets config.
+     *
+     * @param config the config
+     * @return the config
+     */
+    public Image setConfig(Bitmap.Config config) {
+        this.config = config;
+        return this;
+    }
+
+    /**
+     * Gets config.
+     *
+     * @return the config
+     */
+    public Bitmap.Config getConfig() {
+        return config;
     }
 }

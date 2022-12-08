@@ -111,12 +111,12 @@ public class Utils {
      * @param compressLevel the compress level
      * @return the file
      */
-    public File compressImageFile(File imageFile, int bitmapWidth, int bitmapHeight,int compressLevel) {
+    public File compressImageFile(Context context,File imageFile, int bitmapWidth, int bitmapHeight,int compressLevel) {
 
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
+            decodeSampledBitmapFromFile(context,imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,7 +126,7 @@ public class Utils {
 
     }
 
-    private Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight,int compressLevel) throws IOException {
+    private Bitmap decodeSampledBitmapFromFile(Context context, File imageFile, int reqWidth, int reqHeight,int compressLevel) throws IOException {
         // First decode with inJustDecodeBounds=true to check dimensions
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -140,6 +140,12 @@ public class Utils {
 
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
+
+        // explicitly state everything so the configuration is clear
+        DisplayMetrics metrics = context.getApplicationContext().getResources().getDisplayMetrics();
+        options.inScreenDensity = metrics.densityDpi;
+        options.inTargetDensity = metrics.densityDpi;
+        options.inDensity = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ? DisplayMetrics.DENSITY_DEVICE_STABLE : DisplayMetrics.DENSITY_MEDIUM;
 
         Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
 
@@ -178,5 +184,20 @@ public class Utils {
         }
 
         return inSampleSize;
+    }
+
+    public int decodeSampleSize(BitmapFactory.Options options) {
+
+        // The new size we want to scale to
+        final int REQUIRED_WIDTH = 1000;
+        final int REQUIRED_HEIGHT = 500;
+        // Find the correct scale value. It should be the power of 2.
+        int scale = 1;
+        while (options.outWidth / scale / 2 >= REQUIRED_WIDTH
+                && options.outHeight / scale / 2 >= REQUIRED_HEIGHT) {
+            scale *= 2;
+        }
+
+        return scale;
     }
 }
