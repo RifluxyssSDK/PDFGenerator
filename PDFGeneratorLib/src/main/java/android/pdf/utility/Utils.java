@@ -146,7 +146,6 @@ public class Utils {
         options.inDensity = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ? DisplayMetrics.DENSITY_DEVICE_STABLE : DisplayMetrics.DENSITY_MEDIUM;
 
         Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-        scaledBitmap.setConfig(image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565);
 
         //check the rotation of the image and display it properly
         ExifInterface exif;
