@@ -9,10 +9,19 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
+/**
+ * The type Create static.
+ */
 public class CreateStatic {
 
     private final Instance instance = Instance.getInstance();
 
+    /**
+     * Create view.
+     *
+     * @param cells the cells
+     * @return the view
+     */
     public View create(ArrayList<Cell> cells) {
 
         LinearLayout linearLayout = new LinearLayout(instance.getContext());

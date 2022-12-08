@@ -12,11 +12,20 @@ import android.pdf.utility.Utils;
 import android.view.View;
 import android.widget.GridLayout;
 
+/**
+ * The type Create paragraph.
+ */
 public class CreateParagraph {
 
     private final Instance instance = Instance.getInstance();
     private final GridLayout gridLayout = new GridLayout(instance.getContext());
 
+    /**
+     * Create view.
+     *
+     * @param paragraph the paragraph
+     * @return the view
+     */
     public View create(Paragraph paragraph) {
 
         float width = calculateParagraphWidth(paragraph);

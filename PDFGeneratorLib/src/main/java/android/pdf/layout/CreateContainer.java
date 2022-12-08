@@ -18,6 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Create container.
+ */
 public class CreateContainer {
 
     private final Instance instance = Instance.getInstance();
@@ -29,12 +32,23 @@ public class CreateContainer {
     private final View footer;
     private View pageCounterView;
 
+    /**
+     * Instantiates a new Create container.
+     *
+     * @param header the header
+     * @param footer the footer
+     */
     public CreateContainer(View header, View footer) {
         this.header = header;
         this.footer = footer;
         this.pageCounterView = createPageCounterView(1);
     }
 
+    /**
+     * Create create container.
+     *
+     * @return the create container
+     */
     public CreateContainer create() {
 
         LinearLayout container = new LinearLayout(instance.getContext());
@@ -150,11 +164,22 @@ public class CreateContainer {
                 new CreatePageCount().create(pageCount);
     }
 
+    /**
+     * Finish.
+     *
+     * @param servicePdfFile the service pdf file
+     * @throws IOException the io exception
+     */
     public void finish(File servicePdfFile) throws IOException {
         pdfDocument.writeTo(new FileOutputStream(servicePdfFile));
         pdfDocument.close();
     }
 
+    /**
+     * Gets page count.
+     *
+     * @return the page count
+     */
     public int getPageCount() {
         return pdfDocument.getPages().size();
     }

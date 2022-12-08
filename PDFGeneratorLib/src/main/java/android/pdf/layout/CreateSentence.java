@@ -11,11 +11,21 @@ import android.pdf.utility.Utils;
 import android.view.View;
 import android.widget.GridLayout;
 
+/**
+ * The type Create sentence.
+ */
 public class CreateSentence {
 
     private final Instance instance = Instance.getInstance();
     private final GridLayout gridLayout = new GridLayout(instance.getContext());
 
+    /**
+     * Create view.
+     *
+     * @param sentenceWidth the sentence width
+     * @param sentence      the sentence
+     * @return the view
+     */
     public View create(float sentenceWidth, Sentence sentence) {
 
         float width = calculateSentenceWidth(sentenceWidth, sentence);

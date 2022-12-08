@@ -9,17 +9,26 @@ import android.pdf.layout.CreateStatic;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The type Pdf generate factory.
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class PdfGenerateFactory {
 
     private Instance instance = Instance.getInstance();
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         initCustomDimension();
         initPageSize();
         initPageCount();
     }
 
+    /**
+     * Terminate.
+     */
     public void terminate() {
         initDefaultDimension();
         terminateInstance();
@@ -47,6 +56,12 @@ public class PdfGenerateFactory {
         }
     }
 
+    /**
+     * Finish.
+     *
+     * @param file the file
+     * @throws IOException the io exception
+     */
     public void finish(File file) throws IOException {
         new CreateContainer(
                 new CreateStatic().create(instance.getHeaderCells()),

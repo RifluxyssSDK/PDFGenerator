@@ -10,6 +10,9 @@ import android.pdf.io.PageCount;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The type Document.
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Document {
 
@@ -17,39 +20,84 @@ public class Document {
 
     private final PdfGenerateFactory pdfGenerateFactory = new PdfGenerateFactory();
 
+    /**
+     * Instantiates a new Document.
+     *
+     * @param pageSize the page size
+     */
     public Document(PageSize pageSize) {
         instance.setPageSize(pageSize);
     }
 
+    /**
+     * Instantiates a new Document.
+     */
     public Document() {
         instance.setPageSize(PageSize.DEFAULT);
     }
 
+    /**
+     * Init document.
+     *
+     * @param context the context
+     * @return the document
+     */
     public Document init(Context context) {
         instance.setContext(context);
         return this;
     }
 
+    /**
+     * Add.
+     *
+     * @param DocType the doc type
+     * @param cell    the cell
+     */
     public void add(byte DocType, Cell cell) {
         addElement(DocType, cell);
     }
 
+    /**
+     * Add.
+     *
+     * @param cell the cell
+     */
     public void add(Cell cell) {
         addElement(DocType.NORMAL, cell);
     }
 
+    /**
+     * Sets padding.
+     *
+     * @param padding the padding
+     */
     public void setPadding(int padding) {
         setPadding(padding, padding, padding, padding);
     }
 
+    /**
+     * Sets page count.
+     *
+     * @param pageCount the page count
+     */
     public void setPageCount(PageCount pageCount) {
         instance.setPageCount(pageCount);
     }
 
+    /**
+     * Open.
+     *
+     * @param columnWeight the column weight
+     */
     public void open(int columnWeight) {
         instance.setColumnWeight(columnWeight);
     }
 
+    /**
+     * Sets background image.
+     *
+     * @param bgImage the bg image
+     */
     public void setBackgroundImage(BgImage bgImage) {
         instance.setBgImage(bgImage);
     }
@@ -64,6 +112,14 @@ public class Document {
         }
     }
 
+    /**
+     * Sets padding.
+     *
+     * @param paddingLeft   the padding left
+     * @param paddingTop    the padding top
+     * @param paddingRight  the padding right
+     * @param paddingBottom the padding bottom
+     */
     public void setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
         instance.setPaddingLeft(paddingLeft);
         instance.setPaddingTop(paddingTop);
@@ -71,6 +127,9 @@ public class Document {
         instance.setPaddingBottom(paddingBottom);
     }
 
+    /**
+     * Close.
+     */
     public void close() {
         if (authorization()) {
             pdfGenerateFactory.initialize();
@@ -87,6 +146,12 @@ public class Document {
         }
     }
 
+    /**
+     * Finish.
+     *
+     * @param file the file
+     * @throws IOException the io exception
+     */
     public void finish(File file) throws IOException {
         pdfGenerateFactory.finish(file);
         pdfGenerateFactory.terminate();

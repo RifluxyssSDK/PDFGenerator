@@ -14,9 +14,20 @@ import com.rifluxyss.pdfgenerator.R;
 
 import java.util.List;
 
+/**
+ * The type Utils.
+ */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Utils {
 
+    /**
+     * Create border drawable.
+     *
+     * @param backgroundColor the background color
+     * @param borderColor     the border color
+     * @param width           the width
+     * @return the drawable
+     */
     public static Drawable createBorder(int backgroundColor, int borderColor, int width) {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setStroke(width, borderColor);
@@ -24,6 +35,12 @@ public class Utils {
         return new LayerDrawable(new Drawable[]{gradientDrawable});
     }
 
+    /**
+     * Create get font typeface.
+     *
+     * @param typeFace the type face
+     * @return the typeface
+     */
     public static Typeface createGetFont(int typeFace) {
         switch (typeFace) {
             default:
@@ -43,6 +60,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Gets view height.
+     *
+     * @param views the views
+     * @return the view height
+     */
     public static int getViewHeight(List<View> views) {
         int mHeight = 0;
         for (int i = 0; i < views.size(); i++) {

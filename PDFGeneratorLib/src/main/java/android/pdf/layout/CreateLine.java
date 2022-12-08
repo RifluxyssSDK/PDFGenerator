@@ -6,11 +6,21 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
+/**
+ * The type Create line.
+ */
 public class CreateLine {
 
     private final Instance instance = Instance.getInstance();
     private final LinearLayout lineOuter = new LinearLayout(instance.getContext());
 
+    /**
+     * Create view.
+     *
+     * @param width the width
+     * @param line  the line
+     * @return the view
+     */
     public View create(float width, Line line) {
 
         int actualWidth = calculateActualWidth(width, line);

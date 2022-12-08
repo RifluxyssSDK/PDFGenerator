@@ -6,11 +6,21 @@ import android.pdf.utility.Utils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+/**
+ * The type Create image.
+ */
 public class CreateImage {
 
     private final Instance instance = Instance.getInstance();
     private final ImageView imageView = new ImageView(instance.getContext());
 
+    /**
+     * Create image view.
+     *
+     * @param width the width
+     * @param image the image
+     * @return the image view
+     */
     public ImageView create(float width, Image image) {
 
         authorization(image);

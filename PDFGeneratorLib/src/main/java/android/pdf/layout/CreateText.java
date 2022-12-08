@@ -7,11 +7,21 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+/**
+ * The type Create text.
+ */
 public class CreateText {
 
     private final Instance instance = Instance.getInstance();
     private final TextView textView = new TextView(instance.getContext());
 
+    /**
+     * Create view.
+     *
+     * @param width the width
+     * @param text  the text
+     * @return the view
+     */
     public View create(float width, Text text) {
 
         int actualWidth = calculateActualWidth(width, text);

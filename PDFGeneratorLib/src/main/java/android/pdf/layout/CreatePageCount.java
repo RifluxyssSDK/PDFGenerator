@@ -8,11 +8,20 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * The type Create page count.
+ */
 public class CreatePageCount {
 
     private final Instance instance = Instance.getInstance();
     private final TextView textView = new TextView(instance.getContext());
 
+    /**
+     * Create view.
+     *
+     * @param currentPageCount the current page count
+     * @return the view
+     */
     public View create(int currentPageCount) {
 
         PageCount pageCount = instance.getPageCount();

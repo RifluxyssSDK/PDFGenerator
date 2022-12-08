@@ -8,10 +8,23 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Create area break.
+ */
 public class CreateAreaBreak {
 
     private final Instance instance = Instance.getInstance();
 
+    /**
+     * Create view.
+     *
+     * @param header          the header
+     * @param footer          the footer
+     * @param gridLayout      the grid layout
+     * @param pageCounterView the page counter view
+     * @param pageHeight      the page height
+     * @return the view
+     */
     public View create(View header, View footer, GridLayout gridLayout, View pageCounterView, int pageHeight) {
 
         ArrayList<View> views = new ArrayList<>();

@@ -39,8 +39,6 @@ public class Testing {
 
             this.init();
 
-            this.init2();
-
             Toast.makeText(context, "Document Created", Toast.LENGTH_SHORT).show();
 
         } catch (IOException error) {
@@ -48,37 +46,6 @@ public class Testing {
             Toast.makeText(context, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
         }
-    }
-
-    private void init2() throws IOException {
-
-        Document document = new Document().init(context);
-
-        document.open(10);
-
-        document.setPadding(10);
-
-        createDocument_Two(document);
-
-        document.close();
-
-        document.finish(new File(path, "Document_Two.pdf"));
-
-    }
-
-    private void createDocument_Two(Document document) {
-
-        document.add(DocType.HEADER, new Paragraph()
-                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
-                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
-        );
-
-        document.add(DocType.FOOTER, new Paragraph()
-                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
-                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
-        );
-
-        document.add(new Paragraph().add(new Text(1, 10, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10)));
     }
 
     public void init() throws IOException {
