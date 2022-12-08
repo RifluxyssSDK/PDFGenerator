@@ -73,12 +73,10 @@ public class Testing {
 
         document.setPageCount(new PageCount("Page "," / "));
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 1; i <= 13; i++) {
             document.add(new Paragraph()
-                    .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
-                    .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
-                    .add(new Text(1, 7, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
-                    .add(new Text(1, 3, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
+                    .add(new Text(1, 10, i+". Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                    .setBorder(true)
             );
         }
 
