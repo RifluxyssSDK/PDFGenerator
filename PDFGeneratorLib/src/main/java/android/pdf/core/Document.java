@@ -13,7 +13,7 @@ import java.io.IOException;
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Document {
 
-    private final Instance instance = new Instance().getInstance();
+    private final Instance instance = Instance.createInstance();
 
     private final PdfGenerateFactory pdfGenerateFactory = new PdfGenerateFactory();
 

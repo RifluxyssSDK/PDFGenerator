@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Environment;
+import android.pdf.bgImage.BgImage;
+import android.pdf.cell.AreaBreak;
 import android.pdf.cell.Paragraph;
 import android.pdf.constant.DocType;
 import android.pdf.core.Document;
@@ -37,6 +39,8 @@ public class Testing {
 
             this.init();
 
+            this.init2();
+
             Toast.makeText(context, "Document Created", Toast.LENGTH_SHORT).show();
 
         } catch (IOException error) {
@@ -44,6 +48,37 @@ public class Testing {
             Toast.makeText(context, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void init2() throws IOException {
+
+        Document document = new Document().init(context);
+
+        document.open(10);
+
+        document.setPadding(10);
+
+        createDocument_Two(document);
+
+        document.close();
+
+        document.finish(new File(path, "Document_Two.pdf"));
+
+    }
+
+    private void createDocument_Two(Document document) {
+
+        document.add(DocType.HEADER, new Paragraph()
+                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
+                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
+        );
+
+        document.add(DocType.FOOTER, new Paragraph()
+                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
+                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
+        );
+
+        document.add(new Paragraph().add(new Text(1, 10, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10)));
     }
 
     public void init() throws IOException {
@@ -63,17 +98,19 @@ public class Testing {
 
     private void createDocument(Document document) throws IOException {
 
-        document.add(DocType.NORMAL, new Paragraph()
-                .add(new Text(1,10,"HEADER").setGravity(Gravity.CENTER).setPadding(10).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
+        document.add(DocType.HEADER, new Paragraph()
+                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
+                .add(new Text(1,5,"HEADER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
         );
 
         document.add(DocType.FOOTER, new Paragraph()
-                .add(new Text(1,10,"FOOTER").setGravity(Gravity.CENTER).setPadding(10).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
+                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
+                .add(new Text(1,5,"FOOTER").setGravity(Gravity.CENTER).setPadding(5).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
         );
 
         document.setPageCount(new PageCount("Page "," / "));
 
-        for (int i = 1; i <= 13; i++) {
+        for (int i = 1; i <= 100; i++) {
             document.add(new Paragraph()
                     .add(new Text(1, 10, i+". Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
                     .setBorder(true)
@@ -82,10 +119,14 @@ public class Testing {
 
         Sentence sentence = new Sentence(1,5);
         sentence.add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10));
-        sentence.add(new Image(1, 5, decodeStream(R.raw.eleven_pro_knit_argyle_polo)));
-        sentence.setPadding(10);
+        sentence.add(new Image(1, 5, decodeStream(R.raw.eleven_pro_knit_argyle_polo)).setBorder(true).setPadding(4));
+        sentence.setPadding(10).setBorder(true).setBackgroundColor(Color.RED);
 
-        document.add(new Paragraph().add(sentence).add(sentence).setBorder(true));
+
+        document.add(new Paragraph().add(new Image(1, 9, decodeStream(R.raw.eleven_pro_knit_argyle_polo)).setBorder(true).setPadding(4)));
+
+
+        document.add(new Paragraph().add(sentence).add(sentence).setBorder(true).setPadding(10).setBackgroundColor(Color.GRAY));
 
         /*document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eleven_pro_knit_argyle_polo))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.fifteen_women_workwear_b))));

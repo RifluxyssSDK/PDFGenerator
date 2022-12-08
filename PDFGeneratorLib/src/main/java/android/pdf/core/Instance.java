@@ -37,14 +37,12 @@ public class Instance {
 
     private final ArrayList<Cell> footerCells = new ArrayList<>();
 
-
-    public Instance() {
-        if (instance == null) {
-            instance = this;
-        }
+    public static Instance getInstance() {
+        return instance;
     }
 
-    public static Instance getInstance() {
+    public static Instance createInstance() {
+        instance = new Instance();
         return instance;
     }
 
@@ -92,8 +90,9 @@ public class Instance {
         return context;
     }
 
-    public void setContext(Context context) {
+    public Instance setContext(Context context) {
         this.context = context;
+        return this;
     }
 
     public BgImage getBgImage() {

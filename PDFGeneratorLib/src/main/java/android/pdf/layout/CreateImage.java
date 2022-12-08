@@ -2,6 +2,7 @@ package android.pdf.layout;
 
 import android.pdf.core.Instance;
 import android.pdf.element.Image;
+import android.pdf.utility.Utils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
@@ -27,6 +28,18 @@ public class CreateImage {
                 image.getMarginRight(),
                 image.getMarginBottom()
         );
+
+        if (image.isBorder()) {
+            imageView.setBackground(
+                    Utils.createBorder(
+                            image.getBackgroundColor(),
+                            image.getBorderColor(),
+                            image.getBorderWidth()
+                    )
+            );
+        } else {
+            imageView.setBackgroundColor(image.getBackgroundColor());
+        }
 
         imageView.setMaxWidth(actualWidth);
         imageView.setAdjustViewBounds(true);

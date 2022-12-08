@@ -43,18 +43,12 @@ public class Utils {
         }
     }
 
-
     public static int getViewHeight(List<View> views) {
-
         int mHeight = 0;
-
         for (int i = 0; i < views.size(); i++) {
-
             views.get(i).measure(0, 0);
             mHeight += views.get(i).getMeasuredHeight();
-
         }
-
         return mHeight;
     }
 }

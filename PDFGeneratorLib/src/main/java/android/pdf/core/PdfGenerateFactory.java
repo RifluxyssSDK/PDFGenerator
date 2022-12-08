@@ -1,8 +1,8 @@
 package android.pdf.core;
 
+import android.pdf.constant.PageSize;
 import android.pdf.dimension.Dimension;
 import android.pdf.io.PageCount;
-import android.pdf.constant.PageSize;
 import android.pdf.layout.CreateContainer;
 import android.pdf.layout.CreateStatic;
 
@@ -26,8 +26,8 @@ public class PdfGenerateFactory {
     }
 
     private void initPageSize() {
-        instance.getPageSize().calculatePageSize();
-//        pageSize.calculatePageSize();
+        PageSize pageSize = instance.getPageSize();
+        pageSize.calculatePageSize();
     }
 
     private void initCustomDimension() {

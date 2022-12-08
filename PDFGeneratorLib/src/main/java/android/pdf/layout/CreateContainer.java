@@ -32,11 +32,10 @@ public class CreateContainer {
     public CreateContainer(View header, View footer) {
         this.header = header;
         this.footer = footer;
+        this.pageCounterView = createPageCounterView(1);
     }
 
     public CreateContainer create() {
-
-        pageCounterView = createPageCounterView(0);
 
         LinearLayout container = new LinearLayout(instance.getContext());
         container.setOrientation(LinearLayout.VERTICAL);
@@ -159,5 +158,4 @@ public class CreateContainer {
     public int getPageCount() {
         return pdfDocument.getPages().size();
     }
-
 }

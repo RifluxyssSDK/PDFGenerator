@@ -1,6 +1,7 @@
 package android.pdf.element;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.pdf.io.Element;
 import android.widget.ImageView;
 
@@ -98,8 +99,10 @@ public class Image extends Element {
      */
     public Image(int rowSpan, int colSpan, Bitmap image) {
         setImage(image);
+        setBorderWidth(1);
         setRowSpan(rowSpan);
         setColSpan(colSpan);
+        setBorderColor(Color.BLACK);
         setImageWidth(image.getWidth());
         setImageHeight(image.getHeight());
         setScaleType(ImageView.ScaleType.FIT_XY);

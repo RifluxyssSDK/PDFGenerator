@@ -1,7 +1,6 @@
 package android.pdf.layout;
 
 import android.pdf.core.Instance;
-import android.pdf.element.Text;
 import android.pdf.io.PageCount;
 import android.pdf.utility.Utils;
 import android.view.View;
