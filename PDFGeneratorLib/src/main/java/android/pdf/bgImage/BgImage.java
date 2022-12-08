@@ -3,6 +3,8 @@ package android.pdf.bgImage;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.pdf.constant.PageSize;
+import android.pdf.core.Instance;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class BgImage {
@@ -87,24 +89,14 @@ public class BgImage {
     }
 
     /**
-     * @param width  This parameter used to createScaledBitmap for actual document size.
-     * @param height This parameter used to createScaledBitmap for actual document size.
      * @return backgroundImage
      */
-    public Bitmap getImage(int width, int height) {
-        return initBackground(width, height);
-    }
-
-    /**
-     * @param width  This parameter used to createScaledBitmap for actual document size.
-     * @param height This parameter used to createScaledBitmap for actual document size.
-     * @return backgroundImage
-     */
-    private Bitmap initBackground(int width, int height) {
+    public Bitmap getImage() {
+        PageSize pageSize = Instance.getInstance().getPageSize();
         Bitmap bitmap = Bitmap.createBitmap((image.getWidth() + getMarginLeft() + getMarginRight()), (image.getHeight() + getMarginTop() + getMarginBottom()), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
         canvas.drawBitmap(image, getMarginLeft(), getMarginTop(), null);
-        return Bitmap.createScaledBitmap(bitmap, width, height, true);
+        return Bitmap.createScaledBitmap(bitmap, pageSize.getDocumentWidth(), pageSize.getDocumentHeight(), true);
     }
 }

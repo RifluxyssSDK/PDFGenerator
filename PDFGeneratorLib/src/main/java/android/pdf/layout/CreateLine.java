@@ -1,47 +1,53 @@
 package android.pdf.layout;
 
-import android.content.Context;
+import android.pdf.core.Instance;
+import android.pdf.element.Line;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
-import android.pdf.element.Line;
-
-/**
- * The type Create line.
- */
 public class CreateLine {
 
-    /**
-     * Create view.
-     *
-     * @param context         the context
-     * @param singleColWeight the single col weight
-     * @param line            the line
-     * @return the view
-     */
-    public View create(Context context, float singleColWeight, Line line) {
+    private final Instance instance = Instance.getInstance();
+    private final LinearLayout lineOuter = new LinearLayout(instance.getContext());
 
-        double minMaxWidth =  singleColWeight * line.getColSpan();
-        int elementWidth = (int) (minMaxWidth - (line.getMarginRight() + line.getMarginLeft()));
+    public View create(float width, Line line) {
 
-        LinearLayout lineOuter = new LinearLayout(context);
+        int actualWidth = calculateActualWidth(width, line);
+
+        authorization(line);
+
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, line.getRowSpan(), line.getRowSpan()),
                 GridLayout.spec(GridLayout.UNDEFINED, line.getColSpan(), line.getColSpan())
         );
 
-        layoutParams.setMargins(line.getMarginLeft(), line.getMarginTop(), line.getMarginRight(), line.getMarginBottom());
-        lineOuter.setLayoutParams(layoutParams);
+        layoutParams.setMargins(
+                line.getMarginLeft(),
+                line.getMarginTop(),
+                line.getMarginRight(),
+                line.getMarginBottom()
+        );
 
-        View view = new View(context);
-        view.setPadding(line.getPaddingLeft(), line.getPaddingTop(), line.getPaddingRight(), line.getPaddingBottom());
+        View view = new View(instance.getContext());
+        view.setMinimumWidth(actualWidth);
         view.setBackgroundColor(line.getLineColor());
-        view.setMinimumWidth(elementWidth);
+        view.setPadding(line.getPaddingLeft(), line.getPaddingTop(), line.getPaddingRight(), line.getPaddingBottom());
 
-        lineOuter.addView(view, new LinearLayout.LayoutParams(elementWidth, line.getLineStrokeWidth()));
-
+        lineOuter.setLayoutParams(layoutParams);
+        lineOuter.addView(view, new LinearLayout.LayoutParams(actualWidth, line.getLineStrokeWidth()));
         return lineOuter;
+    }
 
+    private void authorization(Line line) {
+        if (line.getColSpan() > instance.getColumnWeight()) {
+            throw new Error("column span mustn't exceed the column count. ( total column : " + instance.getColumnWeight() + ", cell colSpan : " + line.getColSpan() + " )");
+        }
+    }
+
+    private int calculateActualWidth(float width, Line line) {
+        double minMaxWidth = width * line.getColSpan();
+        int marginWidth = line.getMarginLeft() + line.getMarginRight();
+        return (int) minMaxWidth - marginWidth;
     }
 }

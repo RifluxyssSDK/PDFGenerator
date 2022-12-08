@@ -1,6 +1,6 @@
 package android.pdf.cell;
 
-import android.pdf.abstract_io.Cell;
+import android.pdf.io.Cell;
 import android.pdf.constant.ElementType;
 
 /**

@@ -1,72 +1,55 @@
 package android.pdf.layout;
 
-import android.content.Context;
-import android.view.View;
+import android.pdf.core.Instance;
+import android.pdf.element.Image;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import android.pdf.element.Image;
-
-/**
- * The type Create image.
- */
 public class CreateImage {
 
-    /**
-     * Create view.
-     *
-     * @param context         the context
-     * @param singleColWeight the single col weight
-     * @param image           the image
-     * @return the view
-     */
-    public View create(Context context, float singleColWeight, Image image) {
+    private final Instance instance = Instance.getInstance();
+    private final ImageView imageView = new ImageView(instance.getContext());
 
-        double minMaxWidth = singleColWeight * image.getColSpan();
-        int elementWidth = (int) (minMaxWidth - (image.getMarginRight() + image.getMarginLeft()));
+    public ImageView create(float width, Image image) {
 
-        if (image.getImage() != null) {
+        authorization(image);
 
-            ImageView imageView = new ImageView(context);
+        int actualWidth = calculateActualWidth(width, image);
 
-            imageView.setImageBitmap(image.getImage());
+        GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
+                GridLayout.spec(GridLayout.UNDEFINED, image.getRowSpan(), image.getRowSpan()),
+                GridLayout.spec(GridLayout.UNDEFINED, image.getColSpan(), image.getColSpan())
+        );
 
-            imageView.setMinimumWidth(image.getImageWidth());
+        layoutParams.setMargins(
+                image.getMarginLeft(),
+                image.getMarginTop(),
+                image.getMarginRight(),
+                image.getMarginBottom()
+        );
 
-            imageView.setMaxWidth(elementWidth);
-
-            imageView.setAdjustViewBounds(true);
-
-            imageView.setScaleType(image.getScaleType());
-
-            imageView.setBackgroundColor(image.getBackgroundColor());
-
-            imageView.setPadding(image.getPaddingLeft(), image.getPaddingTop(), image.getPaddingRight(), image.getPaddingBottom());
-
-            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
-                    GridLayout.spec(GridLayout.UNDEFINED, image.getRowSpan(), image.getRowSpan()),
-                    GridLayout.spec(GridLayout.UNDEFINED, image.getColSpan(), image.getColSpan())
-            );
-
-            layoutParams.setMargins(image.getMarginLeft(), image.getMarginTop(), image.getMarginRight(), image.getMarginBottom());
-
-            imageView.setLayoutParams(layoutParams);
-
-            return imageView;
-
-        } else {
-
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.setMinimumWidth(elementWidth);
-
-            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, image.getRowSpan(), image.getRowSpan()), GridLayout.spec(GridLayout.UNDEFINED, image.getColSpan(), image.getColSpan()));
-            layoutParams.setMargins(image.getMarginLeft(), image.getMarginTop(), image.getMarginRight(), image.getMarginBottom());
-            linearLayout.setLayoutParams(layoutParams);
-
-            return linearLayout;
-        }
-
+        imageView.setMaxWidth(actualWidth);
+        imageView.setAdjustViewBounds(true);
+        imageView.setLayoutParams(layoutParams);
+        imageView.setImageBitmap(image.getImage());
+        imageView.setScaleType(image.getScaleType());
+        imageView.setMinimumWidth(image.getImageWidth());
+        imageView.setBackgroundColor(image.getBackgroundColor());
+        imageView.setPadding(image.getPaddingLeft(), image.getPaddingTop(), image.getPaddingRight(), image.getPaddingBottom());
+        return imageView;
     }
 
+    private void authorization(Image image) {
+        if (image.getImage() == null) {
+            throw new Error("Given bitmap is Null");
+        } else if (image.getColSpan() > instance.getColumnWeight()) {
+            throw new Error("column span mustn't exceed the column count. ( total column : " + instance.getColumnWeight() + ", cell colSpan : " + image.getColSpan() + " )");
+        }
+    }
+
+    private int calculateActualWidth(float width, Image image) {
+        double minMaxWidth = width * image.getColSpan();
+        int marginWidth = image.getMarginLeft() + image.getMarginRight();
+        return (int) minMaxWidth - marginWidth;
+    }
 }

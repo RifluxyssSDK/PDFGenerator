@@ -1,4 +1,4 @@
-package android.pdf.abstract_io;
+package android.pdf.io;
 
 import android.pdf.cell.Paragraph;
 

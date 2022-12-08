@@ -1,89 +1,64 @@
 package android.pdf.layout;
 
-import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
-import android.pdf.abstract_io.Cell;
+import android.pdf.cell.Paragraph;
+import android.pdf.constant.ElementType;
+import android.pdf.constant.PageSize;
+import android.pdf.core.Instance;
+import android.pdf.element.Text;
+import android.pdf.io.Cell;
+import android.pdf.utility.Utils;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-
-import android.pdf.core.Document;
-import android.pdf.utility.Utils;
-import android.pdf.cell.Paragraph;
-import android.pdf.element.Text;
-import android.pdf.constant.ElementType;
-import android.pdf.constant.PageSize;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * The type Create container.
- */
 public class CreateContainer {
+
+    private final Instance instance = Instance.getInstance();
+    private final PageSize pageSize = instance.getPageSize();
+
+    private final PdfDocument pdfDocument = new PdfDocument();
 
     private final View header;
     private final View footer;
-
-    private final Document document;
-    private final PdfDocument pdfDocument = new PdfDocument();
-
-    private PageSize pageSize;
     private View pageCounterView;
 
-    /**
-     * Instantiates a new Create container.
-     *
-     * @param document the document
-     * @param header   the header
-     * @param footer   the footer
-     */
-    public CreateContainer(Document document, View header, View footer) {
+    public CreateContainer(View header, View footer) {
         this.header = header;
         this.footer = footer;
-        this.document = document;
     }
 
-    /**
-     * Create create container.
-     *
-     * @return the create container
-     */
     public CreateContainer create() {
 
-        pageSize = document.getPageSize();
-
-        float singleColWeight = (float) pageSize.pageWidth / document.getColumnWeight();
         pageCounterView = createPageCounterView(0);
 
-        LinearLayout container = new LinearLayout(document.getContext());
+        LinearLayout container = new LinearLayout(instance.getContext());
         container.setOrientation(LinearLayout.VERTICAL);
-        container.setPadding(document.getPaddingLeft(), document.getPaddingTop(), document.getPaddingRight(), document.getPaddingBottom());
+        container.setPadding(instance.getPaddingLeft(), instance.getPaddingTop(), instance.getPaddingRight(), instance.getPaddingBottom());
 
         container.addView(header);
         container.addView(footer);
         container.addView(pageCounterView);
 
-        GridLayout gridLayout = new GridLayout(document.getContext());
-        gridLayout.setColumnCount(document.getColumnWeight());
+        GridLayout gridLayout = new GridLayout(instance.getContext());
+        gridLayout.setColumnCount(instance.getColumnWeight());
+        gridStretchable(gridLayout);
 
-        gridStretchable(gridLayout, singleColWeight);
+        for (Cell cell : instance.getCells()) {
 
-        for (Cell cell : document.getCells()) {
-
-            if (cell.getCellType() == ElementType.PARAGRAPH) {
-
-                gridLayout.addView(new CreateParagraph().create(document.getContext(), singleColWeight, ((Paragraph) cell), document.getColumnWeight()));
-
-            }
-
-            if (cell.getCellType() == ElementType.AREA_BREAK) {
-
-                createPageBreakView(gridLayout);
-
+            switch (cell.getCellType()) {
+                case ElementType.PARAGRAPH:
+                    gridLayout.addView(new CreateParagraph().create(((Paragraph) cell)));
+                    break;
+                case ElementType.AREA_BREAK:
+                    createPageBreakView(gridLayout);
+                    break;
             }
 
             ArrayList<View> mHeight = new ArrayList<>();
@@ -92,7 +67,7 @@ public class CreateContainer {
             mHeight.add(gridLayout);
             mHeight.add(pageCounterView);
 
-            if (Utils.getViewHeight(mHeight) > pageSize.pageHeight) {
+            if (Utils.getViewHeight(mHeight) > pageSize.getPageHeight()) {
 
                 View view = overlapping(gridLayout);
 
@@ -106,7 +81,7 @@ public class CreateContainer {
 
                 container.removeViews(1, (container.getChildCount() - 3));
 
-                gridStretchable(gridLayout, singleColWeight);
+                gridStretchable(gridLayout);
 
                 gridLayout.addView(view);
             }
@@ -121,92 +96,66 @@ public class CreateContainer {
         return this;
     }
 
-    /**
-     * @param gridLayout      It used to adding the overlap View.
-     * @param singleColWeight It used basic Alignment.
-     */
-    private void gridStretchable(GridLayout gridLayout, float singleColWeight) {
-        gridLayout.addView(new CreateText().create(document.getContext(), singleColWeight, new Text(1, document.getColumnWeight(), "").setTextSize(1)));
+    private void gridStretchable(GridLayout gridLayout) {
+        gridLayout.addView(new CreateText().create(pageSize.getPageWidth(), new Text(1, 1, "").setTextSize(1)));
     }
 
-    /**
-     * @param gridLayout It used to adding the overlap View.
-     * @return overlap View.
-     */
     private View overlapping(GridLayout gridLayout) {
-
         View view = gridLayout.getChildAt(gridLayout.getChildCount() - 1);
         gridLayout.removeViewAt(gridLayout.getChildCount() - 1);
         return view;
-
     }
 
-    /**
-     * @param gridLayout It used to adding the overlap View.
-     */
     private void createPageBreakView(GridLayout gridLayout) {
-        gridLayout.addView(new CreateAreaBreak().create(document.getContext(), 1, document.getColumnWeight(), header, footer, gridLayout, pageCounterView, pageSize.pageHeight));
+        gridLayout.addView(
+                new CreateAreaBreak().create(
+                        header,
+                        footer,
+                        gridLayout,
+                        pageCounterView,
+                        pageSize.getPageHeight()
+                )
+        );
     }
 
-    /**
-     * @param view This method called when page Completed & Create document.
-     */
     private void createNewPage(LinearLayout view) {
 
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageSize.documentWidth, pageSize.documentHeight, (pdfDocument.getPages().size() + 1)).create();
-        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
-        Canvas canvas = page.getCanvas();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
+                pageSize.getDocumentWidth(),
+                pageSize.getDocumentHeight(),
+                pdfDocument.getPages().size()
+        ).create();
 
-        if (document.getBgImage() != null && document.getBgImage().getImage(pageSize.documentWidth, pageSize.documentHeight) != null) {
-            canvas.drawBitmap(document.getBgImage().getImage(pageSize.documentWidth, pageSize.documentHeight), 0, 0, new Paint());
+        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+
+        if (instance.getBgImage() != null && instance.getBgImage().getImage() != null) {
+            page.getCanvas().drawBitmap(instance.getBgImage().getImage(), 0, 0, new Paint());
         }
 
-        if (document.getPageCount() != null) {
-            pageCounterView = createPageCounterView((pdfDocument.getPages().size()+1));
+        if (instance.getPageCount() != null) {
+            pageCounterView = createPageCounterView((pdfDocument.getPages().size() + 1));
             view.removeViewAt((view.getChildCount() - 1));
             view.addView(pageCounterView);
         }
 
         view.measure(0, 0);
-        view.layout(0, 0, pageSize.documentWidth, pageSize.documentHeight);
-        view.draw(canvas);
+        view.layout(0, 0, pageSize.getDocumentWidth(), pageSize.getDocumentHeight());
+        view.draw(page.getCanvas());
 
         pdfDocument.finishPage(page);
     }
 
-    /**
-     * @param pageCount {@link CreatePageCount} Used to create Page No
-     * @return View
-     */
     private View createPageCounterView(int pageCount) {
-
-        if (document.getPageCount() == null) {
-
-            return new LinearLayout(document.getContext());
-
-        } else {
-
-            return new CreatePageCount().create(document.getContext(), pageSize.pageWidth, pageCount, document.getPageCount());
-
-        }
+        return (instance.getPageCount() == null) ?
+                new View(instance.getContext()) :
+                new CreatePageCount().create(pageCount);
     }
 
-    /**
-     * Finish.
-     *
-     * @param servicePdfFile the service pdf file
-     * @throws IOException the io exception
-     */
     public void finish(File servicePdfFile) throws IOException {
         pdfDocument.writeTo(new FileOutputStream(servicePdfFile));
         pdfDocument.close();
     }
 
-    /**
-     * Gets page count.
-     *
-     * @return the page count
-     */
     public int getPageCount() {
         return pdfDocument.getPages().size();
     }

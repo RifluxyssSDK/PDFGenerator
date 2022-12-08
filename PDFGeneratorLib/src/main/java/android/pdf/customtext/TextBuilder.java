@@ -14,12 +14,6 @@ import java.util.ArrayList;
 public class TextBuilder {
 
     /**
-     * It used to Context of the parent {@link Context}.
-     */
-    private final Context context;
-
-
-    /**
      * Initialize the empty string of the variable {@code message}
      */
     private String message = "";
@@ -28,15 +22,6 @@ public class TextBuilder {
      * Initialize the empty Arraylist of the variable {@code textBuilderList}
      */
     private final ArrayList<TextBuilderModel> textBuilderList = new ArrayList<>();
-
-    /**
-     * Instantiates a new Text builder.
-     *
-     * @param context the context
-     */
-    public TextBuilder(Context context) {
-        this.context = context;
-    }
 
     /**
      * Append.
@@ -62,7 +47,7 @@ public class TextBuilder {
         for (int i = 0; i < textBuilderList.size(); i++) {
 
             TextBuilderModel textBuilderModel = textBuilderList.get(i);
-            spannable.setSpan(new CustomTypefaceSpan(textBuilderModel.getText(), Utils.createGetFont(context, textBuilderModel.getFontStyle())), stringBuilder.length(), (stringBuilder.length() + textBuilderModel.getLength()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new CustomTypefaceSpan(textBuilderModel.getText(), Utils.createGetFont(textBuilderModel.getFontStyle())), stringBuilder.length(), (stringBuilder.length() + textBuilderModel.getLength()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             stringBuilder.append(textBuilderModel.getText());
         }
 

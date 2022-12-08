@@ -1,57 +1,30 @@
 package android.pdf.dimension;
 
-import android.content.Context;
+import android.pdf.core.Instance;
 import android.util.DisplayMetrics;
 
-/**
- * The Dimension Class Used To Create Document As A Fixed Size.
- */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Dimension {
 
-    private final Context context;
-    private final DisplayMetrics displayMetrics;
+    private final Instance instance = Instance.getInstance();
 
-    /**
-     * Instantiates a new Dimension.
-     *
-     * @param context the Context
-     */
-    public Dimension(Context context) {
-
-        this.context = context;
-
-        displayMetrics = context.getResources().getDisplayMetrics();
-
-        this.init();
+    public void saveDefaultDisplayMetrics() {
+        instance.setDisplayMetrics(instance.getContext().getResources().getDisplayMetrics());
     }
 
-    /**
-     * Change to custom {@link DisplayMetrics}
-     */
-    private void init() {
-
-        DisplayMetrics metrics = new DisplayMetrics();
-
-        metrics.density = 2f;
-        metrics.densityDpi = 320;
-        metrics.heightPixels = 1184;
-        metrics.widthPixels = 768;
-        metrics.scaledDensity = 2f;
-        metrics.xdpi = 320f;
-        metrics.ydpi = 320f;
-
-        context.getResources().getDisplayMetrics().setTo(metrics);
+    public void setDefaultDisplayMetrics() {
+        instance.getContext().getResources().getDisplayMetrics().setTo(instance.getDisplayMetrics());
     }
 
-    /**
-     * Change to default {@link DisplayMetrics}
-     */
-    public void setDefault() {
-
-        DisplayMetrics metrics = new DisplayMetrics();
-
-        context.getResources().getDisplayMetrics().setTo(displayMetrics);
-
+    public void setCustomDisplayMetrics() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        displayMetrics.density = 2f;
+        displayMetrics.densityDpi = 320;
+        displayMetrics.heightPixels = 1184;
+        displayMetrics.widthPixels = 768;
+        displayMetrics.scaledDensity = 2f;
+        displayMetrics.xdpi = 320f;
+        displayMetrics.ydpi = 320f;
+        instance.getContext().getResources().getDisplayMetrics().setTo(displayMetrics);
     }
 }

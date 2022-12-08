@@ -1,6 +1,5 @@
 package android.pdf.core;
 
-import android.content.Context;
 import android.pdf.dimension.Dimension;
 import android.pdf.io.PageCount;
 import android.pdf.constant.PageSize;
@@ -10,123 +9,56 @@ import android.pdf.layout.CreateStatic;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * The type Pdf generate factory.
- */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class PdfGenerateFactory {
 
-    private Dimension dimension;
-    private CreateStatic staticHeader;
-    private CreateStatic staticFooter;
-    private CreateContainer container;
+    private Instance instance = Instance.getInstance();
 
-    /**
-     * Init.
-     *
-     * @param document the document
-     */
-    public void init(Document document) {
+    public void initialize() {
+        initCustomDimension();
+        initPageSize();
+        initPageCount();
+    }
 
-        initCustomDimension(document.getContext());
-
-        initPageSize(document);
-
-        initStaticLayout(document);
-
-        initPageCount(document);
-
-        initContainer(document);
-
+    public void terminate() {
         initDefaultDimension();
+        terminateInstance();
     }
 
-    /**
-     * It used to create Non-repeated View's
-     *
-     * @param document {@link Document}
-     */
-    private void initContainer(Document document) {
-
-        container = new CreateContainer(document, staticHeader.create(), staticFooter.create());
-
-        container.create();
-
+    private void initPageSize() {
+        instance.getPageSize().calculatePageSize();
+//        pageSize.calculatePageSize();
     }
 
-    /**
-     * Calculate no of pages
-     *
-     * @param document {@link Document}
-     */
-    private void initPageCount(Document document) {
+    private void initCustomDimension() {
+        new Dimension().saveDefaultDisplayMetrics();
+        new Dimension().setCustomDisplayMetrics();
+    }
 
-        PageCount pageCount = document.getPageCount();
-
+    private void initPageCount() {
+        PageCount pageCount = instance.getPageCount();
         if (pageCount != null) {
-
-            CreateContainer calculatePageCount = new CreateContainer(document, staticHeader.create(), staticFooter.create());
-
-            pageCount.setTotalPageCount(calculatePageCount.create().getPageCount());
-
+            pageCount.setTotalPageCount(
+                    new CreateContainer(
+                            new CreateStatic().create(instance.getHeaderCells()),
+                            new CreateStatic().create(instance.getFooterCells())
+                    ).create().getPageCount()
+            );
         }
     }
 
-    /**
-     * Create repeated View ( HEADER & FOOTER ).
-     *
-     * @param document {@link Document}
-     */
-    private void initStaticLayout(Document document) {
-
-        staticHeader = new CreateStatic(document.getContext(), document.getHeaderCells(), document.getPageSize(), document.getColumnWeight());
-
-        staticFooter = new CreateStatic(document.getContext(), document.getFooterCells(), document.getPageSize(), document.getColumnWeight());
-
-    }
-
-    /**
-     * initDimension {@link Dimension}
-     */
-    private void initCustomDimension(Context context) {
-
-        dimension = new Dimension(context);
-
-    }
-
-    /**
-     * initDefaultDimension {@link Dimension}
-     */
-    private void initDefaultDimension() {
-
-        dimension.setDefault();
-
-    }
-
-    /**
-     * It used to calculate actual size for main content.
-     *
-     * @param document {@link Document}
-     */
-    private void initPageSize(Document document) {
-
-        int paddingWidth = document.getPaddingLeft() + document.getPaddingRight();
-        int paddingHeight = document.getPaddingTop() + document.getPaddingBottom();
-
-        PageSize pageSize = document.getPageSize();
-        pageSize.decreasePadding(paddingWidth, paddingHeight);
-
-    }
-
-    /**
-     * Finish.
-     *
-     * @param file the file
-     * @throws IOException the io exception
-     */
     public void finish(File file) throws IOException {
+        new CreateContainer(
+                new CreateStatic().create(instance.getHeaderCells()),
+                new CreateStatic().create(instance.getFooterCells())
+        ).create().finish(file);
+    }
 
-        container.finish(file);
+    private void terminateInstance() {
+        instance = null;
+    }
 
+    private void initDefaultDimension() {
+        new Dimension().setDefaultDisplayMetrics();
     }
 }

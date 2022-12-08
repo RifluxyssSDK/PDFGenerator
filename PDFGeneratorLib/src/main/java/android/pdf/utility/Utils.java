@@ -1,13 +1,12 @@
 package android.pdf.utility;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.view.View;
-
 import android.pdf.constant.FontStyle;
+import android.pdf.core.Instance;
+import android.view.View;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -15,20 +14,9 @@ import com.rifluxyss.pdfgenerator.R;
 
 import java.util.List;
 
-/**
- *  Utility's
- */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Utils {
 
-    /**
-     * Create border drawable.
-     *
-     * @param backgroundColor the background color
-     * @param borderColor     the border color
-     * @param width           the width of border
-     * @return the drawable
-     */
     public static Drawable createBorder(int backgroundColor, int borderColor, int width) {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setStroke(width, borderColor);
@@ -36,40 +24,26 @@ public class Utils {
         return new LayerDrawable(new Drawable[]{gradientDrawable});
     }
 
-    /**
-     * Create get font typeface.
-     *
-     * @param context  the context
-     * @param typeFace the type face
-     * @return the typeface
-     */
-    public static Typeface createGetFont(Context context, int typeFace) {
-
+    public static Typeface createGetFont(int typeFace) {
         switch (typeFace) {
             default:
-                return ResourcesCompat.getFont(context, R.font.helvetica);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica);
             case FontStyle.HELVETICA_BOLD:
-                return ResourcesCompat.getFont(context, R.font.helvetica_bold);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_bold);
             case FontStyle.HELVETICA_BOLD_OBLIQUE:
-                return ResourcesCompat.getFont(context, R.font.helvetica_bold_oblique);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_bold_oblique);
             case FontStyle.HELVETICA_ROUNDED_BOLD:
-                return ResourcesCompat.getFont(context, R.font.helvetica_rounded_bold);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_rounded_bold);
             case FontStyle.HELVETICA_OBLIQUE:
-                return  ResourcesCompat.getFont(context, R.font.helvetica_oblique);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_oblique);
             case FontStyle.HELVETICA_LIGHT:
-                return  ResourcesCompat.getFont(context, R.font.helvetica_light);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_light);
             case FontStyle.HELVETICA_COMPRESSED:
-                return  ResourcesCompat.getFont(context, R.font.helvetica_compressed);
+                return ResourcesCompat.getFont(Instance.getInstance().getContext(), R.font.helvetica_compressed);
         }
     }
 
 
-    /**
-     * Gets view height.
-     *
-     * @param views the views
-     * @return the view height
-     */
     public static int getViewHeight(List<View> views) {
 
         int mHeight = 0;

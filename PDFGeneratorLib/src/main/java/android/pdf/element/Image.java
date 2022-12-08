@@ -1,7 +1,7 @@
 package android.pdf.element;
 
 import android.graphics.Bitmap;
-import android.pdf.abstract_io.Element;
+import android.pdf.io.Element;
 import android.widget.ImageView;
 
 import android.pdf.constant.ElementType;

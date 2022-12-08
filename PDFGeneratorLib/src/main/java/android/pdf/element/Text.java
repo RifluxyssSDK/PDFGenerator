@@ -2,7 +2,7 @@ package android.pdf.element;
 
 import android.graphics.Color;
 
-import android.pdf.abstract_io.Element;
+import android.pdf.io.Element;
 import android.pdf.customtext.TextBuilder;
 import android.pdf.constant.ElementType;
 

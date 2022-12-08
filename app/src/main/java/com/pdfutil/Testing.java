@@ -8,11 +8,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Environment;
 import android.pdf.cell.Paragraph;
+import android.pdf.constant.DocType;
 import android.pdf.core.Document;
 import android.pdf.element.Image;
 import android.pdf.element.Sentence;
 import android.pdf.element.Text;
+import android.pdf.io.PageCount;
 import android.util.Base64;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
@@ -60,18 +63,31 @@ public class Testing {
 
     private void createDocument(Document document) throws IOException {
 
-        document.add(new Paragraph()
-                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
-                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
-                .setBackgroundColor(Color.GRAY).setPadding(10)
+        document.add(DocType.NORMAL, new Paragraph()
+                .add(new Text(1,10,"HEADER").setGravity(Gravity.CENTER).setPadding(10).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginBottom(5))
         );
+
+        document.add(DocType.FOOTER, new Paragraph()
+                .add(new Text(1,10,"FOOTER").setGravity(Gravity.CENTER).setPadding(10).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setMarginTop(5))
+        );
+
+        document.setPageCount(new PageCount("Page "," / "));
+
+        for (int i = 0; i < 20; i++) {
+            document.add(new Paragraph()
+                    .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                    .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                    .add(new Text(1, 7, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
+                    .add(new Text(1, 3, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10).setMarginLeft(-1))
+            );
+        }
 
         Sentence sentence = new Sentence(1,5);
         sentence.add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10));
         sentence.add(new Image(1, 5, decodeStream(R.raw.eleven_pro_knit_argyle_polo)));
-        sentence.setBackgroundColor(Color.GRAY).setPadding(10);
+        sentence.setPadding(10);
 
-        document.add(new Paragraph().add(sentence).add(sentence));
+        document.add(new Paragraph().add(sentence).add(sentence).setBorder(true));
 
         /*document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eleven_pro_knit_argyle_polo))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.fifteen_women_workwear_b))));
