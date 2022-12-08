@@ -11,6 +11,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.media.ExifInterface;
 import android.os.Build;
 import android.os.Environment;
+import android.pdf.element.Image;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -106,17 +107,14 @@ public class Utils {
      * Compress image file file.
      *
      * @param imageFile     the image file
-     * @param bitmapWidth   the bitmap width
-     * @param bitmapHeight  the bitmap height
-     * @param compressLevel the compress level
      * @return the file
      */
-    public File compressImageFile(Context context,File imageFile, int bitmapWidth, int bitmapHeight,int compressLevel) {
+    public File compressImageFile(Context context, File imageFile, Image image) {
 
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(context,imageFile, bitmapWidth,bitmapHeight,compressLevel).compress(Bitmap.CompressFormat.WEBP, compressLevel, new FileOutputStream(imageFile));
+            decodeSampledBitmapFromFile(context,imageFile,image).compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageFile));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,7 +124,7 @@ public class Utils {
 
     }
 
-    private Bitmap decodeSampledBitmapFromFile(Context context, File imageFile, int reqWidth, int reqHeight,int compressLevel) throws IOException {
+    private Bitmap decodeSampledBitmapFromFile(Context context, File imageFile,Image image) throws IOException {
         // First decode with inJustDecodeBounds=true to check dimensions
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -136,7 +134,7 @@ public class Utils {
         BitmapFactory.Options optionsImage = new BitmapFactory.Options();
 
         // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inSampleSize = calculateInSampleSize(options, image.getImageWidth(), image.getImageHeight());
 
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
@@ -148,6 +146,7 @@ public class Utils {
         options.inDensity = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ? DisplayMetrics.DENSITY_DEVICE_STABLE : DisplayMetrics.DENSITY_MEDIUM;
 
         Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+        scaledBitmap.setConfig(image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565);
 
         //check the rotation of the image and display it properly
         ExifInterface exif;

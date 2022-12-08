@@ -64,11 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(20, 10, 20, 10);
 
-        String  currentDateTimeString = DateFormat.getDateTimeInstance()
-                .format(new Date());
-
-        Log.e("status","check Duration ===> " +currentDateTimeString);
-
         verifySDK();
 
         addPageNumbers();
@@ -84,11 +79,6 @@ public class MainActivity extends AppCompatActivity {
             File imageFileCom = new File(fileCompress, "Document.pdf");
 
             document.finish(imageFileCom);
-
-            String  currentDateTimeString1 = DateFormat.getDateTimeInstance()
-                    .format(new Date());
-
-            Log.e("status","check Duration ===> " +currentDateTimeString1);
 
             Toast.makeText(this, "Doc Created", Toast.LENGTH_SHORT).show();
 

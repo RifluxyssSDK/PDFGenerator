@@ -53,7 +53,7 @@ public class CreateImage {
                 // YOU can also save it in WEBP
                 image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
 
-                File compressImageFile = new Utils().compressImageFile(context,imageResourceFile, image.getImageWidth(), image.getImageHeight(), image.getCompressLevel());
+                File compressImageFile = new Utils().compressImageFile(context,imageResourceFile, image);
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565;
