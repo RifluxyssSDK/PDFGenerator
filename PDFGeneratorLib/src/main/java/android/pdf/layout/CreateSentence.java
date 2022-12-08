@@ -110,13 +110,10 @@ public class CreateSentence {
     private float initCalc(float singleColWeight, Sentence sentence, int columnWeight) {
 
         double minMaxWidth = singleColWeight * sentence.getColSpan();
-        int elementWidth = (int) (minMaxWidth - (sentence.getMarginRight() + sentence.getMarginLeft()));
-
         int marginWidth = sentence.getMarginLeft() + sentence.getMarginRight();
         int paddingWidth = sentence.getPaddingLeft() + sentence.getPaddingRight();
-        int contentWidth = elementWidth - (marginWidth + paddingWidth);
+        double contentWidth = minMaxWidth - (marginWidth + paddingWidth);
         return (float) contentWidth / columnWeight;
-
     }
 }
 

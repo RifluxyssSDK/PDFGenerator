@@ -119,12 +119,9 @@ public class CreateParagraph {
     private float initCalc(float singleColWeight, Paragraph paragraph, int columnWeight) {
 
         double minMaxWidth = singleColWeight * paragraph.getColSpan();
-        int elementWidth = (int) (minMaxWidth - (paragraph.getMarginRight() + paragraph.getMarginLeft()));
-
         int marginWidth = paragraph.getMarginLeft() + paragraph.getMarginRight();
         int paddingWidth = paragraph.getPaddingLeft() + paragraph.getPaddingRight();
-        int contentWidth = elementWidth - (marginWidth + paddingWidth);
+        double contentWidth = minMaxWidth - (marginWidth + paddingWidth);
         return (float) contentWidth / columnWeight;
-
     }
 }

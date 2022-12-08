@@ -4,11 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Environment;
 import android.pdf.cell.Paragraph;
 import android.pdf.core.Document;
 import android.pdf.element.Image;
+import android.pdf.element.Sentence;
+import android.pdf.element.Text;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -46,6 +49,8 @@ public class Testing {
 
         document.open(10);
 
+        document.setPadding(10);
+
         createDocument(document);
 
         document.close();
@@ -55,7 +60,19 @@ public class Testing {
 
     private void createDocument(Document document) throws IOException {
 
-        document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eighteen_carhartt_fr_enhanced_visibility))));
+        document.add(new Paragraph()
+                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                .add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10))
+                .setBackgroundColor(Color.GRAY).setPadding(10)
+        );
+
+        Sentence sentence = new Sentence(1,5);
+        sentence.add(new Text(1, 5, "Hello World").setBorder(true).setBackgroundColor(Color.GREEN).setPadding(10));
+        sentence.add(new Image(1, 5, decodeStream(R.raw.eleven_pro_knit_argyle_polo)));
+        sentence.setBackgroundColor(Color.GRAY).setPadding(10);
+
+        document.add(new Paragraph().add(sentence).add(sentence));
+
         /*document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.eleven_pro_knit_argyle_polo))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.fifteen_women_workwear_b))));
         document.add(new Paragraph().add(new Image(1, 10, decodeStream(R.raw.five_ur_differentiator_page))));
