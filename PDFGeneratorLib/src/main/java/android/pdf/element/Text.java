@@ -2,107 +2,111 @@ package android.pdf.element;
 
 import android.graphics.Color;
 
+import android.pdf.core.Instance;
+import android.pdf.exception.Authorization;
 import android.pdf.io.Element;
 import android.pdf.customtext.TextBuilder;
 import android.pdf.constant.ElementType;
 
 /**
- * This class used to create each text for pdf document.
+ * The type Text.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Text extends Element {
 
     /**
-     * It represents the number of rows to span.
+     * The Row span.
      */
     int rowSpan;
     /**
-     * It represents the number of columns to span.
+     * The Col span.
      */
     int colSpan;
     /**
-     * It specifies extra space on the LEFT side of the view.
+     * The Margin left.
      */
     int marginLeft;
     /**
-     * It specifies extra space on the TOP side of the view.
+     * The Margin top.
      */
     int marginTop;
     /**
-     * It specifies extra space on the RIGHT side of the view.
+     * The Margin right.
      */
     int marginRight;
     /**
-     * It specifies extra space on the BOTTOM side of the view.
+     * The Margin bottom.
      */
     int marginBottom;
     /**
-     * It used to specify extra space on the LEFT side inside the view.
+     * The Padding left.
      */
     int paddingLeft;
     /**
-     * It used to specify extra space on the TOP side inside the view.
+     * The Padding top.
      */
     int paddingTop;
     /**
-     * It used to specify extra space on the RIGHT side inside the view.
+     * The Padding right.
      */
     int paddingRight;
     /**
-     * It used to specify extra space on the BOTTOM side inside the view.
+     * The Padding bottom.
      */
     int paddingBottom;
     /**
-     * It used to set the gravity of text. ( EX : "Gravity.CENTER", "Gravity.CENTER | Gravity.CENTER_VERTICAL" )
+     * The Gravity.
      */
     int gravity;
     /**
-     * It used to set the color of text.
+     * The Text color.
      */
     int textColor;
     /**
-     * It used to set the size of text.
+     * The Text size.
      */
     int textSize;
     /**
-     * It used to set the fontStyle of text.
+     * The Font style.
      */
     byte fontStyle;
     /**
-     * It used to set the background of text.
+     * The Background color.
      */
     int backgroundColor;
 
     /**
-     * It used to set the border of text.
+     * The Border.
      */
     boolean border;
     /**
-     * It used to set the strokeWidth of text border.
+     * The Border width.
      */
     int borderWidth;
     /**
-     * It used to set the color of text border.
+     * The Border color.
      */
     int borderColor;
     /**
-     * It used to set lineSpace between lines.
+     * The Line space.
      */
     float lineSpace;
 
     /**
-     * It used to create text for pdf document.
+     * The Message.
      */
     String message;
     /**
-     * It used to create text for pdf document.
+     * The Text builder.
      */
     TextBuilder textBuilder;
 
     /**
-     * @param rowSpan It represents the number of rows to span.
-     * @param colSpan It represents the number of columns to span.
-     * @param message It used to create text for pdf document.
+     * Instantiates a new Text.
+     *
+     * @param rowSpan the row span
+     * @param colSpan the col span
+     * @param message the message
      */
     public Text(int rowSpan, int colSpan, String message) {
         setRowSpan(rowSpan);
@@ -111,10 +115,16 @@ public class Text extends Element {
         init();
     }
 
+    private void authorization() {
+        Authorization.colSpanAuthenticate(getColSpan());
+    }
+
     /**
-     * @param rowSpan It represents the number of rows to span.
-     * @param colSpan It represents the number of columns to span.
-     * @param TextBuilder It used to create text for pdf document.
+     * Instantiates a new Text.
+     *
+     * @param rowSpan     the row span
+     * @param colSpan     the col span
+     * @param TextBuilder the text builder
      */
     public Text(int rowSpan, int colSpan, TextBuilder TextBuilder) {
         setRowSpan(rowSpan);
@@ -123,10 +133,8 @@ public class Text extends Element {
         init();
     }
 
-    /**
-     * Add sum default value's.
-     */
     private void init(){
+        authorization();
         setTextSize(7);
         setLineSpace(1);
         setBorderWidth(1);
@@ -134,17 +142,16 @@ public class Text extends Element {
         setBorderColor(Color.BLACK);
     }
 
-    /**
-     * @return Text It used to find the type of Element's
-     */
     @Override
     public byte getElementType() {
         return ElementType.TEXT;
     }
 
     /**
-     * @param rowSpan It represents the number of rows to span.
-     * @return Text
+     * Sets row span.
+     *
+     * @param rowSpan the row span
+     * @return the row span
      */
     public Text setRowSpan(int rowSpan) {
         this.rowSpan = rowSpan;
@@ -152,8 +159,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param colSpan It represents the number of columns to span.
-     * @return Text
+     * Sets col span.
+     *
+     * @param colSpan the col span
+     * @return the col span
      */
     public Text setColSpan(int colSpan) {
         this.colSpan = colSpan;
@@ -161,8 +170,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param marginLeft It specifies extra space on the LEFT side of the view.
-     * @return Text
+     * Sets margin left.
+     *
+     * @param marginLeft the margin left
+     * @return the margin left
      */
     public Text setMarginLeft(int marginLeft) {
         this.marginLeft = marginLeft;
@@ -170,8 +181,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param marginTop It specifies extra space on the TOP side of the view.
-     * @return Text
+     * Sets margin top.
+     *
+     * @param marginTop the margin top
+     * @return the margin top
      */
     public Text setMarginTop(int marginTop) {
         this.marginTop = marginTop;
@@ -179,8 +192,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param marginRight It specifies extra space on the Right side of the view.
-     * @return Text
+     * Sets margin right.
+     *
+     * @param marginRight the margin right
+     * @return the margin right
      */
     public Text setMarginRight(int marginRight) {
         this.marginRight = marginRight;
@@ -188,8 +203,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param marginBottom It specifies extra space on the BOTTOM side of the view.
-     * @return Text
+     * Sets margin bottom.
+     *
+     * @param marginBottom the margin bottom
+     * @return the margin bottom
      */
     public Text setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
@@ -197,8 +214,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param paddingLeft It used to specify extra space on the LEFT Side inside the view.
-     * @return Text
+     * Sets padding left.
+     *
+     * @param paddingLeft the padding left
+     * @return the padding left
      */
     public Text setPaddingLeft(int paddingLeft) {
         this.paddingLeft = paddingLeft;
@@ -206,8 +225,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param paddingTop It used to specify extra space on the TOP Side inside the view.
-     * @return Text
+     * Sets padding top.
+     *
+     * @param paddingTop the padding top
+     * @return the padding top
      */
     public Text setPaddingTop(int paddingTop) {
         this.paddingTop = paddingTop;
@@ -215,8 +236,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param paddingRight It used to specify extra space on the RIGHT Side inside the view.
-     * @return Text
+     * Sets padding right.
+     *
+     * @param paddingRight the padding right
+     * @return the padding right
      */
     public Text setPaddingRight(int paddingRight) {
         this.paddingRight = paddingRight;
@@ -224,8 +247,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param paddingBottom It used to specify extra space on the BOTTOM Side inside the view.
-     * @return Text
+     * Sets padding bottom.
+     *
+     * @param paddingBottom the padding bottom
+     * @return the padding bottom
      */
     public Text setPaddingBottom(int paddingBottom) {
         this.paddingBottom = paddingBottom;
@@ -233,8 +258,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param gravity It used to set the gravity of text. ( EX : "Gravity.CENTER", "Gravity.CENTER | Gravity.CENTER_VERTICAL" )
-     * @return Text
+     * Sets gravity.
+     *
+     * @param gravity the gravity
+     * @return the gravity
      */
     public Text setGravity(int gravity) {
         this.gravity = gravity;
@@ -242,8 +269,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param textColor It used to set the color of text.
-     * @return Text
+     * Sets text color.
+     *
+     * @param textColor the text color
+     * @return the text color
      */
     public Text setTextColor(int textColor) {
         this.textColor = textColor;
@@ -251,8 +280,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param textSize It used to set the size of text.
-     * @return Text
+     * Sets text size.
+     *
+     * @param textSize the text size
+     * @return the text size
      */
     public Text setTextSize(int textSize) {
         this.textSize = textSize;
@@ -260,8 +291,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param fontStyle It used to set the fontStyle of text.
-     * @return Text
+     * Sets font style.
+     *
+     * @param fontStyle the font style
+     * @return the font style
      */
     public Text setFontStyle(byte fontStyle) {
         this.fontStyle = fontStyle;
@@ -269,8 +302,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param backgroundColor It used to set the background of text.
-     * @return Text
+     * Sets background color.
+     *
+     * @param backgroundColor the background color
+     * @return the background color
      */
     public Text setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
@@ -278,8 +313,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param border It used to set the border of text.
-     * @return Text
+     * Sets border.
+     *
+     * @param border the border
+     * @return the border
      */
     public Text setBorder(boolean border) {
         this.border = border;
@@ -287,8 +324,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param borderWidth It used to set the strokeWidth of text border.
-     * @return Text
+     * Sets border width.
+     *
+     * @param borderWidth the border width
+     * @return the border width
      */
     public Text setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
@@ -296,8 +335,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param borderColor It used to set the color of text border.
-     * @return Text
+     * Sets border color.
+     *
+     * @param borderColor the border color
+     * @return the border color
      */
     public Text setBorderColor(int borderColor) {
         this.borderColor = borderColor;
@@ -305,8 +346,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param lineSpace It used to set space between Line.
-     * @return Text
+     * Sets line space.
+     *
+     * @param lineSpace the line space
+     * @return the line space
      */
     public Text setLineSpace(float lineSpace) {
         this.lineSpace = lineSpace;
@@ -314,8 +357,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param message It used to create text for pdf document.
-     * @return Text
+     * Sets message.
+     *
+     * @param message the message
+     * @return the message
      */
     public Text setMessage(String message) {
         this.message = message;
@@ -323,8 +368,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param padding It used to specify extra space on the LEFT, TOP, RIGHT, BOTTOM side's inside the view.
-     * @return Text
+     * Sets padding.
+     *
+     * @param padding the padding
+     * @return the padding
      */
     public Text setPadding(int padding) {
         setPaddingLeft(padding);
@@ -335,11 +382,13 @@ public class Text extends Element {
     }
 
     /**
-     * @param paddingLeft It used to specify extra space on the LEFT side inside the view.
-     * @param paddingTop It used to specify extra space on the TOP side inside the view.
-     * @param paddingRight It used to specify extra space on the RIGHT side inside the view.
-     * @param paddingBottom It used to specify extra space on the BOTTOM side inside the view.
-     * @return Text
+     * Sets padding.
+     *
+     * @param paddingLeft   the padding left
+     * @param paddingTop    the padding top
+     * @param paddingRight  the padding right
+     * @param paddingBottom the padding bottom
+     * @return the padding
      */
     public Text setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
         setPaddingLeft(paddingLeft);
@@ -350,8 +399,10 @@ public class Text extends Element {
     }
 
     /**
-     * @param margin It specifies extra space on the LEFT, TOP, RIGHT, BOTTOM side's of the view.
-     * @return Text
+     * Sets margin.
+     *
+     * @param margin the margin
+     * @return the margin
      */
     public Text setMargin(int margin) {
         setMarginLeft(margin);
@@ -362,11 +413,13 @@ public class Text extends Element {
     }
 
     /**
-     * @param marginLeft It specifies extra space on the LEFT side of the view.
-     * @param marginTop It specifies extra space on the TOP side of the view.
-     * @param marginRight It specifies extra space on the RIGHT side of the view.
-     * @param marginBottom It specifies extra space on the BOTTOM side of the view.
-     * @return Text
+     * Sets margin.
+     *
+     * @param marginLeft   the margin left
+     * @param marginTop    the margin top
+     * @param marginRight  the margin right
+     * @param marginBottom the margin bottom
+     * @return the margin
      */
     public Text setMargin(int marginLeft, int marginTop, int marginRight, int marginBottom) {
         setMarginLeft(marginLeft);
@@ -377,154 +430,198 @@ public class Text extends Element {
     }
 
     /**
-     * @return rowSpan
+     * Gets row span.
+     *
+     * @return the row span
      */
     public int getRowSpan() {
         return rowSpan;
     }
 
     /**
-     * @return colSpan
+     * Gets col span.
+     *
+     * @return the col span
      */
     public int getColSpan() {
         return colSpan;
     }
 
     /**
-     * @return marginLeft
+     * Gets margin left.
+     *
+     * @return the margin left
      */
     public int getMarginLeft() {
         return marginLeft;
     }
 
     /**
-     * @return marginTop
+     * Gets margin top.
+     *
+     * @return the margin top
      */
     public int getMarginTop() {
         return marginTop;
     }
 
     /**
-     * @return marginRight
+     * Gets margin right.
+     *
+     * @return the margin right
      */
     public int getMarginRight() {
         return marginRight;
     }
 
     /**
-     * @return marginBottom
+     * Gets margin bottom.
+     *
+     * @return the margin bottom
      */
     public int getMarginBottom() {
         return marginBottom;
     }
 
     /**
-     * @return paddingLeft
+     * Gets padding left.
+     *
+     * @return the padding left
      */
     public int getPaddingLeft() {
         return paddingLeft;
     }
 
     /**
-     * @return paddingTop
+     * Gets padding top.
+     *
+     * @return the padding top
      */
     public int getPaddingTop() {
         return paddingTop;
     }
 
     /**
-     * @return paddingRight
+     * Gets padding right.
+     *
+     * @return the padding right
      */
     public int getPaddingRight() {
         return paddingRight;
     }
 
     /**
-     * @return paddingBottom
+     * Gets padding bottom.
+     *
+     * @return the padding bottom
      */
     public int getPaddingBottom() {
         return paddingBottom;
     }
 
     /**
-     * @return gravity
+     * Gets gravity.
+     *
+     * @return the gravity
      */
     public int getGravity() {
         return gravity;
     }
 
     /**
-     * @return textColor
+     * Gets text color.
+     *
+     * @return the text color
      */
     public int getTextColor() {
         return textColor;
     }
 
     /**
-     * @return textSize
+     * Gets text size.
+     *
+     * @return the text size
      */
     public int getTextSize() {
         return textSize;
     }
 
     /**
-     * @return fontStyle
+     * Gets font style.
+     *
+     * @return the font style
      */
     public byte getFontStyle() {
         return fontStyle;
     }
 
     /**
-     * @return backgroundColor
+     * Gets background color.
+     *
+     * @return the background color
      */
     public int getBackgroundColor() {
         return backgroundColor;
     }
 
     /**
-     * @return border
+     * Is border boolean.
+     *
+     * @return the boolean
      */
     public boolean isBorder() {
         return border;
     }
 
     /**
-     * @return borderWidth
+     * Gets border width.
+     *
+     * @return the border width
      */
     public int getBorderWidth() {
         return borderWidth;
     }
 
     /**
-     * @return borderColor
+     * Gets border color.
+     *
+     * @return the border color
      */
     public int getBorderColor() {
         return borderColor;
     }
 
     /**
-     * @return lineSpace
+     * Gets line space.
+     *
+     * @return the line space
      */
     public float getLineSpace() {
         return lineSpace;
     }
 
     /**
-     * @return message
+     * Gets message.
+     *
+     * @return the message
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * @return textBuilder
+     * Gets text builder.
+     *
+     * @return the text builder
      */
     public TextBuilder getTextBuilder() {
         return textBuilder;
     }
 
     /**
-     * @param textBuilder It used to create text for pdf document.
+     * Sets text builder.
+     *
+     * @param textBuilder the text builder
      */
     public void setTextBuilder(TextBuilder textBuilder) {
         this.textBuilder = textBuilder;

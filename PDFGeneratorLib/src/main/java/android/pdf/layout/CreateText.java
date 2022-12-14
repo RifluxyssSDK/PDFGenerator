@@ -26,8 +26,6 @@ public class CreateText {
 
         int actualWidth = calculateActualWidth(width, text);
 
-        authorization(text);
-
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, text.getRowSpan(), text.getRowSpan()),
                 GridLayout.spec(GridLayout.UNDEFINED, text.getColSpan(), text.getColSpan())
@@ -63,12 +61,6 @@ public class CreateText {
         textView.setText(text.getTextBuilder() == null ? text.getMessage() : text.getTextBuilder().get());
         textView.setPadding(text.getPaddingLeft(), text.getPaddingTop(), text.getPaddingRight(), text.getPaddingBottom());
         return textView;
-    }
-
-    private void authorization(Text text) {
-        if (text.getColSpan() > instance.getColumnWeight()) {
-            throw new Error("column span mustn't exceed the column count. ( total column : " + instance.getColumnWeight() + ", cell colSpan : " + text.getColSpan() + " )");
-        }
     }
 
     private int calculateActualWidth(float width, Text text) {

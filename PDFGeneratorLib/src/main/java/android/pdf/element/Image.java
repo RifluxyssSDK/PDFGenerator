@@ -2,6 +2,8 @@ package android.pdf.element;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.pdf.core.Instance;
+import android.pdf.exception.Authorization;
 import android.pdf.io.Element;
 import android.widget.ImageView;
 
@@ -106,6 +108,13 @@ public class Image extends Element {
         setImageWidth(image.getWidth());
         setImageHeight(image.getHeight());
         setScaleType(ImageView.ScaleType.FIT_XY);
+
+        authorization();
+    }
+
+    private void authorization() {
+        Authorization.bitmapAuthenticate(getImage());
+        Authorization.colSpanAuthenticate(getColSpan());
     }
 
     /**

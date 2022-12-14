@@ -1,5 +1,6 @@
 package android.pdf.layout;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.pdf.cell.Paragraph;
@@ -151,6 +152,7 @@ public class CreateContainer {
             view.addView(pageCounterView);
         }
 
+        view.setBackgroundColor(Color.WHITE);
         view.measure(0, 0);
         view.layout(0, 0, pageSize.getDocumentWidth(), pageSize.getDocumentHeight());
         view.draw(page.getCanvas());

@@ -2,6 +2,7 @@ package android.pdf.element;
 
 import android.graphics.Color;
 
+import android.pdf.exception.Authorization;
 import android.pdf.io.Element;
 import android.pdf.constant.ElementType;
 
@@ -86,6 +87,12 @@ public class Sentence extends Element {
         setRowSpan(rowSpan);
         setColSpan(colSpan);
         setBorderColor(Color.BLACK);
+
+        authorization();
+    }
+
+    private void authorization() {
+        Authorization.colSpanAuthenticate(getColSpan());
     }
 
     /**

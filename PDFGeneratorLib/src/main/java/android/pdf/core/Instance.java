@@ -39,6 +39,7 @@ public class Instance {
 
     private final ArrayList<Cell> footerCells = new ArrayList<>();
 
+
     /**
      * Gets instance.
      *

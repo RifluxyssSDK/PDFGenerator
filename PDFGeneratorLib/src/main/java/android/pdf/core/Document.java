@@ -1,10 +1,11 @@
 package android.pdf.core;
 
 import android.content.Context;
-import android.pdf.io.Cell;
 import android.pdf.bgImage.BgImage;
 import android.pdf.constant.DocType;
 import android.pdf.constant.PageSize;
+import android.pdf.exception.Authorization;
+import android.pdf.io.Cell;
 import android.pdf.io.PageCount;
 
 import java.io.File;
@@ -17,7 +18,6 @@ import java.io.IOException;
 public class Document {
 
     private final Instance instance = Instance.createInstance();
-
     private final PdfGenerateFactory pdfGenerateFactory = new PdfGenerateFactory();
 
     /**
@@ -103,12 +103,14 @@ public class Document {
     }
 
     private void addElement(byte docType, Cell cell) {
-        if (docType == DocType.NORMAL) {
-            instance.getCells().add(cell);
-        } else if (docType == DocType.HEADER) {
-            instance.getHeaderCells().add(cell);
-        } else if (docType == DocType.FOOTER) {
-            instance.getFooterCells().add(cell);
+        if (Authorization.documentAuthenticate()) {
+            if (docType == DocType.NORMAL) {
+                instance.getCells().add(cell);
+            } else if (docType == DocType.HEADER) {
+                instance.getHeaderCells().add(cell);
+            } else if (docType == DocType.FOOTER) {
+                instance.getFooterCells().add(cell);
+            }
         }
     }
 
@@ -131,18 +133,8 @@ public class Document {
      * Close.
      */
     public void close() {
-        if (authorization()) {
+        if (Authorization.documentAuthenticate()) {
             pdfGenerateFactory.initialize();
-        }
-    }
-
-    private boolean authorization() {
-        if (instance.getColumnWeight() == 0) {
-            throw new Error("You been must open the Document");
-        } else if (instance.getContext() == null) {
-            throw new Error("You been must call 'init' method to initialize library (or) Null Context");
-        } else {
-            return true;
         }
     }
 
@@ -153,7 +145,9 @@ public class Document {
      * @throws IOException the io exception
      */
     public void finish(File file) throws IOException {
-        pdfGenerateFactory.finish(file);
-        pdfGenerateFactory.terminate();
+        if (Authorization.documentCloseAuthenticate()) {
+            pdfGenerateFactory.finish(file);
+            pdfGenerateFactory.terminate();
+        }
     }
 }

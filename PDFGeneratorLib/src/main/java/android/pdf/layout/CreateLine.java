@@ -25,8 +25,6 @@ public class CreateLine {
 
         int actualWidth = calculateActualWidth(width, line);
 
-        authorization(line);
-
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, line.getRowSpan(), line.getRowSpan()),
                 GridLayout.spec(GridLayout.UNDEFINED, line.getColSpan(), line.getColSpan())
@@ -47,12 +45,6 @@ public class CreateLine {
         lineOuter.setLayoutParams(layoutParams);
         lineOuter.addView(view, new LinearLayout.LayoutParams(actualWidth, line.getLineStrokeWidth()));
         return lineOuter;
-    }
-
-    private void authorization(Line line) {
-        if (line.getColSpan() > instance.getColumnWeight()) {
-            throw new Error("column span mustn't exceed the column count. ( total column : " + instance.getColumnWeight() + ", cell colSpan : " + line.getColSpan() + " )");
-        }
     }
 
     private int calculateActualWidth(float width, Line line) {

@@ -23,8 +23,6 @@ public class CreateImage {
      */
     public ImageView create(float width, Image image) {
 
-        authorization(image);
-
         int actualWidth = calculateActualWidth(width, image);
 
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
@@ -60,14 +58,6 @@ public class CreateImage {
         imageView.setBackgroundColor(image.getBackgroundColor());
         imageView.setPadding(image.getPaddingLeft(), image.getPaddingTop(), image.getPaddingRight(), image.getPaddingBottom());
         return imageView;
-    }
-
-    private void authorization(Image image) {
-        if (image.getImage() == null) {
-            throw new Error("Given bitmap is Null");
-        } else if (image.getColSpan() > instance.getColumnWeight()) {
-            throw new Error("column span mustn't exceed the column count. ( total column : " + instance.getColumnWeight() + ", cell colSpan : " + image.getColSpan() + " )");
-        }
     }
 
     private int calculateActualWidth(float width, Image image) {
