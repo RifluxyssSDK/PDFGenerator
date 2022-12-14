@@ -28,9 +28,6 @@ public class CreateStatic {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if (cells.size() != 0) {
-
-            float width = (float) instance.getPageSize().getPageWidth() / instance.getColumnWeight();
-
             for (Cell cell : cells) {
                 if (cell.getCellType() == ElementType.PARAGRAPH) {
                     linearLayout.addView(new CreateParagraph().create(((Paragraph) cell)));
