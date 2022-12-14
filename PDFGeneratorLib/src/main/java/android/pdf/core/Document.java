@@ -34,9 +34,9 @@ import java.io.IOException;
  * document.add(new Paragraph().add(new Text(1,10,"Hello Document")));
  * document.close();
  * try {
- * document.finish(file);
+ *      document.finish(file);
  * } catch (IOException e) {
- * e.printStackTrace();
+ *      e.printStackTrace();
  * }
  * </PRE>
  */
