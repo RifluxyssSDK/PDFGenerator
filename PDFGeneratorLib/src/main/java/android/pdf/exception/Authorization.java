@@ -5,6 +5,8 @@ import android.pdf.core.Instance;
 
 /**
  * The type Authorization.
+ *
+ * The class <code>Exception</code> and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch.
  */
 public class Authorization extends Exception {
 

@@ -1,14 +1,24 @@
 package com.pdfutil;
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.pdf.cell.Paragraph;
+import android.pdf.core.Document;
+import android.pdf.element.Text;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.pdfutil.databinding.ActivityMainBinding;
 
+import java.io.File;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private final File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Document.pdf");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +26,31 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
-        new Testing(getBaseContext());
+        try {
+
+            this.init();
+
+            Toast.makeText(getBaseContext(), "Document Created", Toast.LENGTH_SHORT).show();
+
+        } catch (IOException error) {
+
+            Toast.makeText(getBaseContext(), error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+    public void init() throws IOException {
+
+        Document document = new Document().init(getBaseContext());
+
+        document.open(10);
+
+        document.setPadding(10);
+
+        document.add(new Paragraph().add(new Text(1,10,"Hello Document...")));
+
+        document.close();
+
+        document.finish(path);
     }
 }
