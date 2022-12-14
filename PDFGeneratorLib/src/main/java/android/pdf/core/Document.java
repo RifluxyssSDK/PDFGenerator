@@ -40,6 +40,7 @@ import java.io.IOException;
  * }
  * </PRE>
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Document {
 
     /**
