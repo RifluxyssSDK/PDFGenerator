@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(10);
 
-        document.add(new Paragraph().add(new Text(1,11,"Hello Document...")));
+        document.add(new Paragraph().add(new Text(1,10,"Hello Document...")));
 
         document.close();
 

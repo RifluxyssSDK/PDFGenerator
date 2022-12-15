@@ -39,6 +39,14 @@ public class Instance {
 
     private final ArrayList<Cell> footerCells = new ArrayList<>();
 
+    /**
+     * Sets instance.
+     *
+     * @param instance the instance
+     */
+    public static void setInstance(Instance instance) {
+        Instance.instance = instance;
+    }
 
     /**
      * Gets instance.
@@ -46,16 +54,9 @@ public class Instance {
      * @return the instance
      */
     public static Instance getInstance() {
-        return instance;
-    }
-
-    /**
-     * Create instance instance.
-     *
-     * @return the instance
-     */
-    public static Instance createInstance() {
-        instance = new Instance();
+        if (instance == null) {
+            instance = new Instance();
+        }
         return instance;
     }
 

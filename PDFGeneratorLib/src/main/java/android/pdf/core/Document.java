@@ -49,7 +49,7 @@ public class Document {
      * <P>Use this variable to get an instance of the <CODE>Instance</CODE> class.</P>
      * <P>All the data's stored on these one static variable.</P>
      */
-    private final Instance instance = Instance.createInstance();
+    private final Instance instance = Instance.getInstance();
 
     /**
      * A {@link PdfGenerateFactory} class
