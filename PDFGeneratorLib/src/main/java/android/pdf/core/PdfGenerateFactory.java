@@ -70,7 +70,7 @@ public class PdfGenerateFactory {
     }
 
     private void terminateInstance() {
-        instance = null;
+        Instance.setInstance(null);
     }
 
     private void initDefaultDimension() {
