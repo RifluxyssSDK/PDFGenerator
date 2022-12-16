@@ -20,6 +20,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.ImgRaw;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.pdfutil.databinding.ActivityMainBinding;
 
 import java.io.File;
@@ -55,13 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         document.open(10);
 
-        document.setPadding(30,70,30,30);
+        document.setPadding(10);
 
-        Bitmap border = BitmapFactory.decodeResource(getResources(), R.drawable.print_border);
-        border = border.copy(Bitmap.Config.RGB_565,true);
-
-        document.add(new Paragraph().add(new Image(1,5,border))
-                .add(new Text(1,5,"border")).setBackgroundColor(Color.GRAY).setPadding(10));
+//        document.add(new Paragraph().add(new Image(1,10,border)));
 
         /*BgImage bgImage = new BgImage(border);
 
