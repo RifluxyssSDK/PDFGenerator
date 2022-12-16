@@ -145,7 +145,7 @@ public class CreateContainer extends Instance {
         Canvas canvas = page.getCanvas();
 
         if (getBgImage() != null && getBgImage().getImage() != null) {
-            canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.print_border), 0, 0, new Paint());
+            canvas.drawBitmap(getBgImage().getImage(), 0, 0, new Paint());
         }
 
         if (getPageCount() != null) {
@@ -154,7 +154,6 @@ public class CreateContainer extends Instance {
             view.addView(pageCounterView);
         }
 
-        view.setBackgroundColor(Color.WHITE);
         view.measure(0, 0);
         view.layout(0, 0, getPageSize().getDocumentWidth(), getPageSize().getDocumentHeight());
         view.draw(canvas);
