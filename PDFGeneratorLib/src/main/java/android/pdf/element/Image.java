@@ -104,6 +104,10 @@ public class Image extends Element {
      */
     Bitmap.Config config;
 
+    int resourceUri;
+
+    int imageName = 0;
+
     /**
      * Instantiates a new Image.
      *
@@ -118,6 +122,13 @@ public class Image extends Element {
         setImageWidth(image.getWidth());
         setImageHeight(image.getHeight());
         setScaleType(ImageView.ScaleType.FIT_XY);
+    }
+
+    public Image(int rowSpan, int colSpan, int image) {
+        setResourceUri(image);
+        setRowSpan(rowSpan);
+        setColSpan(colSpan);
+        setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     }
 
     /**
@@ -386,6 +397,14 @@ public class Image extends Element {
     public Image setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
         return this;
+    }
+
+    public int getResourceUri() {
+        return resourceUri;
+    }
+
+    public void setResourceUri(int resourceUri) {
+        this.resourceUri = resourceUri;
     }
 
     /**

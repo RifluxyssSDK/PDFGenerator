@@ -3,11 +3,14 @@ package android.pdf.layout;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Build;
 import android.os.Environment;
 import android.pdf.element.Image;
 import android.pdf.utility.Utils;
+import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -18,6 +21,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -33,42 +38,35 @@ public class CreateImage {
      * @param image           the image
      * @return the view
      */
-    public View create(Context context, float singleColWeight, Image image) throws FileNotFoundException {
+    public View create(Context context, float singleColWeight, Image image) throws IOException {
 
         double minMaxWidth = singleColWeight * image.getColSpan();
         int elementWidth = (int) (minMaxWidth - (image.getMarginRight() + image.getMarginLeft()));
 
-        if (image.getImage() != null) {
+        if (image.getResourceUri() != 0) {
 
             ImageView imageView = new ImageView(context);
 
-            if (image.getCompressLevel() != 0) {
+            InputStream XmlFileInputStream = context.getResources().openRawResource(image.getResourceUri());
+            byte[] b = new byte[XmlFileInputStream.available()];
+            XmlFileInputStream.read(b);
 
-                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "images");
-                if (!imageFile.exists()) { imageFile.mkdirs(); }
+            FileOutputStream fos = context.openFileOutput("imageName" + Utils.fileExtension, Context.MODE_PRIVATE);
+            byte[] decodedString = Base64.decode(new String(b), Base64.DEFAULT);
+            fos.write(decodedString);
+            fos.flush();
+            fos.close();
 
-                String fileName = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
-                File imageResourceFile = new File(imageFile, fileName + Utils.fileExtension);
+            File file = new File(context.getFilesDir() + File.separator + "imageName" + Utils.fileExtension);
 
-                // YOU can also save it in WEBP
-                image.getImage().compress(Bitmap.CompressFormat.WEBP, image.getCompressLevel(), new FileOutputStream(imageResourceFile));
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = false;
+            options.inScaled = true;
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
-                File compressImageFile = new Utils().compressImageFile(context,imageResourceFile, image);
+            bitmap = Bitmap.createScaledBitmap(bitmap, image.getImageWidth(), image.getImageHeight(), true);
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inPreferredConfig = image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565;
-
-                Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(compressImageFile), null, options);
-
-                if (imageResourceFile.exists()) { imageResourceFile.delete(); }
-                if (imageFile.isDirectory()) { imageFile.delete(); }
-
-                imageView.setImageBitmap(bm);
-
-            } else {
-
-                imageView.setImageBitmap(image.getImage());
-            }
+            imageView.setImageBitmap(bitmap.copy(image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565, true));
 
             imageView.setMinimumWidth(image.getImageWidth());
 

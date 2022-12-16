@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.pdf.abstract_io.Cell;
+import android.pdf.merger.DocumentMerger;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -172,6 +173,7 @@ public class CreateContainer {
         view.draw(canvas);
 
         pdfDocument.finishPage(page);
+
     }
 
     /**
