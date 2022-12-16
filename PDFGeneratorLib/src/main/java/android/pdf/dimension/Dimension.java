@@ -7,16 +7,14 @@ import android.util.DisplayMetrics;
  * The type Dimension.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class Dimension {
-
-    private final Instance instance = Instance.getInstance();
+public class Dimension extends Instance {
 
     /**
      * Save default display metrics.
      */
     public void saveDefaultDisplayMetrics() {
-        DisplayMetrics displayMetrics = instance.getContext().getResources().getDisplayMetrics();
-        instance.setDimensionModel(new DimensionModel(
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        setDimensionModel(new DimensionModel(
                 displayMetrics.densityDpi,
                 displayMetrics.heightPixels,
                 displayMetrics.widthPixels,
@@ -39,22 +37,21 @@ public class Dimension {
         displayMetrics.scaledDensity = 2f;
         displayMetrics.xdpi = 320f;
         displayMetrics.ydpi = 320f;
-        instance.getContext().getResources().getDisplayMetrics().setTo(displayMetrics);
+        getContext().getResources().getDisplayMetrics().setTo(displayMetrics);
     }
 
     /**
      * Sets default display metrics.
      */
     public void setDefaultDisplayMetrics() {
-        DimensionModel dimensionModel = instance.getDimensionModel();
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        displayMetrics.density = dimensionModel.getDensity();
-        displayMetrics.densityDpi = dimensionModel.getDensityDpi();
-        displayMetrics.heightPixels = dimensionModel.getHeightPixels();
-        displayMetrics.widthPixels = dimensionModel.getWidthPixels();
-        displayMetrics.scaledDensity = dimensionModel.getScaledDensity();
-        displayMetrics.xdpi = dimensionModel.getXdpi();
-        displayMetrics.ydpi = dimensionModel.getYdpi();
-        instance.getContext().getResources().getDisplayMetrics().setTo(displayMetrics);
+        displayMetrics.density = getDimensionModel().getDensity();
+        displayMetrics.densityDpi = getDimensionModel().getDensityDpi();
+        displayMetrics.heightPixels = getDimensionModel().getHeightPixels();
+        displayMetrics.widthPixels = getDimensionModel().getWidthPixels();
+        displayMetrics.scaledDensity = getDimensionModel().getScaledDensity();
+        displayMetrics.xdpi = getDimensionModel().getXdpi();
+        displayMetrics.ydpi = getDimensionModel().getYdpi();
+        getContext().getResources().getDisplayMetrics().setTo(displayMetrics);
     }
 }

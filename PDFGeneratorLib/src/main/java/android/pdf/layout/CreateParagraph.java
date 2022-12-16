@@ -15,10 +15,9 @@ import android.widget.GridLayout;
 /**
  * The type Create paragraph.
  */
-public class CreateParagraph {
+public class CreateParagraph extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final GridLayout gridLayout = new GridLayout(instance.getContext());
+    private final GridLayout gridLayout = new GridLayout(getContext());
 
     /**
      * Create view.
@@ -54,7 +53,7 @@ public class CreateParagraph {
     }
 
     private void initialization(Paragraph paragraph) {
-        gridLayout.setColumnCount(instance.getColumnWeight());
+        gridLayout.setColumnCount(getColumnWeight());
         gridLayout.setPadding(
                 paragraph.getPaddingLeft(),
                 paragraph.getPaddingTop(),
@@ -77,7 +76,7 @@ public class CreateParagraph {
     private void initializeLayoutParam(Paragraph paragraph) {
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, (1), (1)),
-                GridLayout.spec(GridLayout.UNDEFINED, instance.getColumnWeight(), instance.getColumnWeight())
+                GridLayout.spec(GridLayout.UNDEFINED, getColumnWeight(), getColumnWeight())
         );
 
         layoutParams.setMargins(
@@ -92,7 +91,7 @@ public class CreateParagraph {
     private float calculateParagraphWidth(Paragraph paragraph) {
         int marginWidth = paragraph.getMarginLeft() + paragraph.getMarginRight();
         int paddingWidth = paragraph.getPaddingLeft() + paragraph.getPaddingRight();
-        double width = instance.getPageSize().getPageWidth() - marginWidth - paddingWidth;
-        return (float) width / instance.getColumnWeight();
+        double width = getPageSize().getPageWidth() - marginWidth - paddingWidth;
+        return (float) width / getColumnWeight();
     }
 }

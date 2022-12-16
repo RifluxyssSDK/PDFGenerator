@@ -8,9 +8,7 @@ import android.pdf.core.Instance;
  *
  * The class <code>Exception</code> and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch.
  */
-public class Authorization extends Exception {
-
-    private static final Instance instance = Instance.getInstance();
+public class Authorization extends Instance {
 
     /**
      * Col span authenticate.
@@ -18,8 +16,8 @@ public class Authorization extends Exception {
      * @param colSpan the col span
      */
     public static void colSpanAuthenticate(int colSpan) {
-        if (colSpan > instance.getColumnWeight() && instance.getColumnWeight() !=0 ) {
-            throw new Error("colSpan mustn't exceed the columnWeight. ( Max Value : " + instance.getColumnWeight() +" )");
+        if (colSpan > Instance.getInstance().getColumnWeight() && Instance.getInstance().getColumnWeight() !=0 ) {
+            throw new Error("colSpan mustn't exceed the columnWeight. ( Max Value : " + Instance.getInstance().getColumnWeight() +" )");
         }
     }
 
@@ -40,9 +38,9 @@ public class Authorization extends Exception {
      * @return the boolean
      */
     public static boolean documentAuthenticate() {
-        if (instance.getColumnWeight() == 0) {
+        if (Instance.getInstance().getColumnWeight() == 0) {
             throw new NullPointerException("You been must call 'open' method before add 'Elements'");
-        } else if (instance.getContext() == null) {
+        } else if (Instance.getInstance().getContext() == null) {
             throw new NullPointerException("You been must call 'init' method to initialize library");
         } else {
             return true;
@@ -55,7 +53,7 @@ public class Authorization extends Exception {
      * @return the boolean
      */
     public static boolean documentCloseAuthenticate() {
-        if (instance.getPageSize().getPageWidth() == 0) {
+        if (Instance.getInstance().getPageSize().getPageWidth() == 0) {
             throw new NullPointerException("You been must call 'close' method");
         } else {
             return true;

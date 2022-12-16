@@ -11,9 +11,7 @@ import java.util.ArrayList;
 /**
  * The type Create area break.
  */
-public class CreateAreaBreak {
-
-    private final Instance instance = Instance.getInstance();
+public class CreateAreaBreak extends Instance {
 
     /**
      * Create view.
@@ -36,13 +34,13 @@ public class CreateAreaBreak {
         int currentViewHeight = Utils.getViewHeight(views);
         int additionalViewHeight = pageHeight - currentViewHeight;
 
-        TextView additionalView = new TextView(instance.getContext());
+        TextView additionalView = new TextView(getContext());
         additionalView.setMinimumHeight(additionalViewHeight);
         additionalView.setMaxHeight(additionalViewHeight);
 
         additionalView.setLayoutParams(new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, (1), (1)),
-                GridLayout.spec(GridLayout.UNDEFINED, instance.getColumnWeight(), instance.getColumnWeight())
+                GridLayout.spec(GridLayout.UNDEFINED, getColumnWeight(), getColumnWeight())
         ));
 
         return additionalView;

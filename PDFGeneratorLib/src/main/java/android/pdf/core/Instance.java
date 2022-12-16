@@ -66,7 +66,7 @@ public class Instance {
      * @return the column weight
      */
     public int getColumnWeight() {
-        return columnWeight;
+        return getInstance().columnWeight;
     }
 
     /**
@@ -74,8 +74,8 @@ public class Instance {
      *
      * @param columnWeight the column weight
      */
-    public void setColumnWeight(int columnWeight) {
-        this.columnWeight = columnWeight;
+    protected void setColumnWeight(int columnWeight) {
+        getInstance().columnWeight = columnWeight;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Instance {
      * @return the padding left
      */
     public int getPaddingLeft() {
-        return paddingLeft;
+        return getInstance().paddingLeft;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Instance {
      * @param paddingLeft the padding left
      */
     public void setPaddingLeft(int paddingLeft) {
-        this.paddingLeft = paddingLeft;
+        getInstance().paddingLeft = paddingLeft;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Instance {
      * @return the padding top
      */
     public int getPaddingTop() {
-        return paddingTop;
+        return getInstance().paddingTop;
     }
 
     /**
@@ -111,7 +111,7 @@ public class Instance {
      * @param paddingTop the padding top
      */
     public void setPaddingTop(int paddingTop) {
-        this.paddingTop = paddingTop;
+        getInstance().paddingTop = paddingTop;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Instance {
      * @return the padding right
      */
     public int getPaddingRight() {
-        return paddingRight;
+        return getInstance().paddingRight;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Instance {
      * @param paddingRight the padding right
      */
     public void setPaddingRight(int paddingRight) {
-        this.paddingRight = paddingRight;
+        getInstance().paddingRight = paddingRight;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Instance {
      * @return the padding bottom
      */
     public int getPaddingBottom() {
-        return paddingBottom;
+        return getInstance().paddingBottom;
     }
 
     /**
@@ -147,7 +147,34 @@ public class Instance {
      * @param paddingBottom the padding bottom
      */
     public void setPaddingBottom(int paddingBottom) {
-        this.paddingBottom = paddingBottom;
+        getInstance().paddingBottom = paddingBottom;
+    }
+
+    /**
+     * Sets the margins.
+     *
+     * @param paddingLeft   the padding on the left
+     * @param paddingTop    the padding on the right
+     * @param paddingRight  the padding on the top
+     * @param paddingBottom the padding on the bottom
+     */
+    public void setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
+        setPaddingLeft(paddingLeft);
+        setPaddingTop(paddingTop);
+        setPaddingRight(paddingRight);
+        setPaddingBottom(paddingBottom);
+    }
+
+    /**
+     * Sets the margins.
+     *
+     * @param padding   the padding on the left, top, right bottom
+     */
+    public void setPadding(int padding) {
+        setPaddingLeft(padding);
+        setPaddingTop(padding);
+        setPaddingRight(padding);
+        setPaddingBottom(padding);
     }
 
     /**
@@ -156,7 +183,7 @@ public class Instance {
      * @return the context
      */
     public Context getContext() {
-        return context;
+        return getInstance().context;
     }
 
     /**
@@ -164,8 +191,8 @@ public class Instance {
      *
      * @param context the context
      */
-    public void setContext(Context context) {
-        this.context = context;
+    protected void setContext(Context context) {
+        getInstance().context = context;
     }
 
     /**
@@ -174,7 +201,7 @@ public class Instance {
      * @return the bg image
      */
     public BgImage getBgImage() {
-        return bgImage;
+        return getInstance().bgImage;
     }
 
     /**
@@ -183,7 +210,7 @@ public class Instance {
      * @param bgImage the bg image
      */
     public void setBgImage(BgImage bgImage) {
-        this.bgImage = bgImage;
+        getInstance().bgImage = bgImage;
     }
 
     /**
@@ -192,7 +219,7 @@ public class Instance {
      * @return the page size
      */
     public PageSize getPageSize() {
-        return pageSize;
+        return getInstance().pageSize;
     }
 
     /**
@@ -200,8 +227,8 @@ public class Instance {
      *
      * @param pageSize the page size
      */
-    public void setPageSize(PageSize pageSize) {
-        this.pageSize = pageSize;
+    protected void setPageSize(PageSize pageSize) {
+        getInstance().pageSize = pageSize;
     }
 
     /**
@@ -209,8 +236,8 @@ public class Instance {
      *
      * @return the page count
      */
-    public PageCount getPageCount() {
-        return pageCount;
+    protected PageCount getPageCount() {
+        return getInstance().pageCount;
     }
 
     /**
@@ -219,7 +246,7 @@ public class Instance {
      * @param pageCount the page count
      */
     public void setPageCount(PageCount pageCount) {
-        this.pageCount = pageCount;
+        getInstance().pageCount = pageCount;
     }
 
     /**
@@ -227,8 +254,8 @@ public class Instance {
      *
      * @return the dimension model
      */
-    public DimensionModel getDimensionModel() {
-        return dimensionModel;
+    protected DimensionModel getDimensionModel() {
+        return getInstance().dimensionModel;
     }
 
     /**
@@ -236,8 +263,8 @@ public class Instance {
      *
      * @param dimensionModel the dimension model
      */
-    public void setDimensionModel(DimensionModel dimensionModel) {
-        this.dimensionModel = dimensionModel;
+    protected void setDimensionModel(DimensionModel dimensionModel) {
+        getInstance().dimensionModel = dimensionModel;
     }
 
     /**
@@ -245,8 +272,8 @@ public class Instance {
      *
      * @return the cells
      */
-    public ArrayList<Cell> getCells() {
-        return cells;
+    protected ArrayList<Cell> getCells() {
+        return getInstance().cells;
     }
 
     /**
@@ -254,8 +281,8 @@ public class Instance {
      *
      * @return the header cells
      */
-    public ArrayList<Cell> getHeaderCells() {
-        return headerCells;
+    protected ArrayList<Cell> getHeaderCells() {
+        return getInstance().headerCells;
     }
 
     /**
@@ -263,7 +290,7 @@ public class Instance {
      *
      * @return the footer cells
      */
-    public ArrayList<Cell> getFooterCells() {
-        return footerCells;
+    protected ArrayList<Cell> getFooterCells() {
+        return getInstance().footerCells;
     }
 }

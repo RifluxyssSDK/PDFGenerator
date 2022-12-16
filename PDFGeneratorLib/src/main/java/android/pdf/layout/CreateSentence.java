@@ -14,10 +14,9 @@ import android.widget.GridLayout;
 /**
  * The type Create sentence.
  */
-public class CreateSentence {
+public class CreateSentence extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final GridLayout gridLayout = new GridLayout(instance.getContext());
+    private final GridLayout gridLayout = new GridLayout(getContext());
 
     /**
      * Create view.
@@ -68,7 +67,7 @@ public class CreateSentence {
     }
 
     private void initialization(Sentence sentence) {
-        gridLayout.setColumnCount(instance.getColumnWeight());
+        gridLayout.setColumnCount(getColumnWeight());
         gridLayout.setPadding(
                 sentence.getPaddingLeft(),
                 sentence.getPaddingTop(),
@@ -93,7 +92,7 @@ public class CreateSentence {
         int marginWidth = sentence.getMarginLeft() + sentence.getMarginRight();
         int paddingWidth = sentence.getPaddingLeft() + sentence.getPaddingRight();
         double contentWidth = minMaxWidth - (marginWidth + paddingWidth);
-        return (float) contentWidth / instance.getColumnWeight();
+        return (float) contentWidth / getColumnWeight();
     }
 }
 

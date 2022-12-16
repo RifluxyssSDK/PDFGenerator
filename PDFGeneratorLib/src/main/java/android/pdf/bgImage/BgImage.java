@@ -7,7 +7,7 @@ import android.pdf.constant.PageSize;
 import android.pdf.core.Instance;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class BgImage {
+public class BgImage extends Instance {
 
     /**
      * This bitmap used to set background image for each page of document.
@@ -92,7 +92,7 @@ public class BgImage {
      * @return backgroundImage
      */
     public Bitmap getImage() {
-        PageSize pageSize = Instance.getInstance().getPageSize();
+        PageSize pageSize = getPageSize();
         Bitmap bitmap = Bitmap.createBitmap((image.getWidth() + getMarginLeft() + getMarginRight()), (image.getHeight() + getMarginTop() + getMarginBottom()), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);

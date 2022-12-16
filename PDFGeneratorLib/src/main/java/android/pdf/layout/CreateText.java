@@ -10,10 +10,9 @@ import android.widget.TextView;
 /**
  * The type Create text.
  */
-public class CreateText {
+public class CreateText extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final TextView textView = new TextView(instance.getContext());
+    private final TextView textView = new TextView(getContext());
 
     /**
      * Create view.

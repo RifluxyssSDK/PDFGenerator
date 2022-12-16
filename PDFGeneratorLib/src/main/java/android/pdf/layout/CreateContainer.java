@@ -1,11 +1,12 @@
 package android.pdf.layout;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.pdf.cell.Paragraph;
 import android.pdf.constant.ElementType;
-import android.pdf.constant.PageSize;
 import android.pdf.core.Instance;
 import android.pdf.element.Text;
 import android.pdf.io.Cell;
@@ -13,6 +14,8 @@ import android.pdf.utility.Utils;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+
+import com.rifluxyss.pdfgenerator.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,11 +25,8 @@ import java.util.ArrayList;
 /**
  * The type Create container.
  */
-public class CreateContainer {
-
-    private final Instance instance = Instance.getInstance();
-    private final PageSize pageSize = instance.getPageSize();
-
+public class CreateContainer extends Instance {
+    
     private final PdfDocument pdfDocument = new PdfDocument();
 
     private final View header;
@@ -52,19 +52,19 @@ public class CreateContainer {
      */
     public CreateContainer create() {
 
-        LinearLayout container = new LinearLayout(instance.getContext());
+        LinearLayout container = new LinearLayout(getContext());
         container.setOrientation(LinearLayout.VERTICAL);
-        container.setPadding(instance.getPaddingLeft(), instance.getPaddingTop(), instance.getPaddingRight(), instance.getPaddingBottom());
+        container.setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
 
         container.addView(header);
         container.addView(footer);
         container.addView(pageCounterView);
 
-        GridLayout gridLayout = new GridLayout(instance.getContext());
-        gridLayout.setColumnCount(instance.getColumnWeight());
+        GridLayout gridLayout = new GridLayout(getContext());
+        gridLayout.setColumnCount(getColumnWeight());
         gridStretchable(gridLayout);
 
-        for (Cell cell : instance.getCells()) {
+        for (Cell cell : getCells()) {
 
             switch (cell.getCellType()) {
                 case ElementType.PARAGRAPH:
@@ -81,7 +81,7 @@ public class CreateContainer {
             mHeight.add(gridLayout);
             mHeight.add(pageCounterView);
 
-            if (Utils.getViewHeight(mHeight) > pageSize.getPageHeight()) {
+            if (Utils.getViewHeight(mHeight) > getPageSize().getPageHeight()) {
 
                 View view = overlapping(gridLayout);
 
@@ -111,7 +111,7 @@ public class CreateContainer {
     }
 
     private void gridStretchable(GridLayout gridLayout) {
-        gridLayout.addView(new CreateText().create(pageSize.getPageWidth(), new Text(1, 1, "").setTextSize(1)));
+        gridLayout.addView(new CreateText().create(getPageSize().getPageWidth(), new Text(1, 1, "").setTextSize(1)));
     }
 
     private View overlapping(GridLayout gridLayout) {
@@ -127,7 +127,7 @@ public class CreateContainer {
                         footer,
                         gridLayout,
                         pageCounterView,
-                        pageSize.getPageHeight()
+                        getPageSize().getPageHeight()
                 )
         );
     }
@@ -135,18 +135,20 @@ public class CreateContainer {
     private void createNewPage(LinearLayout view) {
 
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
-                pageSize.getDocumentWidth(),
-                pageSize.getDocumentHeight(),
+                getPageSize().getDocumentWidth(),
+                getPageSize().getDocumentHeight(),
                 pdfDocument.getPages().size()
         ).create();
 
         PdfDocument.Page page = pdfDocument.startPage(pageInfo);
 
-        if (instance.getBgImage() != null && instance.getBgImage().getImage() != null) {
-            page.getCanvas().drawBitmap(instance.getBgImage().getImage(), 0, 0, new Paint());
+        Canvas canvas = page.getCanvas();
+
+        if (getBgImage() != null && getBgImage().getImage() != null) {
+            canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.drawable.print_border), 0, 0, new Paint());
         }
 
-        if (instance.getPageCount() != null) {
+        if (getPageCount() != null) {
             pageCounterView = createPageCounterView((pdfDocument.getPages().size() + 1));
             view.removeViewAt((view.getChildCount() - 1));
             view.addView(pageCounterView);
@@ -154,15 +156,15 @@ public class CreateContainer {
 
         view.setBackgroundColor(Color.WHITE);
         view.measure(0, 0);
-        view.layout(0, 0, pageSize.getDocumentWidth(), pageSize.getDocumentHeight());
-        view.draw(page.getCanvas());
+        view.layout(0, 0, getPageSize().getDocumentWidth(), getPageSize().getDocumentHeight());
+        view.draw(canvas);
 
         pdfDocument.finishPage(page);
     }
 
     private View createPageCounterView(int pageCount) {
-        return (instance.getPageCount() == null) ?
-                new View(instance.getContext()) :
+        return (getPageCount() == null) ?
+                new View(getContext()) :
                 new CreatePageCount().create(pageCount);
     }
 
@@ -182,7 +184,7 @@ public class CreateContainer {
      *
      * @return the page count
      */
-    public int getPageCount() {
+    public int getTotalPageCount() {
         return pdfDocument.getPages().size();
     }
 }

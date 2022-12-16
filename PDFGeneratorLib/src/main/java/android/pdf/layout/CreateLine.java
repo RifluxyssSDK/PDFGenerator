@@ -9,10 +9,9 @@ import android.widget.LinearLayout;
 /**
  * The type Create line.
  */
-public class CreateLine {
+public class CreateLine extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final LinearLayout lineOuter = new LinearLayout(instance.getContext());
+    private final LinearLayout lineOuter = new LinearLayout(getContext());
 
     /**
      * Create view.
@@ -37,7 +36,7 @@ public class CreateLine {
                 line.getMarginBottom()
         );
 
-        View view = new View(instance.getContext());
+        View view = new View(getContext());
         view.setMinimumWidth(actualWidth);
         view.setBackgroundColor(line.getLineColor());
         view.setPadding(line.getPaddingLeft(), line.getPaddingTop(), line.getPaddingRight(), line.getPaddingBottom());

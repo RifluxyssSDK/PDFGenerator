@@ -13,9 +13,9 @@ import java.io.IOException;
  * The type Pdf generate factory.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class PdfGenerateFactory {
+public class PdfGenerateFactory extends Instance {
 
-    private Instance instance = Instance.getInstance();
+//    private Instance instance = Instance.getInstance();
 
     /**
      * Initialize.
@@ -35,7 +35,7 @@ public class PdfGenerateFactory {
     }
 
     private void initPageSize() {
-        PageSize pageSize = instance.getPageSize();
+        PageSize pageSize = getPageSize();
         pageSize.calculatePageSize();
     }
 
@@ -45,13 +45,13 @@ public class PdfGenerateFactory {
     }
 
     private void initPageCount() {
-        PageCount pageCount = instance.getPageCount();
+        PageCount pageCount = getPageCount();
         if (pageCount != null) {
             pageCount.setTotalPageCount(
                     new CreateContainer(
-                            new CreateStatic().create(instance.getHeaderCells()),
-                            new CreateStatic().create(instance.getFooterCells())
-                    ).create().getPageCount()
+                            new CreateStatic().create(getHeaderCells()),
+                            new CreateStatic().create(getFooterCells())
+                    ).create().getTotalPageCount()
             );
         }
     }
@@ -64,8 +64,8 @@ public class PdfGenerateFactory {
      */
     public void finish(File file) throws IOException {
         new CreateContainer(
-                new CreateStatic().create(instance.getHeaderCells()),
-                new CreateStatic().create(instance.getFooterCells())
+                new CreateStatic().create(getHeaderCells()),
+                new CreateStatic().create(getFooterCells())
         ).create().finish(file);
     }
 

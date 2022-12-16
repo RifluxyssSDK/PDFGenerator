@@ -1,8 +1,6 @@
 package android.pdf.element;
 
 import android.graphics.Color;
-
-import android.pdf.core.Instance;
 import android.pdf.exception.Authorization;
 import android.pdf.io.Element;
 import android.pdf.constant.ElementType;

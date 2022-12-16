@@ -6,7 +6,7 @@ import android.pdf.core.Instance;
  * The type Page size.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class PageSize {
+public class PageSize extends Instance {
 
     private int pageWidth;
     private int pageHeight;
@@ -145,8 +145,8 @@ public class PageSize {
      * Calculate page size.
      */
     public void calculatePageSize() {
-        pageWidth = documentWidth - (Instance.getInstance().getPaddingLeft() + Instance.getInstance().getPaddingRight());
-        pageHeight = documentHeight - (Instance.getInstance().getPaddingTop() + Instance.getInstance().getPaddingBottom());
+        pageWidth = documentWidth - (getPaddingLeft() + getPaddingRight());
+        pageHeight = documentHeight - (getPaddingTop() + getPaddingBottom());
     }
 
     /**

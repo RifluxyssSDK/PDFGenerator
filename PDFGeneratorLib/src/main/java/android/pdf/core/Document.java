@@ -1,12 +1,10 @@
 package android.pdf.core;
 
 import android.content.Context;
-import android.pdf.bgImage.BgImage;
 import android.pdf.constant.DocType;
 import android.pdf.constant.PageSize;
 import android.pdf.exception.Authorization;
 import android.pdf.io.Cell;
-import android.pdf.io.PageCount;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,15 +39,7 @@ import java.io.IOException;
  * </PRE>
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class Document {
-
-    /**
-     * A {@link Instance} class
-     *
-     * <P>Use this variable to get an instance of the <CODE>Instance</CODE> class.</P>
-     * <P>All the data's stored on these one static variable.</P>
-     */
-    private final Instance instance = Instance.getInstance();
+public class Document extends Instance {
 
     /**
      * A {@link PdfGenerateFactory} class
@@ -68,7 +58,7 @@ public class Document {
      * @param pageSize the pageSize
      */
     public Document(PageSize pageSize) {
-        instance.setPageSize(pageSize);
+        setPageSize(pageSize);
     }
 
     /**
@@ -77,7 +67,7 @@ public class Document {
      * Constructs a new <CODE>Document</CODE> -object.
      */
     public Document() {
-        instance.setPageSize(PageSize.DEFAULT);
+        setPageSize(PageSize.DEFAULT);
     }
 
     /**
@@ -91,7 +81,7 @@ public class Document {
      * @return Document for continues declaration
      */
     public Document init(Context context) {
-        instance.setContext(context);
+        setContext(context);
         return this;
     }
 
@@ -116,20 +106,6 @@ public class Document {
     }
 
     /**
-     * @param padding This method override setPadding method.
-     */
-    public void setPadding(int padding) {
-        setPadding(padding, padding, padding, padding);
-    }
-
-    /**
-     * @param pageCount the pageCount stored to {@link Instance}.
-     */
-    public void setPageCount(PageCount pageCount) {
-        instance.setPageCount(pageCount);
-    }
-
-    /**
      * <P>Document has been opened and that</P>
      * <P>Cells can be added.</P>
      * <P>When this method is called, setColumnWeight method on {@link Instance} class.</P>
@@ -137,14 +113,7 @@ public class Document {
      * @param columnWeight This value define as how many columns in singleRow.
      */
     public void open(int columnWeight) {
-        instance.setColumnWeight(columnWeight);
-    }
-
-    /**
-     * @param bgImage the bgImage stored to {@link Instance}.
-     */
-    public void setBackgroundImage(BgImage bgImage) {
-        instance.setBgImage(bgImage);
+        setColumnWeight(columnWeight);
     }
 
     /**
@@ -161,28 +130,13 @@ public class Document {
     private void addCell(byte docType, Cell cell) {
         if (Authorization.documentAuthenticate()) {
             if (docType == DocType.NORMAL) {
-                instance.getCells().add(cell);
+                getCells().add(cell);
             } else if (docType == DocType.HEADER) {
-                instance.getHeaderCells().add(cell);
+                getHeaderCells().add(cell);
             } else if (docType == DocType.FOOTER) {
-                instance.getFooterCells().add(cell);
+                getFooterCells().add(cell);
             }
         }
-    }
-
-    /**
-     * Sets the margins.
-     *
-     * @param paddingLeft   the padding on the left
-     * @param paddingTop    the padding on the right
-     * @param paddingRight  the padding on the top
-     * @param paddingBottom the padding on the bottom
-     */
-    public void setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
-        instance.setPaddingLeft(paddingLeft);
-        instance.setPaddingTop(paddingTop);
-        instance.setPaddingRight(paddingRight);
-        instance.setPaddingBottom(paddingBottom);
     }
 
     /**

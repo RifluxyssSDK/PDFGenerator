@@ -11,10 +11,9 @@ import android.widget.TextView;
 /**
  * The type Create page count.
  */
-public class CreatePageCount {
+public class CreatePageCount extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final TextView textView = new TextView(instance.getContext());
+    private final TextView textView = new TextView(getContext());
 
     /**
      * Create view.
@@ -24,7 +23,7 @@ public class CreatePageCount {
      */
     public View create(int currentPageCount) {
 
-        PageCount pageCount = instance.getPageCount();
+        PageCount pageCount = getPageCount();
         int actualWidth = calculateActualWidth(pageCount);
         String message = pageCount.getStartMessage() + currentPageCount + pageCount.getMiddleMessage() + pageCount.getTotalPageCount();
 
@@ -64,6 +63,6 @@ public class CreatePageCount {
     }
 
     private int calculateActualWidth(PageCount pageCount) {
-        return instance.getPageSize().getPageWidth() - (pageCount.getMarginLeft() + pageCount.getMarginRight());
+        return getPageSize().getPageWidth() - (pageCount.getMarginLeft() + pageCount.getMarginRight());
     }
 }

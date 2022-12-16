@@ -9,10 +9,9 @@ import android.widget.ImageView;
 /**
  * The type Create image.
  */
-public class CreateImage {
+public class CreateImage extends Instance {
 
-    private final Instance instance = Instance.getInstance();
-    private final ImageView imageView = new ImageView(instance.getContext());
+    private final ImageView imageView = new ImageView(getContext());
 
     /**
      * Create image view.

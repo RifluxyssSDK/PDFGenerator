@@ -12,9 +12,7 @@ import java.util.ArrayList;
 /**
  * The type Create static.
  */
-public class CreateStatic {
-
-    private final Instance instance = Instance.getInstance();
+public class CreateStatic extends Instance {
 
     /**
      * Create view.
@@ -24,7 +22,7 @@ public class CreateStatic {
      */
     public View create(ArrayList<Cell> cells) {
 
-        LinearLayout linearLayout = new LinearLayout(instance.getContext());
+        LinearLayout linearLayout = new LinearLayout(getContext());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if (cells.size() != 0) {
