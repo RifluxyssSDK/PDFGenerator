@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.pdf.cell.Paragraph;
 import android.pdf.core.Document;
+import android.pdf.element.Image;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -57,14 +59,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void addStaticDocument(Document document) throws IOException {
 
-
+        document.add(new Paragraph().add(new Image(1,20,getResource(R.raw.five_ur_differentiator_page))));
 
     }
 
-    byte[] getResource(int resPath) throws IOException {
+    Bitmap getResource(int resPath) throws IOException {
         InputStream inputStream = getResources().openRawResource(resPath);
         byte[] bytes = new byte[inputStream.available()];
         inputStream.read(bytes);
-        return Base64.decode(new String(bytes), Base64.DEFAULT);
+        return compressImage(Base64.decode(new String(bytes), Base64.DEFAULT));
+    }
+
+    private Bitmap compressImage(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
     }
 }
