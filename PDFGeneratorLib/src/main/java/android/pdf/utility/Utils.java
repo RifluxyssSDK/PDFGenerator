@@ -106,4 +106,39 @@ public class Utils {
         return mHeight;
     }
 
+    public int getDensity(Context context) {
+
+        int density = 0;
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+
+        switch(metrics.densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                density = DisplayMetrics.DENSITY_LOW;
+                break;
+
+            case DisplayMetrics.DENSITY_MEDIUM:
+                density = DisplayMetrics.DENSITY_MEDIUM;
+                break;
+
+            case DisplayMetrics.DENSITY_HIGH:
+                density = DisplayMetrics.DENSITY_HIGH;
+                break;
+
+            case DisplayMetrics.DENSITY_XHIGH:
+                density = DisplayMetrics.DENSITY_XHIGH;
+                break;
+
+            case DisplayMetrics.DENSITY_XXHIGH:
+                density = DisplayMetrics.DENSITY_XXHIGH;
+                break;
+
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                density = DisplayMetrics.DENSITY_XXXHIGH;
+                break;
+        }
+
+        return density;
+
+    }
+
 }
