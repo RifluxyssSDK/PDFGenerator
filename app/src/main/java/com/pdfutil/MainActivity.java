@@ -1,8 +1,11 @@
 package com.pdfutil;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.core.Document;
+import android.util.Base64;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import com.pdfutil.databinding.ActivityMainBinding;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,9 +55,16 @@ public class MainActivity extends AppCompatActivity {
         document.finish(path);
     }
 
-    private void addStaticDocument(Document document) {
+    private void addStaticDocument(Document document) throws IOException {
 
 
 
+    }
+
+    byte[] getResource(int resPath) throws IOException {
+        InputStream inputStream = getResources().openRawResource(resPath);
+        byte[] bytes = new byte[inputStream.available()];
+        inputStream.read(bytes);
+        return Base64.decode(new String(bytes), Base64.DEFAULT);
     }
 }
