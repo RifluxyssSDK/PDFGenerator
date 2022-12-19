@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addStaticDocument(Document document) throws IOException {
 
-        document.add(new Paragraph().add(new Image(1,20,getResource(R.raw.five_ur_differentiator_page))));
+        document.add(new Paragraph().add(new Image(1,10,getResource(R.raw.five_ur_differentiator_page))));
 
     }
 
@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Bitmap compressImage(byte[] bytes) {
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+
+        bitmap = bitmap.copy(Bitmap.Config.RGB_565,true);
+
+        return bitmap;
     }
 }
