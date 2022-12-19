@@ -1,28 +1,12 @@
 package com.pdfutil;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.pdf.bgImage.BgImage;
-import android.pdf.cell.AreaBreak;
-import android.pdf.cell.Paragraph;
-import android.pdf.constant.DocType;
 import android.pdf.core.Document;
-import android.pdf.element.Image;
-import android.pdf.element.Sentence;
-import android.pdf.element.Text;
-import android.pdf.io.PageCount;
-import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.ImgRaw;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.pdfutil.databinding.ActivityMainBinding;
 
 import java.io.File;
@@ -60,59 +44,16 @@ public class MainActivity extends AppCompatActivity {
 
         document.setPadding(10);
 
-//        document.add(new Paragraph().add(new Image(1,10,border)));
-
-        /*BgImage bgImage = new BgImage(border);
-
-        bgImage.setMargin(50,0,50,50);
-
-        document.setBgImage(bgImage);
-
-        document.add(DocType.HEADER, new Paragraph().add(new Text(1,10,"HEADER").setGravity(Gravity.CENTER).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setPadding(5)));
-
-        document.add(DocType.FOOTER,new Paragraph().add(new Text(1,10,"FOOTER").setGravity(Gravity.CENTER).setBackgroundColor(Color.GRAY).setTextColor(Color.WHITE).setPadding(5)));
-
-        document.setPageCount(new PageCount("Page "," / "));
-
-        document.add(new Paragraph().add(new Text(1,10,"1 Hello Document...")));
-        document.add(new Paragraph().add(new Text(1,10,"2 Hello Document...")));
-        document.add(new Paragraph().add(new Text(1,10,"3 Hello Document...")));
-        document.add(new AreaBreak());
-
-        document.add(new Paragraph().add(new Text(1,10,"Paragraph").setGravity(Gravity.CENTER).setMargin(10)));
-
-        document.add(new Paragraph()
-                .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(2,5,"Row 2 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .setBorder(true).setPadding(10).setBackgroundColor(Color.LTGRAY)
-        );
-
-        document.add(new Paragraph()
-                .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(2,5,"Row 2 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .setBorder(true).setPadding(10).setBackgroundColor(Color.LTGRAY)
-        );
-
-        document.add(new Paragraph().add(new Text(1,10,"Sentence").setGravity(Gravity.CENTER).setMargin(10)));
-
-        Sentence sentence = new Sentence(1,5);
-        sentence.add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-        .add(new Text(2,5,"Row 2 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-        .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-        .setPadding(10).setBackgroundColor(Color.LTGRAY);
-
-        Sentence sentence1 = new Sentence(1,5);
-        sentence1.add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(2,5,"Row 2 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .add(new Text(1,5,"Row 1 Col 5").setGravity(Gravity.CENTER).setBorder(true).setPadding(5).setBackgroundColor(Color.RED))
-                .setPadding(10).setBackgroundColor(Color.LTGRAY).setMarginLeft(-1);
-
-        document.add(new Paragraph().add(sentence).add(sentence1).setBorder(true).setPadding(1));*/
+        addStaticDocument(document);
 
         document.close();
 
         document.finish(path);
+    }
+
+    private void addStaticDocument(Document document) {
+
+
+
     }
 }
