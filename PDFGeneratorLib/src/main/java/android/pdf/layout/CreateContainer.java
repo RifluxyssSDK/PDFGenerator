@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.rifluxyss.pdfgenerator.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -170,11 +171,19 @@ public class CreateContainer extends Instance {
     /**
      * Finish.
      *
-     * @param servicePdfFile the service pdf file
+     * @param file the service pdf file
      * @throws IOException the io exception
      */
-    public void finish(File servicePdfFile) throws IOException {
-        pdfDocument.writeTo(new FileOutputStream(servicePdfFile));
+    public void finish(File file) throws IOException {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        pdfDocument.writeTo(byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(bytes);
+        fileOutputStream.close();
+
         pdfDocument.close();
     }
 

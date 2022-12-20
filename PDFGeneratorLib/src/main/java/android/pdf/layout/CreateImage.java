@@ -55,6 +55,7 @@ public class CreateImage extends Instance {
         imageView.setScaleType(image.getScaleType());
         imageView.setMinimumWidth(image.getImageWidth());
         imageView.setBackgroundColor(image.getBackgroundColor());
+        imageView.setMaxHeight(getPageSize().getPageHeight() - 10);
         imageView.setPadding(image.getPaddingLeft(), image.getPaddingTop(), image.getPaddingRight(), image.getPaddingBottom());
         return imageView;
     }
