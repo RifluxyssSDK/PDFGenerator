@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     Bitmap getResource(int resPath) throws IOException {
-
         // Decode Raw File To Byte Array
         InputStream inputStream = getResources().openRawResource(resPath);
         byte[] bytes = new byte[inputStream.available()];
