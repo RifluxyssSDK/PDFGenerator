@@ -75,29 +75,36 @@ public class CreateImage {
                 opts.inScreenDensity = metrics.densityDpi;
                 opts.inTargetDensity = metrics.densityDpi;
                 opts.inPreferredConfig = image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565;
-                Matrix m = new Matrix();
-                float[] values = new float[9];
-                m.getValues(values);
 
                 InputStream in = context.openFileInput(String.format("%s %s", image.getResourceUri(), Utils.fileExtension));
 
                 // bmp is the resized bitmap
                 Bitmap decodeStream = BitmapFactory.decodeStream(in, null, opts);
-
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                decodeStream.compress(Bitmap.CompressFormat.WEBP, 0, out);
-                byte[] byteArray = out.toByteArray();
-
-                //Bitmap updatedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-                Bitmap updatedBitmap = Bitmap.createScaledBitmap(decodeStream,image.getImageWidth(),image.getImageHeight(),false);
+               // Bitmap updatedBitmap = Bitmap.createScaledBitmap(decodeStream,image.getImageWidth(),image.getImageHeight(),true);
 
                 long bitmapByteCount = BitmapCompat.getAllocationByteCount(decodeStream);
                 Log.e("status","check bitmapByteCount ===> " + bitmapByteCount);
                 String fileSize = getStringSizeLengthFile(bitmapByteCount);
                 Log.e("status","check Size ===> " + fileSize);
 
-                imageView.setImageBitmap(updatedBitmap);
+                int width = decodeStream.getWidth();
+                int height = decodeStream.getHeight();
+                float scaleWidth = ((float) image.getImageWidth()) / width;
+                float scaleHeight = ((float) image.getImageHeight()) / height;
+                // CREATE A MATRIX FOR THE MANIPULATION
+                Matrix matrix = new Matrix();
+                // RESIZE THE BIT MAP
+                matrix.postScale(scaleWidth, scaleHeight);
+
+                // "RECREATE" THE NEW BITMAP
+                Bitmap resizedBitmap = Bitmap.createBitmap(decodeStream, 0, 0, width, height, matrix, true);
+
+                Log.e("status","check bitmapByteCount Width ===> " + width + " ===> Height : ===> " + height);
+                Log.e("status","check bitmapByteCount resizedBitmap Width ===> " + resizedBitmap.getWidth() + " ===> resizedBitmap Height : ===> " + resizedBitmap.getHeight());
+
+                decodeStream.recycle();
+
+                imageView.setImageBitmap(resizedBitmap);
 
 
             } else {
