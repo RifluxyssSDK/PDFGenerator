@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.pdf.cell.Paragraph;
 import android.pdf.constant.FontStyle;
+import android.pdf.constant.PageSize;
 import android.pdf.core.Document;
 import android.pdf.customtext.TextBuilder;
 import android.pdf.element.Image;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        document = new Document().init(this);
+        document = new Document(PageSize.A4).init(this);
 
         document.open(20);
 
@@ -98,43 +99,43 @@ public class MainActivity extends AppCompatActivity {
 
     private void verifySDK() {
 
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.four_cover)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.five_ur_differentiator_page)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.six_fs_differentiator_page)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seven_comfort_shirt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eight_wrinkle_free_shirt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.nine_performance_polo)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ten_oxford_exec_cargo)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eleven_pro_knit_argyle_polo)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twelve_cargo_comfort_jeans)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thireteen_pro_knit_tee_cargo_shorts)).setImageWidth(579).setImageHeight(771).setCompressLevel(48).setCompressImage(true)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.forteen_women_workwear_a)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.fifteen_women_workwear_b)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.sixteen_carhartt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.seventeen_carhartt_fr)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.eighteen_carhartt_fr_enhanced_visibility)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.ninteen_tecasafe)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_fr_outerwear)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyone_e_viz_tecasafe_a)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twenty_two_viz_tecasafe_b)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentythree_e_viz_tecasafe_c)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfour_high_visibility_shirt)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyfive_enhanced_visibility)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentysix_hundred_cotton)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyseven_food_pharma)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentyeight_culinary)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.twentynine_chef_essential)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirty_chef_signature)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyone_outerwear)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtytwo_floor_zone)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtythree_supply_closet)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfour_restroom_zone)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtyfive_kitchen_zone)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
-        document.add(new Paragraph().add(new Image(1, 20, compressImage(R.raw.thirtysix_shop_zone)).setImageWidth(579).setImageHeight(771).setCompressLevel(48)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.four_cover).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.five_ur_differentiator_page).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.six_fs_differentiator_page).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.seven_comfort_shirt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.eight_wrinkle_free_shirt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.eight_wrinkle_free_shirt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.nine_performance_polo).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.ten_oxford_exec_cargo).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.eleven_pro_knit_argyle_polo).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twelve_cargo_comfort_jeans).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thireteen_pro_knit_tee_cargo_shorts).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.forteen_women_workwear_a).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.fifteen_women_workwear_b).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.sixteen_carhartt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.seventeen_carhartt_fr).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.seventeen_carhartt_fr).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.eighteen_carhartt_fr_enhanced_visibility).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.eighteen_carhartt_fr_enhanced_visibility).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.ninteen_tecasafe).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twenty_fr_outerwear).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyone_e_viz_tecasafe_a).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twenty_two_viz_tecasafe_b).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentythree_e_viz_tecasafe_c).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyfour_high_visibility_shirt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyfour_high_visibility_shirt).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyfive_enhanced_visibility).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentysix_hundred_cotton).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyseven_food_pharma).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentyeight_culinary).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.twentynine_chef_essential).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirty_chef_signature).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtyone_outerwear).setImageWidth(770).setImageHeight(980)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtytwo_floor_zone).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtythree_supply_closet).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtyfour_restroom_zone).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtyfive_kitchen_zone).setImageWidth(579).setImageHeight(771)));
+        document.add(new Paragraph().add(new Image(1, 20, R.raw.thirtysix_shop_zone).setImageWidth(579).setImageHeight(771)));
     }
 
     public Bitmap compressImage(int resourceUri) {
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             /*Bitmap createdBitmap
             scaledBitmap = createdBitmap.copy(Bitmap.Config.ARGB_8888,true);*/
 
-           /* Bitmap createdBitmap = Bitmap.createScaledBitmap(originalBitmap,579,771,true);
+           /* Bitmap createdBitmap = Bitmap.createScaledBitmap(originalBitmap,150,150,true);
 
             String filePath = getRealPathFromURI(imageFile.getAbsolutePath());
             BitmapFactory.Options options1 = new BitmapFactory.Options();
@@ -206,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             // write the compressed bitmap at the destination specified by destinationPath.
-            decodeSampledBitmapFromFile(imageFile, 579,771).compress( Bitmap.CompressFormat.WEBP, 30, new FileOutputStream(imageResourceFile));
+            decodeSampledBitmapFromFile(imageFile, 150,150).compress( Bitmap.CompressFormat.WEBP, 30, new FileOutputStream(imageResourceFile));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,25 +3,35 @@ package android.pdf.layout;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Environment;
 import android.pdf.element.Image;
 import android.pdf.utility.Utils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.core.graphics.BitmapCompat;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 /**
  * The type Create image.
  */
 public class CreateImage {
+
 
     /**
      * Create view.
@@ -51,13 +61,11 @@ public class CreateImage {
                 byte[] b = new byte[XmlFileInputStream.available()];
                 XmlFileInputStream.read(b);
 
-                FileOutputStream fos = context.openFileOutput("imageName" + Utils.fileExtension, Context.MODE_PRIVATE);
+                FileOutputStream fos = context.openFileOutput(String.format("%s %s", image.getResourceUri(), Utils.fileExtension), Context.MODE_PRIVATE);
                 byte[] decodedString = Base64.decode(new String(b), Base64.DEFAULT);
                 fos.write(decodedString);
                 fos.flush();
                 fos.close();
-
-                File file = new File(context.getFilesDir() + File.separator + "imageName" + Utils.fileExtension);
 
                 DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 
@@ -67,18 +75,30 @@ public class CreateImage {
                 opts.inScreenDensity = metrics.densityDpi;
                 opts.inTargetDensity = metrics.densityDpi;
                 opts.inPreferredConfig = image.getConfig() != null ? image.getConfig() : Bitmap.Config.RGB_565;
+                Matrix m = new Matrix();
+                float[] values = new float[9];
+                m.getValues(values);
+
+                InputStream in = context.openFileInput(String.format("%s %s", image.getResourceUri(), Utils.fileExtension));
 
                 // bmp is the resized bitmap
-                Bitmap decodeStream = BitmapFactory.decodeStream(new FileInputStream(file), null, opts);
+                Bitmap decodeStream = BitmapFactory.decodeStream(in, null, opts);
 
-                // File using Create Drawable images
-                //Drawable imageDrawable = Drawable.createFromResourceStream(context.getResources(), null, context.openFileInput(file.getName()), null, opts);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                decodeStream.compress(Bitmap.CompressFormat.WEBP, 0, out);
+                byte[] byteArray = out.toByteArray();
 
-                Bitmap bitmapNew = Bitmap.createScaledBitmap(decodeStream, image.getImageWidth(), image.getImageHeight(), true);
+                //Bitmap updatedBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-                imageView.setImageBitmap(bitmapNew);
+                Bitmap updatedBitmap = Bitmap.createScaledBitmap(decodeStream,image.getImageWidth(),image.getImageHeight(),false);
 
-                //imageView.setImageDrawable(imageDrawable);
+                long bitmapByteCount = BitmapCompat.getAllocationByteCount(decodeStream);
+                Log.e("status","check bitmapByteCount ===> " + bitmapByteCount);
+                String fileSize = getStringSizeLengthFile(bitmapByteCount);
+                Log.e("status","check Size ===> " + fileSize);
+
+                imageView.setImageBitmap(updatedBitmap);
+
 
             } else {
 
@@ -116,6 +136,25 @@ public class CreateImage {
             return linearLayout;
         }
 
+    }
+
+    public static String getStringSizeLengthFile(long size) {
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        float sizeKb = 1024.0f;
+        float sizeMb = sizeKb * sizeKb;
+        float sizeGb = sizeMb * sizeKb;
+        float sizeTerra = sizeGb * sizeKb;
+
+        if(size < sizeMb)
+            return df.format(size / sizeKb)+ " Kb";
+        else if(size < sizeGb)
+            return df.format(size / sizeMb) + " Mb";
+        else if(size < sizeTerra)
+            return df.format(size / sizeGb) + " Gb";
+
+        return "";
     }
 
 }

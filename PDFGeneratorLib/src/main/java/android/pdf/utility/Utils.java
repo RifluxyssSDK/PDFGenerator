@@ -20,17 +20,22 @@ import android.view.View;
 import android.pdf.constant.FontStyle;
 
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.BitmapCompat;
 
 import com.rifluxyss.pdfgenerator.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Utility's
@@ -138,6 +143,46 @@ public class Utils {
         }
 
         return density;
+
+    }
+
+    public static long getFolderSize(File f) {
+        long size = 0;
+        if (f.isDirectory()) {
+            for (File file : Objects.requireNonNull(f.listFiles())) {
+                size += BitmapCompat.getAllocationByteCount(BitmapFactory.decodeFile(file.getAbsolutePath()));
+
+                size += getFolderSize(file);
+            }
+        } else {
+            size=f.length();
+        }
+        return size;
+    }
+
+    public static long getFolderBitmapSize(File f) {
+        long size = 0;
+        if (f.isDirectory()) {
+            for (File file : Objects.requireNonNull(f.listFiles())) {
+                size += BitmapCompat.getAllocationByteCount(BitmapFactory.decodeFile(file.getAbsolutePath()));
+            }
+        } else {
+            size=f.length();
+        }
+        return size;
+    }
+
+    public static String getStringSizeLengthFile(long size) {
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        float sizeKb = size/1024.0f;
+
+        if (sizeKb > 1) {
+            return df.format(sizeKb).concat(" MB");
+        } else {
+            return df.format(sizeKb).concat(" KB");
+        }
 
     }
 
